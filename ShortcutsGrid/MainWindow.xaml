@@ -1,0 +1,17 @@
+﻿<Window x:Class="ShortcutsGrid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShortcutsGrid" mc:Ignorable="d"
+        Title="MainWindow" Height="440" Width="660">
+    <!--Background="Transparent" AllowsTransparency="True" WindowStyle="None"-->
+
+    <StackPanel x:Name="stkPnl" Orientation="Vertical" Background="Transparent">
+        <StackPanel x:Name="stkPnl1" Orientation="Horizontal" />
+        <StackPanel x:Name="stkPnl2" Orientation="Horizontal" />
+        <StackPanel x:Name="stkPnl3" Orientation="Horizontal" />
+        <StackPanel x:Name="stkPnl4" Orientation="Horizontal" />
+    </StackPanel>
+
+</Window>
