@@ -51,7 +51,7 @@
 
         public static ImageSource? ImagePathToSource(string? path)
         {
-            try { return new BitmapImage(new Uri(path)); }
+            try { return new BitmapImage(new Uri((path == null) ? "" : path)); }
             catch (Exception) { return null; }
         }
 

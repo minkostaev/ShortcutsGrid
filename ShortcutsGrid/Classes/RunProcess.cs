@@ -1,6 +1,5 @@
 ﻿namespace ShortcutsGrid.Classes
 {
-
     using System;
     using System.Diagnostics;
     using System.IO;
@@ -16,15 +15,26 @@
                 ProcessStart(commandOrPath, admin);
                 return string.Empty;
             }
-            catch (Exception ex) { return ex.Message; }
+            catch (Exception)
+            {
+                try
+                {
+                    string[] cmdAndArgs = commandOrPath.Split(' ');
+                    string args = commandOrPath.Remove(0, cmdAndArgs[0].Length);
+                    ProcessStart(cmdAndArgs[0], admin, args);
+                    return string.Empty;
+                }
+                catch (Exception ex) { return ex.Message; }
+            }
         }
 
-        private static void ProcessStart(string commandOrPath, bool admin)
+        private static void ProcessStart(string commandOrPath, bool admin, string args = "")
         {
             Process process = new Process();
             process.StartInfo.UseShellExecute = true;
             ///process.StartInfo.WorkingDirectory = "c:\\";
             process.StartInfo.FileName = commandOrPath;
+            process.StartInfo.Arguments = args;
             process.StartInfo.Verb = admin ? "runas" : "";
             process.Start();
         }

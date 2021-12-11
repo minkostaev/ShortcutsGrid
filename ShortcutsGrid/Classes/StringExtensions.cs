@@ -4,7 +4,7 @@
 
     internal static class StringExtensions
     {
-        static readonly Regex _base64RegexPattern = new Regex(BASE64_REGEX_STRING, RegexOptions.Compiled);
+        private static readonly Regex _base64RegexPattern = new Regex(BASE64_REGEX_STRING, RegexOptions.Compiled);
 
         private const string BASE64_REGEX_STRING = @"^[a-zA-Z0-9\+/]*={0,3}$";
 
