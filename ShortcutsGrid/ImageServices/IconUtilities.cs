@@ -1,6 +1,5 @@
-﻿namespace ShortcutsGrid.Classes
+﻿namespace ShortcutsGrid.ImageServices
 {
-
     using System;
     using System.Windows;
     using System.Drawing;
@@ -50,9 +49,10 @@
             return imageSource;
         }
 
-        public static ImageSource ImagePathToSource(string path)
+        public static ImageSource? ImagePathToSource(string? path)
         {
-            return new BitmapImage(new Uri(path));
+            try { return new BitmapImage(new Uri(path)); }
+            catch (Exception) { return null; }
         }
 
     }

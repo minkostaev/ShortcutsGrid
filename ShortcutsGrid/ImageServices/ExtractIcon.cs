@@ -1,4 +1,4 @@
-﻿namespace ShortcutsGrid.Classes
+﻿namespace ShortcutsGrid.ImageServices
 {
 
     using System;

@@ -1,6 +1,6 @@
 ﻿namespace ShortcutsGrid.Classes
 {
-
+    using ShortcutsGrid.ImageServices;
     using System;
     using System.Drawing;
     using System.IO;
@@ -14,36 +14,41 @@
         public string ImgPath { get; set; } = string.Empty;//ImgPath or Base64String
         public string ErrMsg { get; set; } = string.Empty;
 
-        private ImageSource? _Image;
+        private ImageSource? _image;
         public ImageSource? Image
         {
             get
             {
-                if (_Image == null)
+                if (_image == null)
                 {
                     try
                     {
                         if (string.IsNullOrWhiteSpace(ImgPath))
                         {
                             Icon icon = ExtractIcon.ExtractIconFromExecutable(ExePath);
-                            _Image = icon.ToImageSource();
+                            _image = icon.ToImageSource();
                         }
                         else
                         {
-                            if (File.Exists(ImgPath))
+                            if (ImgPath.IsBase64())
                             {
-                                _Image = IconUtilities.ImagePathToSource(ImgPath);
+                                _image = IconUtilities.Base64StringToImage(ImgPath);
                             }
-                            else
+                            else if (File.Exists(ImgPath))
                             {
-                                _Image = IconUtilities.Base64StringToImage(ImgPath);
+                                _image = IconUtilities.ImagePathToSource(ImgPath);
+                                if (_image == null)
+                                {
+                                    var combinedSubPath = AppValues.GetSubPath(ImgPath);
+                                    _image = IconUtilities.ImagePathToSource(combinedSubPath);
+                                }
                             }
                         }
                         ErrMsg = string.Empty;
                     }
                     catch(Exception ex) { ErrMsg = ex.Message; }
                 }
-                return _Image;
+                return _image;
             }
         }
 
