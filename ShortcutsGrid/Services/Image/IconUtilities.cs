@@ -1,4 +1,4 @@
-﻿namespace ShortcutsGrid.ImageServices
+﻿namespace ShortcutsGrid.Services.Image
 {
     using System;
     using System.Windows;
@@ -56,5 +56,4 @@
         }
 
     }
-
 }

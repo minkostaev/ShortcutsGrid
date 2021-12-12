@@ -1,6 +1,6 @@
 ﻿namespace ShortcutsGrid.Classes
 {
-    using ShortcutsGrid.ImageServices;
+    using ShortcutsGrid.Services.Image;
     using System;
     using System.Drawing;
     using System.IO;

@@ -24,7 +24,10 @@
                     string path = (items.Length >= 1) ? items[0] : "";
                     string label = (items.Length >= 2) ? items[1] : "";
                     string img = (items.Length >= 3) ? items[2] : "";
-                    result.Add(new Shortcut() { ExePath = path, ExeName = label, ImgPath = img });
+                    if (!string.IsNullOrWhiteSpace(path) && !string.IsNullOrWhiteSpace(label) && !string.IsNullOrWhiteSpace(img))
+                    {
+                        result.Add(new Shortcut() { ExePath = path, ExeName = label, ImgPath = img });
+                    }
                 }
                 stream.Close();
                 return result;

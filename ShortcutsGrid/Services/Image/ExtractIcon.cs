@@ -1,6 +1,5 @@
-﻿namespace ShortcutsGrid.ImageServices
+﻿namespace ShortcutsGrid.Services.Image
 {
-
     using System;
     using System.IO;
     using System.Collections.Generic;
@@ -113,6 +112,6 @@
 
             return buf;
         }
-    }
 
+    }
 }
