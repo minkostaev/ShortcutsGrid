@@ -1,4 +1,4 @@
-﻿namespace ShortcutsGrid.Classes
+﻿namespace ShortcutsGrid.Services
 {
     using System.Text.RegularExpressions;
 
@@ -24,5 +24,4 @@
         }
 
     }
-
 }

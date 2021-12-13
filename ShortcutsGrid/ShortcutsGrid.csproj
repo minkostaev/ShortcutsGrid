@@ -5,11 +5,11 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>AppIcons\administrative-tools-128.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\windows-128.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="AppIcons\administrative-tools-128.ico" />
+    <Content Include="Resources\windows-128.ico" />
   </ItemGroup>
 
   <ItemGroup>

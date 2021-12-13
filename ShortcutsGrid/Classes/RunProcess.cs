@@ -39,18 +39,18 @@
             process.Start();
         }
 
-        public static string GetShortcutsFile
-        {
-            get
-            {
-                ///var exePath = Process.GetCurrentProcess().MainModule.FileName;
-                var exePath = Environment.ProcessPath;
-                var exeDir = Path.GetDirectoryName(exePath);
-                var exeName = Path.GetFileNameWithoutExtension(exePath);
-                var fileWithList = Path.Combine(exeDir == null ? "" : exeDir, exeName + ".csv");
-                return fileWithList;
-            }
-        }
+        //public static string GetShortcutsFile
+        //{
+        //    get
+        //    {
+        //        ///var exePath = Process.GetCurrentProcess().MainModule.FileName;
+        //        var exePath = Environment.ProcessPath;
+        //        var exeDir = Path.GetDirectoryName(exePath);
+        //        var exeName = Path.GetFileNameWithoutExtension(exePath);
+        //        var fileWithList = Path.Combine(exeDir == null ? "" : exeDir, exeName + ".csv");
+        //        return fileWithList;
+        //    }
+        //}
 
     }
 

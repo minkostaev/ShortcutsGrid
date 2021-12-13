@@ -1,6 +1,6 @@
-﻿namespace ShortcutsGrid.Classes
+﻿namespace ShortcutsGrid.Services
 {
-
+    using ShortcutsGrid.Models;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -9,12 +9,13 @@
     internal static class ReadShortcuts
     {
 
-        public static List<Shortcut> FileToShortcuts(string filePath)
+        public static List<Shortcut> FileToShortcuts(string? filePath)
         {
             try
             {
                 var result = new List<Shortcut>();
-                
+                if (filePath == null) return result;
+
                 var stream = new StreamReader(filePath, Encoding.Default);//UTF7
                 while (!stream.EndOfStream)
                 {
@@ -38,6 +39,7 @@
             }
         }
 
-    }
+        //todo JSON
 
+    }
 }

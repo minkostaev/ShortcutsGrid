@@ -1,5 +1,7 @@
 ﻿using ShortcutsGrid.Classes;
 using ShortcutsGrid.Controls;
+using ShortcutsGrid.Models;
+using ShortcutsGrid.Services;
 using System.Windows;
 using System.Windows.Input;
 
@@ -25,9 +27,9 @@ namespace ShortcutsGrid
             this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Close(); };
             #endregion
 
-            var shortcuts = ReadShortcuts.FileToShortcuts(RunProcess.GetShortcutsFile);
+            var shortcuts = ReadShortcuts.FileToShortcuts(AppValues.ListFile);
 
-            shortcuts.Add(new Shortcut() { ExeName = "Cancel", ImgPath = new Shortcut().CloseImage });
+            shortcuts.Add(new Shortcut() { ExeName = "Cancel", ImgPath = AppValues.CloseImage });
 
             foreach (var shortcut in shortcuts)
             {
