@@ -1,7 +1,7 @@
-﻿using ShortcutsGrid.Classes;
-using ShortcutsGrid.Controls;
+﻿using ShortcutsGrid.Controls;
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Services;
+using ShortcutsGrid.Services.Run;
 using System.Windows;
 using System.Windows.Input;
 

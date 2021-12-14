@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShortcutsGrid.Classes
+﻿namespace ShortcutsGrid.Services.Run
 {
-    internal static class DialogRun
+    using System;
+    using System.Runtime.InteropServices;
+
+    internal static class RunDialog
     {
         [DllImport("shell32.dll", EntryPoint = "#61", CharSet = CharSet.Unicode)]
         public static extern int RunFileDlg(

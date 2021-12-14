@@ -1,8 +1,7 @@
-﻿namespace ShortcutsGrid.Classes
+﻿namespace ShortcutsGrid.Services.Run
 {
     using System;
     using System.Diagnostics;
-    using System.IO;
 
     public static class RunProcess
     {
@@ -39,19 +38,5 @@
             process.Start();
         }
 
-        //public static string GetShortcutsFile
-        //{
-        //    get
-        //    {
-        //        ///var exePath = Process.GetCurrentProcess().MainModule.FileName;
-        //        var exePath = Environment.ProcessPath;
-        //        var exeDir = Path.GetDirectoryName(exePath);
-        //        var exeName = Path.GetFileNameWithoutExtension(exePath);
-        //        var fileWithList = Path.Combine(exeDir == null ? "" : exeDir, exeName + ".csv");
-        //        return fileWithList;
-        //    }
-        //}
-
     }
-
 }
