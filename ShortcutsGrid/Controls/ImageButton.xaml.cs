@@ -13,7 +13,7 @@ namespace ShortcutsGrid.Controls
             InitializeComponent();
             img.Source = image;
             tb.Text = label;
-            btn.ToolTip = label;
+            ///btn.ToolTip = label;
         }
     }
 }

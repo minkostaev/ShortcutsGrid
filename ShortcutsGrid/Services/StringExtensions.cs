@@ -1,6 +1,9 @@
 ﻿namespace ShortcutsGrid.Services
 {
+    using System;
     using System.Text.RegularExpressions;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     internal static class StringExtensions
     {
@@ -22,6 +25,13 @@
                 && _base64RegexPattern.Match(base64String, 0).Success);
             return rs;
         }
+
+        //todo
+        //public static ImageSource? ImagePathToSource(this string path)
+        //{
+        //    try { return new BitmapImage(new Uri(path ?? "")); }
+        //    catch (Exception) { return null; }
+        //}
 
     }
 }

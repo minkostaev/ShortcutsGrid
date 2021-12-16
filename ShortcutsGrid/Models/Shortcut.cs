@@ -12,7 +12,7 @@
 
         public string ExePath { get; set; } = string.Empty;
         public string ExeName { get; set; } = string.Empty;
-        public string ImgPath { get; set; } = string.Empty;//ImgPath or Base64String
+        public string? ImgPath { get; set; } = string.Empty;//ImgPath or Base64String
         public string ErrMsg { get; set; } = string.Empty;
 
         private ImageSource? _image;
@@ -26,8 +26,11 @@
                     {
                         if (string.IsNullOrWhiteSpace(ImgPath))
                         {
-                            Icon icon = ExtractIcon.ExtractIconFromExecutable(ExePath);
-                            _image = icon.ToImageSource();
+                            if (ImgPath != null)
+                            {
+                                Icon icon = ExtractIcon.ExtractIconFromExecutable(ExePath);
+                                _image = icon.ToImageSource();
+                            }
                         }
                         else
                         {
