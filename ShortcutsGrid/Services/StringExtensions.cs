@@ -26,12 +26,11 @@
             return rs;
         }
 
-        //todo
-        //public static ImageSource? ImagePathToSource(this string path)
-        //{
-        //    try { return new BitmapImage(new Uri(path ?? "")); }
-        //    catch (Exception) { return null; }
-        //}
+        public static ImageSource? PathToImageSource(this string path)
+        {
+            try { return new BitmapImage(new Uri(path ?? "")); }
+            catch (Exception) { return null; }
+        }
 
     }
 }

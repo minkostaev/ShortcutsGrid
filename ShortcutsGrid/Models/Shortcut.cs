@@ -40,11 +40,11 @@
                             }
                             else if (File.Exists(ImgPath))
                             {
-                                _image = IconUtilities.ImagePathToSource(ImgPath);
+                                _image = ImgPath.PathToImageSource();
                                 if (_image == null)
                                 {
                                     var combinedSubPath = AppValues.GetSubPath(ImgPath);
-                                    _image = IconUtilities.ImagePathToSource(combinedSubPath);
+                                    _image = combinedSubPath?.PathToImageSource();
                                 }
                             }
                         }
