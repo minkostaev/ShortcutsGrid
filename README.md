@@ -3,9 +3,18 @@ WPF desktop app that displays 'custom list' grid with links to other programs on
 
 My insparation for making this was that Windows 11 start menu doesn't have the grouping apps option. And I start thinking of better way to sort my installed apps so I can access them faster.
 
-![image info](./screenshots/winadmin.jpg "winadmin.jpg")  
+![img](./screenshots/win11start.jpg "image")![img](./screenshots/win11myapp.jpg "image")  
 [Download this example](./examples/Administrative-Tools.zip)
+
+#### It consist of 2 files:
+
+* exe (show in the screenshots)
+
+* text file (customizible list with program paths)
+
+
 
 	control|Control Panel|iVBORw0KGgoAAAA...
 	control|Control Panel|C:\Images\Control-Panel-128.png
 	control|Control Panel|Control-Panel-128.png
+
