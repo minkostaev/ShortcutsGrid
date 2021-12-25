@@ -10,7 +10,7 @@ My insparation for making this was that Windows 11 start menu doesn't have the g
 
 * exe (show in the screenshots)
 
-* text file (customizible list with program paths)
+* text file (customizable list with programs' path)
 
 
 
