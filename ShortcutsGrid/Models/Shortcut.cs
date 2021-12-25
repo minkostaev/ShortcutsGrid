@@ -36,7 +36,7 @@
                         {
                             if (ImgPath.IsBase64())
                             {
-                                _image = IconUtilities.Base64StringToImage(ImgPath);
+                                _image = ImageUtilities.Base64StringToImage(ImgPath);
                             }
                             else if (File.Exists(ImgPath))
                             {
