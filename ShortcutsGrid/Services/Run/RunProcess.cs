@@ -31,6 +31,7 @@
         {
             Process process = new Process();
             process.StartInfo.UseShellExecute = true;
+            //todo
             ///process.StartInfo.WorkingDirectory = "c:\\";
             process.StartInfo.FileName = commandOrPath;
             process.StartInfo.Arguments = args;
