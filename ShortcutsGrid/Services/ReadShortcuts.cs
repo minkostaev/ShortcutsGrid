@@ -21,7 +21,7 @@
                 {
                     var line = stream.ReadLine();
                     string[] items = (line != null) ? line.Split('|') : new string[] { "" };
-                    //path or command | label | image path
+                    //path or command | label | image path or base64
                     string path = (items.Length >= 1) ? items[0] : "";
                     string label = (items.Length >= 2) ? items[1] : "";
                     string? img = (items.Length >= 3) ? items[2] : null;

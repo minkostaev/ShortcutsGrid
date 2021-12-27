@@ -10,7 +10,9 @@
         public static string? ExeDir => Path.GetDirectoryName(ExePath);
         public static string? ExeName => Path.GetFileNameWithoutExtension(ExePath);
 
-        public static string? ListFile => Path.Combine((ExeDir == null) ? ExeName + ".csv" : ExeDir, ExeName + ".csv");
+        public static string? ListCsv => Path.Combine((ExeDir == null) ? ExeName + ".csv" : ExeDir, ExeName + ".csv");
+        public static string? ListJson => Path.Combine(ExeDir ?? ExeName + ".json", ExeName + ".json");
+
         public static string? GetSubPath(string path) => Path.Combine((ExeDir == null) ? "" : ExeDir, path);
 
         // base64 string

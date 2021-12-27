@@ -6,25 +6,26 @@
     internal static class RunDialog
     {
         [DllImport("shell32.dll", EntryPoint = "#61", CharSet = CharSet.Unicode)]
-        public static extern int RunFileDlg(
+        private static extern int RunFileDlg(
             [In] IntPtr hWnd,
             [In] IntPtr icon,
-            [In] string path,
-            [In] string title,
-            [In] string prompt,
+            [In] string? path,
+            [In] string? title,
+            [In] string? prompt,
             [In] uint flags);
-
-        //private static void Main(string[] args)
-        //{
-        //    // You might also want to add title, window handle...etc.
-        //    RunFileDlg(IntPtr.Zero, IntPtr.Zero, null, null, null, 0);
-        //}
 
         //RFF_NOBROWSE = 1; // Removes the browse button.
         //RFF_NODEFAULT = 2; // No default item selected.
         //RFF_CALCDIRECTORY = 4; // Calculates the working directory from the file name.
         //RFF_NOLABEL = 8; // Removes the edit box label.
         //RFF_NOSEPARATEMEM = 14; // Removes the Separate Memory Space check box (Windows NT only).
+
+        public static void OpenDefault()
+        {
+            _ = RunFileDlg(IntPtr.Zero, IntPtr.Zero, null, null, null, 0);
+        }
+
+        //Add more version of this dialog
 
     }
 }

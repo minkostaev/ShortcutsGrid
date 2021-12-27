@@ -9,6 +9,11 @@
         public static string Run(string commandOrPath, bool admin = false)
         {
             if (string.IsNullOrWhiteSpace(commandOrPath)) { return string.Empty; }
+            if (commandOrPath.ToLower() == "run")
+            {
+                RunDialog.OpenDefault();
+                return string.Empty;
+            }
             try
             {
                 ProcessStart(commandOrPath, admin);

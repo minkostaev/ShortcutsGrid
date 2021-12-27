@@ -5,6 +5,8 @@ always on top ???
 
 command 'run' to open run dialog/DialogRun
 
+'open its folder' context menu
+
 NEW PROJECT - IMG to BASE64
 
 
