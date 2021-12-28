@@ -27,7 +27,7 @@ namespace ShortcutsGrid
             this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Close(); };
             #endregion
 
-            var shortcuts = ReadShortcuts.FileToShortcuts(AppValues.ListCsv);
+            var shortcuts = ReadShortcuts.FileToShortcuts();
 
             shortcuts.Add(new Shortcut() { ExeName = "Cancel", ImgPath = AppValues.CloseImage });
 

@@ -11,7 +11,9 @@
         public static string? ExeName => Path.GetFileNameWithoutExtension(ExePath);
 
         public static string? ListCsv => Path.Combine((ExeDir == null) ? ExeName + ".csv" : ExeDir, ExeName + ".csv");
+        public static bool CsvExists => File.Exists(ListCsv);
         public static string? ListJson => Path.Combine(ExeDir ?? ExeName + ".json", ExeName + ".json");
+        public static bool JsonExists => File.Exists(ListJson);
 
         public static string? GetSubPath(string path) => Path.Combine((ExeDir == null) ? "" : ExeDir, path);
 
