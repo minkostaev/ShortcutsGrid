@@ -42,9 +42,9 @@
                 string path = (items.Length >= 1) ? items[0] : "";
                 string label = (items.Length >= 2) ? items[1] : "";
                 string? img = (items.Length >= 3) ? items[2] : null;
-                if (items.Count() > 1)
+                if (items.Count() > 1 && !path.StartsWith("//"))
                 {
-                    result.Add(new Shortcut() { ExePath = path, ExeName = label, ImgPath = img });
+                    result.Add(new Shortcut() { ExePath = path, AppName = label, ImgPath = img });
                 }
             }
             stream.Close();

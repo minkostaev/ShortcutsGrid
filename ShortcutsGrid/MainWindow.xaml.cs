@@ -20,6 +20,7 @@ namespace ShortcutsGrid
             this.AllowsTransparency = true;
             this.WindowStyle = WindowStyle.None;
             this.Background = System.Windows.Media.Brushes.Transparent;
+            this.Topmost = true;
 
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.ResizeMode = ResizeMode.NoResize;
@@ -29,7 +30,7 @@ namespace ShortcutsGrid
 
             var shortcuts = ReadShortcuts.FileToShortcuts();
 
-            shortcuts.Add(new Shortcut() { ExeName = "Cancel", ImgPath = AppValues.CloseImage });
+            shortcuts.Add(new Shortcut() { AppName = "Cancel", ImgPath = AppValues.CloseImage });
 
             foreach (var shortcut in shortcuts)
             {
@@ -58,7 +59,7 @@ namespace ShortcutsGrid
 
         private ImageButton ShortcutButton(Shortcut shortcutItem)
         {
-            var imageButton = new ImageButton(shortcutItem.Image, shortcutItem.ExeName)
+            var imageButton = new ImageButton(shortcutItem.Image, shortcutItem.AppName)
             {
                 Height = 110,
                 Width = 110

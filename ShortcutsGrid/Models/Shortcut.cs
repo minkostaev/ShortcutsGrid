@@ -7,7 +7,7 @@
     {
 
         public string ExePath { get; set; } = string.Empty;
-        public string ExeName { get; set; } = string.Empty;
+        public string AppName { get; set; } = string.Empty;
         public string? ImgPath { get; set; } = string.Empty;//ImgPath or Base64String
 
         private ImageSource? _image;
@@ -24,4 +24,5 @@
         }
 
     }
+
 }
