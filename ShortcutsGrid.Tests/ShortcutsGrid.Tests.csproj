@@ -18,4 +18,13 @@
     <ProjectReference Include="..\ShortcutsGrid\ShortcutsGrid.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="testhost.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="testhost.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

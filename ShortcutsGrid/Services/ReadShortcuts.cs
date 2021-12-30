@@ -7,7 +7,7 @@
     using System.Text;
     using System.Text.Json;
 
-    internal static class ReadShortcuts
+    public static class ReadShortcuts
     {
 
         public static List<Shortcut> FileToShortcuts()
