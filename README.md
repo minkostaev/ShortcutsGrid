@@ -1,5 +1,7 @@
 # Shortcuts Grid
 
+[![.NET Core Desktop](https://github.com/minkostaev/ShortcutsGrid/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/minkostaev/ShortcutsGrid/actions/workflows/dotnet-desktop.yml)
+
 **WPF (.NET 6.0) desktop app with transparent background that displays 'custom list' grid with links to other programs on the PC or/and run commands. With customizable app names and icons/images.**
 
 My inspiration for making this was that Windows 11 start menu doesn't have the grouping apps option. And I start thinking of better way to sort my installed apps so I can access them faster.
@@ -18,6 +20,8 @@ The idea is this exe to display user's group of apps. Copy or build new exe with
 
 **In order too work - both files should be in the same folder and have the same names.** [(it can be seen in the examples)](examples)
 
+## Guide - how should the text file look like:
+
 ### Text file structure: list with objects - each object with 3 parameters:
 
 1. run command or file path (it can have argument after the command/path)
@@ -28,8 +32,8 @@ The idea is this exe to display user's group of apps. Copy or build new exe with
 
 ### Text file types:
 
-* csv (default choice)
-* json
+* csv (default choice) [csv](#csv-structure)
+* json [json](#json-structure)
 
 [csv file content](screenshots/readme_test.md)
 
