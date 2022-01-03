@@ -34,25 +34,22 @@ namespace ShortcutsGrid
 
             foreach (var shortcut in shortcuts)
             {
-                var shortcutButton = ShortcutButton(shortcut);
-                #region fill panels with buttons
                 if (stkPnl1.Children.Count < 6)
                 {
-                    stkPnl1.Children.Add(shortcutButton);
+                    stkPnl1.Children.Add(ShortcutButton(shortcut));
                 }
                 else if (stkPnl2.Children.Count < 6)
                 {
-                    stkPnl2.Children.Add(shortcutButton);
+                    stkPnl2.Children.Add(ShortcutButton(shortcut));
                 }
                 else if (stkPnl3.Children.Count < 6)
                 {
-                    stkPnl3.Children.Add(shortcutButton);
+                    stkPnl3.Children.Add(ShortcutButton(shortcut));
                 }
                 else if (stkPnl4.Children.Count < 6)
                 {
-                    stkPnl4.Children.Add(shortcutButton);
+                    stkPnl4.Children.Add(ShortcutButton(shortcut));
                 }
-                #endregion
             }
 
         }
@@ -67,11 +64,7 @@ namespace ShortcutsGrid
             imageButton.btn.Click += delegate
             {
                 string msg = RunProcess.Run(shortcutItem.ExePath);
-                if (!string.IsNullOrWhiteSpace(msg))
-                {
-                    MessageBox.Show(msg, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
+                if (!IsErrorDisplayed(msg))
                 {
                     this.Close();
                 }
@@ -79,21 +72,44 @@ namespace ShortcutsGrid
             imageButton.mnOpen.Click += delegate
             {
                 string msg = RunProcess.Run(shortcutItem.ExePath);
-                if (!string.IsNullOrWhiteSpace(msg))
-                {
-                    MessageBox.Show(msg, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                IsErrorDisplayed(msg);
             };
             imageButton.mnAdmin.Click += delegate
             {
                 string msg = RunProcess.Run(shortcutItem.ExePath, true);
-                if (!string.IsNullOrWhiteSpace(msg))
-                {
-                    MessageBox.Show(msg, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                IsErrorDisplayed(msg);
             };
-            imageButton.mnFolder.Click += delegate { MessageBox.Show("Folder"); };
+            imageButton.mnFolderExe.Click += delegate
+            {
+                string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ExePath));
+                IsErrorDisplayed(msg);
+            };
+            imageButton.mnFolderImg.Click += delegate
+            {
+                string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ImgPath));
+                IsErrorDisplayed(msg);
+            };
+            imageButton.mnFolderThis.Click += delegate
+            {
+                string msg = RunProcess.Run(FolderOpeningString(AppValues.ExePath));
+                IsErrorDisplayed(msg);
+            };
             return imageButton;
+        }
+
+        private string FolderOpeningString(string? filePath)
+        {
+            return "explorer.exe " + "/select, \"" + filePath + "\"";
+        }
+
+        private bool IsErrorDisplayed(string error)
+        {
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                MessageBox.Show(error, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
         }
 
     }

@@ -6,19 +6,28 @@
 
 My inspiration for making this was that Windows 11 start menu doesn't have the grouping apps option. And I start thinking of better way to sort my installed apps so I can access them faster.
 
-Basically it looks something like this:
+*Basically it looks something like this:*
 
 ![img](./screenshots/win11start.jpg "image")![img](./screenshots/win11myapp.jpg "image")  
 [Download this example](./examples/Administrative-Tools.zip)
 
-The idea is this exe to display user's group of apps. Copy or build new exe with different name and icon for other group.
+The idea is this exe to display user's group of apps. Copy or build new exe with different name and icon for other group of apps.
 
-## It consist of 2 files:
+Each icon/app in the displayed grid on selection opens the selected app. But it also has **context menu** (right mouse click) with more options such as:
 
-* exe (show in the screenshots)
-* text file (customizable list with **programs' path** or/and **run commands**)
+* Open (selected app without closing this app)
+* Run as administrator
+* Open folder of selected app
+* Open folder of selected image
+* Open folder of this app
 
-**In order too work - both files should be in the same folder and have the same names.** [(it can be seen in the examples)](examples)
+## User defined list with shortcuts
+
+To display the shortcuts grid this app requires a **text file** placed next to build of it.
+
+This text file is customizable list with **programs' path** or/and **run commands**.
+
+**In order too work - the text file should be placed in the same folder as this app's exe and have the same names.** [(it can be seen in the examples)](examples)
 
 ## Guide - how should the text file look like:
 
@@ -30,16 +39,14 @@ The idea is this exe to display user's group of apps. Copy or build new exe with
 
 *It has custom command, the app checks for: 'run' - it displays run dialog.*
 
-### Text file types:
+### Text file types supported:
 
-* csv (default choice) [csv](#csv-structure)
-* json [json](#json-structure)
+* [csv](#csv-structure) (default choice)
+* [json](#json-structure)
 
-[csv file content](screenshots/readme_test.md)
+---
 
-[json file content](screenshots/readme_test.md)
-
-#### CSV structure:
+### CSV structure:
 
 Every row is one program. The parameters is divided by '|':
 
@@ -62,7 +69,9 @@ control printers|Devices & Printers|Control-Printers-128.png
 
 *If row starts '//' it is ignored.*
 
-#### JSON structure:
+---
+
+### JSON structure:
 
 ExePath is app's path or run command (it can have argument after it)
 AppName is app's label
