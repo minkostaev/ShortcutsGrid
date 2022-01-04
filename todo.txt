@@ -1,7 +1,0 @@
-
-'open its folder' context menu
-
-NEW PROJECT - IMG to BASE64
-
-
-
