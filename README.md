@@ -2,6 +2,9 @@
 
 [![.NET Core Desktop](https://github.com/minkostaev/ShortcutsGrid/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/minkostaev/ShortcutsGrid/actions/workflows/dotnet-desktop.yml)
 
+[![codecov](https://codecov.io/gh/minkostaev/ShortcutsGrid/branch/main/graph/badge.svg?token=29MDM4VJOW)](https://codecov.io/gh/minkostaev/ShortcutsGrid)
+
+
 **WPF (.NET 6.0) desktop app with transparent background that displays 'custom list' grid with links to other programs on the PC or/and run commands. With customizable app names and icons/images.**
 
 My inspiration for making this was that Windows 11 start menu doesn't have the grouping apps option. And I start thinking of better way to sort my installed apps so I can access them faster.
