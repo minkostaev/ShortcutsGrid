@@ -81,8 +81,8 @@ jobs:
     - name: Execute unit tests
       run: dotnet test
 
-    - uses: actions/checkout@main
-    - uses: codecov/codecov-action@v2
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
         files: ./coverage1.xml,./coverage2.xml # optional
