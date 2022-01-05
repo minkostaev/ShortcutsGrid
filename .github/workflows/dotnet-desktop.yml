@@ -77,6 +77,10 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
+    # ReportGenerator
+    - name: reportgenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
+
     # Execute all unit tests in the solution
     - name: Execute unit tests
       run: dotnet test
