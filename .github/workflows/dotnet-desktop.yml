@@ -83,7 +83,7 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test
+      run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
 
     # Codecov
     - name: Upload coverage to Codecov
