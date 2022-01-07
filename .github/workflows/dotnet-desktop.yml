@@ -77,7 +77,7 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
-    # ReportGenerator
+    # Install report generator
     - name: reportgenerator
       run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
 
@@ -85,16 +85,20 @@ jobs:
     - name: Execute unit tests
       run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
 
+    # Execute report generator
+    - name: Execute report generator
+      run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html;Badges
+
     # Codecov
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        files: ./coverage1.xml,./coverage2.xml # optional
-        flags: unittests # optional
-        name: codecov-umbrella # optional
-        fail_ci_if_error: false # optional (default = false)
-        verbose: true # optional (default = false)
+    #- name: Upload coverage to Codecov
+    #  uses: codecov/codecov-action@v2
+    #  with:
+    #    token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+    #    files: ./coverage1.xml,./coverage2.xml # optional
+    #    flags: unittests # optional
+    #    name: codecov-umbrella # optional
+    #    fail_ci_if_error: false # optional (default = false)
+    #    verbose: true # optional (default = false)
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
