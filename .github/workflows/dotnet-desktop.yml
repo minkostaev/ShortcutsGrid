@@ -87,7 +87,7 @@ jobs:
 
     # Execute report generator
     - name: Execute report generator
-      run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html;Badges
+      run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
 
     # Codecov
     #- name: Upload coverage to Codecov
