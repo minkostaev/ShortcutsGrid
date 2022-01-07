@@ -79,8 +79,8 @@ jobs:
 
     # Install report generator
     - name: reportgenerator
-    - run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
-    - run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
+    #  run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
 
     # Execute all unit tests in the solution
     #- name: Execute unit tests
