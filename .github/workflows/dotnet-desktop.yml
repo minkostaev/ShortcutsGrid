@@ -80,14 +80,15 @@ jobs:
     # Install report generator
     - name: reportgenerator
       run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
-
-    # Execute all unit tests in the solution
-    - name: Execute unit tests
       run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
 
+    # Execute all unit tests in the solution
+    #- name: Execute unit tests
+    #  run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
+
     # Execute report generator
-    - name: Execute report generator
-      run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
+    #- name: Execute report generator
+    #  run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
 
     # Codecov
     #- name: Upload coverage to Codecov
