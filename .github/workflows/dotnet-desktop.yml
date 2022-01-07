@@ -77,15 +77,13 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
-    # Install report generator
+    # Execute all unit tests and install report generator
     - name: reportgenerator
       run: |
         dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
         dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
-
-    # Execute all unit tests in the solution
-    #- name: Execute unit tests
-    #  run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
+        New-Item test.txt
+        Set-Content test.txt 'Welcome to jungle'
 
     # Execute report generator
     #- name: Execute report generator
