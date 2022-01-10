@@ -135,7 +135,7 @@ jobs:
         
     # simple publish artifacts example
     - name: Step 1 - Create a temporary artifact downloads folder
-        run: mkdir downloads
+      run: mkdir downloads
         
     - name: step 2 - Add artifacts to publish to the temp folder
       run: |
