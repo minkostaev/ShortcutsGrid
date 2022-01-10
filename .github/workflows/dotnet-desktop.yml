@@ -150,6 +150,9 @@ jobs:
       with: 
         name: assetsFile
         path: downloads
+        
+    # aaaa
+    - name: Step 1 - Create a temporary artifact downloads folder
       run: |
         git add downloads
         git commit -m "Add Artifact file"
