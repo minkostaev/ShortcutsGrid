@@ -99,10 +99,10 @@ jobs:
     #    verbose: true # optional (default = false)
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-      env:
-        Configuration: ${{ matrix.configuration }}
+    #- name: Restore the application
+    #  run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+    #  env:
+    #    Configuration: ${{ matrix.configuration }}
 
     # Decode the base 64 encoded pfx and save the Signing_Certificate
     #- name: Decode the pfx
@@ -130,7 +130,7 @@ jobs:
       with:
         name: package
         path: ${{ env.Wap_Project_Directory }}\\TestResults
-        
+
     # simple publish artifacts example
     #- name: Step 1 - Create a temporary artifact downloads folder
     #  run: mkdir downloads
