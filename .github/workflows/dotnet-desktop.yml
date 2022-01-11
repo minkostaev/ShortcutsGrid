@@ -144,7 +144,7 @@ jobs:
         echo 'bravo'    > bravo.html
         echo 'charlie'  > charlie.html
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
-        for ($i=0; $i -lt $dirList.Count; $i++){Add-Content Debug\dirList.txt $dirList[$i]}
+        for ($i=0; $i -lt $dirList.Count; $i++){Add-Content dirList.txt $dirList[$i]}
         cd ..
     
     - name: Step 3 - Use the Upload Artifact GitHub Action
