@@ -58,7 +58,7 @@ jobs:
     env:
       Solution_Name: ShortcutsGrid.sln                                   # Replace with your solution name, i.e. MyWpfApp.sln.
       Test_Project_Path: ShortcutsGrid.Tests\ShortcutsGrid.Tests.csproj  # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Wap_Project_Directory: ShortcutsGrid.Package                       # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
+      Wap_Project_Directory: ShortcutsGrid.Tests                         # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       Wap_Project_Path: ShortcutsGrid.Package\Package.wapproj            # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
@@ -82,8 +82,6 @@ jobs:
       run: |
         dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
         dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
-        New-Item test.txt
-        Set-Content test.txt 'Welcome to jungle'
 
     # Execute report generator
     #- name: Execute report generator
@@ -130,28 +128,26 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: MSIX Package
-        path: ${{ env.Wap_Project_Directory }}\AppPackages
+        name: package
+        path: ${{ env.Wap_Project_Directory }}\\TestResults
         
     # simple publish artifacts example
-    - name: Step 1 - Create a temporary artifact downloads folder
-      run: mkdir downloads
+    #- name: Step 1 - Create a temporary artifact downloads folder
+    #  run: mkdir downloads
     
-    - name: step 2 - Add artifacts to publish to the temp folder
-      run: |
-        cd downloads
-        echo 'alpha'    > alpha.html
-        echo 'bravo'    > bravo.html
-        echo 'charlie'  > charlie.html
-        $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
-        for ($i=0; $i -lt $dirList.Count; $i++){Add-Content dirList.txt $dirList[$i]}
-        cd ..
+    #- name: step 2 - Add artifacts to publish to the temp folder
+    #  run: |
+    #    cd downloads
+    #    echo 'alpha'    > alpha.html
+    #    echo 'bravo'    > bravo.html
+    #    echo 'charlie'  > charlie.html
+    #    cd ..
     
-    - name: Step 3 - Use the Upload Artifact GitHub Action
-      uses: actions/upload-artifact@v2
-      with: 
-        name: assetsFile
-        path: downloads
+    #- name: Step 3 - Use the Upload Artifact GitHub Action
+    #  uses: actions/upload-artifact@v2
+    #  with: 
+    #    name: assetsFile
+    #    path: downloads
         
     # aaaa
     #- name: git
