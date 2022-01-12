@@ -78,10 +78,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     # Execute all unit tests and install report generator
-    - name: Unit Tests
-      run: |
-        dotnet test
-        dir
+    #- name: Unit Tests
+    #  run: |
+    #    dotnet test
+    #    dir
 
     # Execute all unit tests and install report generator
     - name: Unit Tests and report generator
