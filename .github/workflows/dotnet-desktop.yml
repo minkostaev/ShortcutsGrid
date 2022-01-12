@@ -98,7 +98,7 @@ jobs:
         cd ShortcutsGrid.Tests
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
-        for ($i=0; $i -lt $dirList.Count; $i++){Add-Content dirList.txt $dirList[$i]}
+        for ($i=0; $i -lt $dirList.Count; $i++){Add-Content dirList.txt $dirList}
     #    reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
 
     # Codecov
