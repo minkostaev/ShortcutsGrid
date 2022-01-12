@@ -82,6 +82,7 @@ jobs:
       run: |
         dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
         dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
+        dir
 
     # Execute report generator
     #- name: Execute report generator
