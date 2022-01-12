@@ -88,8 +88,8 @@ jobs:
         dir
 
     # Execute report generator
-    - name: Execute report generator
-      run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
+    #- name: Execute report generator
+    #  run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
 
     # Codecov
     #- name: Upload coverage to Codecov
@@ -133,7 +133,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: package
-        path: TestResults
+        path: tools
     #    path: ${{ env.Wap_Project_Directory }}\\TestResults
 
     # simple publish artifacts example
