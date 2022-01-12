@@ -80,7 +80,7 @@ jobs:
     # Execute all unit tests and install report generator
     - name: Unit Tests
       run: |
-        dotnet test --configuration Release --collect:"XPlat Code Coverage" --no-build /p:CollectCoverage=true
+        dotnet test --configuration Release --collect:"XPlat Code Coverage" /p:CollectCoverage=true
         dir
 
     # Execute all unit tests and install report generator
@@ -138,7 +138,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: package
-        path: env.Wap_Project_Directory
+        path: ${{ env.Wap_Project_Directory }}
     #    path: ${{ env.Wap_Project_Directory }}\\TestResults
 
     # simple publish artifacts example
