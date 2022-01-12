@@ -78,6 +78,12 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     # Execute all unit tests and install report generator
+    - name: Unit Tests
+      run: |
+        dotnet test
+        dir
+
+    # Execute all unit tests and install report generator
     - name: Unit Tests and report generator
       run: |
         dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
@@ -133,7 +139,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: package
-        path: tools
+        path: env.Wap_Project_Directory
     #    path: ${{ env.Wap_Project_Directory }}\\TestResults
 
     # simple publish artifacts example
