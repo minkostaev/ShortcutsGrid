@@ -94,7 +94,12 @@ jobs:
 
     # Execute report generator
     - name: Execute report generator
-      run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
+      run: |
+        cd ShortcutsGrid.Tests
+        cd TestResults
+        $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
+        for ($i=0; $i -lt $dirList.Count; $i++){Add-Content dirList.txt $dirList[$i]}
+    #    reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
 
     # Codecov
     #- name: Upload coverage to Codecov
