@@ -143,8 +143,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: package
-        path: ${{ env.Wap_Project_Directory }}
-    #    path: ${{ env.Wap_Project_Directory }}\\TestResults
+        path: ${{ env.Wap_Project_Directory }}\\TestResults
+    #    path: ${{ env.Wap_Project_Directory }}
 
     # simple publish artifacts example
     #- name: Step 1 - Create a temporary artifact downloads folder
@@ -164,9 +164,9 @@ jobs:
     #    name: assetsFile
     #    path: downloads
         
-    # aaaa
-    #- name: git
-    #  run: |
-    #    git add downloads
-    #    git commit -m "Add Artifact file"
-    #    git push origin main
+    # git
+    - name: git
+      run: |
+        git add downloads
+        git commit -m "Add Artifact file"
+        git push origin main
