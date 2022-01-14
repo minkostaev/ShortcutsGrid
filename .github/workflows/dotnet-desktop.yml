@@ -95,11 +95,14 @@ jobs:
     # Execute report generator
     - name: Execute report generator
       run: |
+        $curDir = Get-Location
         cd ShortcutsGrid.Tests
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
+        cd coveragereport
+        copy badge_linecoverage.svg $curDir
 
     # Codecov
     #- name: Upload coverage to Codecov
@@ -164,9 +167,12 @@ jobs:
     #    name: assetsFile
     #    path: downloads
         
+    #${{ env.Wap_Project_Directory }}\\TestResults
     # git
-    - name: git
+    - name: Git 
       run: |
-        git add downloads
-        git commit -m "Add Artifact file"
+        git config --global user.email ${{ secrets.MY_EMAIL }}
+        git config --global user.name "Minko Staev"
+        git add badge_linecoverage.svg
+        git commit -m "add artifact file"
         git push origin main
