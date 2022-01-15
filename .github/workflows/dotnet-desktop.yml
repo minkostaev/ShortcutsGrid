@@ -77,20 +77,20 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
-    # Execute all unit tests and install report generator
-    - name: Unit Tests
+    # Execute all unit tests and collect coverage
+    - name: Unit Tests and collect coverage
       run: |
         dotnet test --configuration Release --collect:"XPlat Code Coverage" /p:CollectCoverage=true
         dir
 
-    # Execute all unit tests and install report generator
-    - name: Unit Tests and report generator
+    # Install report generator and setup
+    - name: Report generator setup
       run: |
         dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.13
         dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version 4.8.13
         dotnet new tool-manifest
         dotnet tool install dotnet-reportgenerator-globaltool --version 4.8.13
-        dir
+    #https://danielpalme.github.io/ReportGenerator/usage.html
 
     # Execute report generator
     - name: Execute report generator
@@ -104,75 +104,20 @@ jobs:
         cd coveragereport
         copy badge_linecoverage.svg $curDir
 
-    # Codecov
-    #- name: Upload coverage to Codecov
-    #  uses: codecov/codecov-action@v2
-    #  with:
-    #    token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-    #    files: ./coverage1.xml,./coverage2.xml # optional
-    #    flags: unittests # optional
-    #    name: codecov-umbrella # optional
-    #    fail_ci_if_error: false # optional (default = false)
-    #    verbose: true # optional (default = false)
-
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    #- name: Restore the application
-    #  run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-    #  env:
-    #    Configuration: ${{ matrix.configuration }}
-
-    # Decode the base 64 encoded pfx and save the Signing_Certificate
-    #- name: Decode the pfx
-    #  run: |
-    #    $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-    #    $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx
-    #    [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
-
-    # Create the app package by building and packaging the Windows Application Packaging project
-    #- name: Create the app package
-    #  run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
-    #  env:
-    #    Appx_Bundle: Always
-    #    Appx_Bundle_Platforms: x86|x64
-    #    Appx_Package_Build_Mode: StoreUpload
-    #    Configuration: ${{ matrix.configuration }}
-
-    # Remove the pfx
-    #- name: Remove the pfx
-    #  run: Remove-Item -path $env:Wap_Project_Directory\$env:Signing_Certificate
-
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
-    - name: Upload build artifacts
+    # Upload artifacts in the ations section
+    - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: package
+        name: artifacts
         path: ${{ env.Wap_Project_Directory }}\\TestResults
-    #    path: ${{ env.Wap_Project_Directory }}
+        expires: 432000
+    # expires value is in seconds (432000 is 5 days)
 
-    # simple publish artifacts example
-    #- name: Step 1 - Create a temporary artifact downloads folder
-    #  run: mkdir downloads
-    
-    #- name: step 2 - Add artifacts to publish to the temp folder
-    #  run: |
-    #    cd downloads
-    #    echo 'alpha'    > alpha.html
-    #    echo 'bravo'    > bravo.html
-    #    echo 'charlie'  > charlie.html
-    #    cd ..
-    
-    #- name: Step 3 - Use the Upload Artifact GitHub Action
-    #  uses: actions/upload-artifact@v2
-    #  with: 
-    #    name: assetsFile
-    #    path: downloads
-        
-    #${{ env.Wap_Project_Directory }}\\TestResults
-    # git
-    - name: Git 
+    # Git - upload artifact back in the repo
+    - name: Git commands
       run: |
         git config --global user.email ${{ secrets.MY_EMAIL }}
-        git config --global user.name "Minko Staev"
+        git config --global user.name "from workflow"
         git add badge_linecoverage.svg
         git commit -m "add artifact file"
         git push origin main
