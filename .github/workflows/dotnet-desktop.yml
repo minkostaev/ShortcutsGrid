@@ -111,8 +111,7 @@ jobs:
       with:
         name: artifacts
         path: ${{ env.Wap_Project_Directory }}\\TestResults
-    #    expires: 432000
-    # expires value is in seconds (432000 is 5 days)
+        retention-days: 5
 
     # Git - upload artifact back in the repo
     - name: Git commands
