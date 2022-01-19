@@ -5,7 +5,7 @@
     using System.IO;
 
     [TestFixture]
-    public class TestReadShortcuts
+    internal class TestReadShortcuts
     {
         [OneTimeSetUp]
         public void OneTimeSetUp()
