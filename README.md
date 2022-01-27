@@ -30,6 +30,8 @@ This text file is customizable list with **programs' path** or/and **run command
 
 **In order too work - the text file should be placed in the same folder as this app's exe and have the same names.** [(it can be seen in the examples)](examples)
 
+The text file can be [csv](#csv-structure) **or** [json](#json-structure)
+
 ## Guide - how should the text file look like:
 
 ### Text file structure: list with objects - each object with 3 parameters:

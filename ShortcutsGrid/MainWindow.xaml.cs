@@ -2,6 +2,7 @@
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Services;
 using ShortcutsGrid.Services.Run;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -61,14 +62,23 @@ namespace ShortcutsGrid
                 Height = 110,
                 Width = 110
             };
-            imageButton.btn.Click += delegate
+
+            // TODO double click open without close
+            imageButton.btn.PreviewMouseLeftButtonDown += new((sender, e) =>
             {
                 string msg = RunProcess.Run(shortcutItem.ExePath);
-                if (!IsErrorDisplayed(msg))
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
                 {
-                    this.Close();
+                    IsErrorDisplayed(msg);
                 }
-            };
+                else
+                {
+                    if (!IsErrorDisplayed(msg))
+                    {
+                        this.Close();
+                    }
+                }
+            });
             imageButton.mnOpen.Click += delegate
             {
                 string msg = RunProcess.Run(shortcutItem.ExePath);
