@@ -1,10 +1,10 @@
-﻿using ShortcutsGrid.Models;
-using ShortcutsGrid.Services;
-using System.Windows;
-using System.Windows.Input;
-
-namespace ShortcutsGrid
+﻿namespace ShortcutsGrid
 {
+    using ShortcutsGrid.Models;
+    using ShortcutsGrid.Services;
+    using System.Windows;
+    using System.Windows.Input;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
