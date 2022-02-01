@@ -20,36 +20,26 @@
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
 
-            //MethodInfo? methodInfo = typeof(MainWindow).GetMethod("IsErrorDisplayed", BindingFlags.NonPublic | BindingFlags.Instance);
-            //object[] parameters = { "" };
-            //var result = methodInfo?.Invoke(mainWindow, parameters);
-
-            //bool? assert = true;
-            //if (result is bool)
-            //{
-            //    assert = result as bool?;
-            //}
-
             if (File.Exists(testhost))
                 File.Delete(testhost);
 
-            Assert.IsInstanceOf<MainWindow>(mainWindow);//assert
+            Assert.IsInstanceOf<MainWindow>(mainWindow);
         }
-
-        //IMessageBox test
-        //https://stackoverflow.com/questions/49146068/unit-tests-for-a-function-with-messagebox
 
         public string GetInputFile(string fileName)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
 
+            string content = string.Empty;
             var stream = assembly.GetManifestResourceStream("ShortcutsGrid.Tests.Resources." + fileName);
-            var reader = new StreamReader(stream);
-            string text = reader.ReadToEnd();
+            if (stream != null)
+            {
+                var reader = new StreamReader(stream);
+                content = reader.ReadToEnd();
+            }
 
-            return text;
+            return content;
         }
-
 
     }
 }

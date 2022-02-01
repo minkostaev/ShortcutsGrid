@@ -8,7 +8,7 @@
     using System.Windows.Input;
     using System.Windows.Threading;
 
-    internal static class ImageButtonCreator
+    public static class ImageButtonCreator
     {
 
         public static ImageButton GetButton(Shortcut shortcutItem)
@@ -101,7 +101,6 @@
             }
             return false;
         }
-
 
     }
 }
