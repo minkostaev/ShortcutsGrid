@@ -115,6 +115,7 @@ jobs:
 
     # Git - upload artifact back in the repo
     - name: Git commands
+      if: ${{ github.event_name != 'pull_request'}}
       run: |
         git config --global user.email ${{ secrets.MY_EMAIL }}
         git config --global user.name "from workflow"
