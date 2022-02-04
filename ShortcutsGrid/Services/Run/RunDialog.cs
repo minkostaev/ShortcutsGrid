@@ -3,7 +3,7 @@
     using System;
     using System.Runtime.InteropServices;
 
-    internal static class RunDialog
+    public static class RunDialog
     {
         [DllImport("shell32.dll", EntryPoint = "#61", CharSet = CharSet.Unicode)]
         private static extern int RunFileDlg(
@@ -20,9 +20,9 @@
         //RFF_NOLABEL = 8; // Removes the edit box label.
         //RFF_NOSEPARATEMEM = 14; // Removes the Separate Memory Space check box (Windows NT only).
 
-        public static void OpenDefault()
+        public static int OpenDefault()
         {
-            _ = RunFileDlg(IntPtr.Zero, IntPtr.Zero, null, null, null, 0);
+            return RunFileDlg(IntPtr.Zero, IntPtr.Zero, null, null, null, 0);
         }
 
         //Add more version of this dialog
