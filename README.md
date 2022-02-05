@@ -22,7 +22,7 @@ Each icon/app in the displayed grid on selection opens the selected app. But it 
 * Open folder of selected image
 * Open folder of this app
 
-**It supports double click and also ctrl+left click**
+*It supports double click and also ctrl+left click*
 
 ## User defined list with shortcuts
 
