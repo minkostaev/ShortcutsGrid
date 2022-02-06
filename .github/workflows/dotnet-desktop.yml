@@ -104,8 +104,13 @@ jobs:
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
         cd coveragereport
         copy badge_linecoverage.svg $curDir
-        $curDir
-        github.ref
+
+    # Execute report generator
+    - name: Branch test
+      if: ${{ github.ref == 'main'}}
+      run: |
+        $curDir = Get-Location
+        dir
 
     # Upload artifacts in the ations section
     - name: Upload artifacts
