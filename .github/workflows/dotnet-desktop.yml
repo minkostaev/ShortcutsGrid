@@ -107,7 +107,7 @@ jobs:
 
     # Execute report generator
     - name: Branch test
-      if: ${{ github.ref == 'main'}}
+      if: ${{ github.ref_name == 'main'}}
       run: |
         $curDir = Get-Location
         dir
