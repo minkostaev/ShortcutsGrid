@@ -121,6 +121,6 @@ jobs:
         git config --global user.name "from workflow"
         git add badge_linecoverage.svg
         git commit -m "add artifact file"
-        $branchName = github.ref_name
+        $branchName = $github.ref_name
         git push origin $branchName
     # github.ref_name is branch name
