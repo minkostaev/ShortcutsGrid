@@ -104,7 +104,8 @@ jobs:
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
         cd coveragereport
         copy badge_linecoverage.svg $curDir
-        github.ref_name
+        $curDir
+        github.ref
 
     # Upload artifacts in the ations section
     - name: Upload artifacts
