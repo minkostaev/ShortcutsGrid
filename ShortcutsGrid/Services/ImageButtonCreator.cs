@@ -13,6 +13,7 @@
 
         public static ImageButton GetButton(Shortcut shortcutItem)
         {
+            MessageDialogs messageDialogs = new MessageDialogs(new MessageBoxWrapper());
             var imageButton = new ImageButton(shortcutItem.Image, shortcutItem.AppName)
             {
                 Height = 110,
@@ -34,11 +35,11 @@
                 string msg = RunProcess.Run(shortcutItem.ExePath);
                 if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
                 {
-                    IsErrorDisplayed(msg);
+                    messageDialogs.IsErrorDisplayed(msg);
                 }
                 else
                 {
-                    if (!IsErrorDisplayed(msg))
+                    if (!messageDialogs.IsErrorDisplayed(msg))
                     {
                         ///Environment.Exit(0);
                         ///App.Current.Shutdown();
@@ -56,33 +57,33 @@
 
                     doubleClicked = true;
                     string msg = RunProcess.Run(shortcutItem.ExePath);
-                    IsErrorDisplayed(msg);
+                    messageDialogs.IsErrorDisplayed(msg);
                 }
             });
             imageButton.mnOpen.Click += delegate
             {
                 string msg = RunProcess.Run(shortcutItem.ExePath);
-                IsErrorDisplayed(msg);
+                messageDialogs.IsErrorDisplayed(msg);
             };
             imageButton.mnAdmin.Click += delegate
             {
                 string msg = RunProcess.Run(shortcutItem.ExePath, true);
-                IsErrorDisplayed(msg);
+                messageDialogs.IsErrorDisplayed(msg);
             };
             imageButton.mnFolderExe.Click += delegate
             {
                 string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ExePath));
-                IsErrorDisplayed(msg);
+                messageDialogs.IsErrorDisplayed(msg);
             };
             imageButton.mnFolderImg.Click += delegate
             {
                 string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ImgPath));
-                IsErrorDisplayed(msg);
+                messageDialogs.IsErrorDisplayed(msg);
             };
             imageButton.mnFolderThis.Click += delegate
             {
                 string msg = RunProcess.Run(FolderOpeningString(AppValues.ExePath));
-                IsErrorDisplayed(msg);
+                messageDialogs.IsErrorDisplayed(msg);
             };
             return imageButton;
         }
@@ -90,16 +91,6 @@
         private static string FolderOpeningString(string? filePath)
         {
             return "explorer.exe " + "/select, \"" + filePath + "\"";
-        }
-
-        private static bool IsErrorDisplayed(string error)
-        {
-            if (!string.IsNullOrWhiteSpace(error))
-            {
-                MessageBox.Show(error, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return true;
-            }
-            return false;
         }
 
     }

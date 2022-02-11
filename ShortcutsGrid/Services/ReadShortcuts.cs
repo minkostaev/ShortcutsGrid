@@ -29,7 +29,7 @@
 
         private static List<Shortcut> CsvToShortcuts(string? filePath, string delimiter)
         {
-            var result = new List<Shortcut>();
+            var result = new List<Shortcut>();//todo list with list
 
             if (filePath == null) return result;
 

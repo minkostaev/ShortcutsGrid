@@ -26,8 +26,5 @@
         ///object[] parameters = { "" };
         ///var result = methodInfo?.Invoke(mainWindow, parameters);
 
-        //IMessageBox test
-        //https://stackoverflow.com/questions/49146068/unit-tests-for-a-function-with-messagebox
-
     }
 }
