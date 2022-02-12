@@ -15,5 +15,21 @@
             Assert.IsEmpty(result);
         }
 
+        [Test]
+        public void TestRunCommand()
+        {
+            string result = RunProcess.Run("explorer");
+
+            Assert.IsEmpty(result);
+        }
+
+        [Test]
+        public void TestRunWrongCommand()
+        {
+            string result = RunProcess.Run("explorera");
+
+            Assert.IsNotEmpty(result);
+        }
+
     }
 }
