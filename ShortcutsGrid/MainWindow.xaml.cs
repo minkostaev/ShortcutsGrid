@@ -28,25 +28,25 @@
 
             var shortcuts = ReadShortcuts.FileToShortcuts();
 
-            shortcuts.Add(new Shortcut() { AppName = "Cancel", ImgPath = AppValues.CloseImage });
+            shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseImage });
 
             foreach (var shortcut in shortcuts)
             {
                 if (stkPnl1.Children.Count < 6)
                 {
-                    stkPnl1.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                    stkPnl1.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
                 }
                 else if (stkPnl2.Children.Count < 6)
                 {
-                    stkPnl2.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                    stkPnl2.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
                 }
                 else if (stkPnl3.Children.Count < 6)
                 {
-                    stkPnl3.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                    stkPnl3.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
                 }
                 else if (stkPnl4.Children.Count < 6)
                 {
-                    stkPnl4.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                    stkPnl4.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
                 }
             }
 

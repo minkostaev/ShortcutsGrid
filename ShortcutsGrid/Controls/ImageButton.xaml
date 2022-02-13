@@ -41,6 +41,8 @@
                         <MenuItem x:Name="mnFolderImg" Header="This icon" />
                         <MenuItem x:Name="mnFolderThis" Header="Default" />
                     </MenuItem>
+                    <Separator />
+                    <MenuItem x:Name="mnAbout" Header="About" />
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>

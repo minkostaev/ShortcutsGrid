@@ -11,7 +11,7 @@
     public static class ImageButtonCreator
     {
 
-        public static ImageButton GetButton(Shortcut shortcutItem)
+        public static ImageButton GetButton(MainWindow mainWindow, Shortcut shortcutItem)
         {
             MessageDialogs messageDialogs = new MessageDialogs(new MessageBoxWrapper());
             var imageButton = new ImageButton(shortcutItem.Image, shortcutItem.AppName)
@@ -43,21 +43,32 @@
                     {
                         ///Environment.Exit(0);
                         ///App.Current.Shutdown();
-                        Application.Current.Shutdown();
                         ///System.Diagnostics.Process.GetCurrentProcess().Kill();
+                        Application.Current.Shutdown();
                     }
                 }
             };
             imageButton.btn.Click += new((sender, e) => { dispatcherTimer.Start(); });
             imageButton.btn.PreviewMouseDown += new((sender, e) =>
             {
+                bool cancelButton = shortcutItem.AppName == "Drag or Close" && shortcutItem.ExePath == "";
                 if (e.ClickCount > 1)
                 {
+                    if (cancelButton)
+                    {
+                        Application.Current.Shutdown();
+                        return;
+                    }
                     dispatcherTimer.Stop();
 
                     doubleClicked = true;
                     string msg = RunProcess.Run(shortcutItem.ExePath);
                     messageDialogs.IsErrorDisplayed(msg);
+                }
+                else if (e.ClickCount == 1 && cancelButton)
+                {
+                    try { mainWindow.DragMove(); }
+                    catch (Exception ex) { _ = ex.Message; }
                 }
             });
             imageButton.mnOpen.Click += delegate
@@ -84,6 +95,11 @@
             {
                 string msg = RunProcess.Run(FolderOpeningString(AppValues.ExePath));
                 messageDialogs.IsErrorDisplayed(msg);
+            };
+            imageButton.mnAbout.Click += delegate
+            {
+                //todo
+                MessageBox.Show("todo");
             };
             return imageButton;
         }

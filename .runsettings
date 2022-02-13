@@ -16,6 +16,11 @@
 								<ModulePath>.*\.exe$</ModulePath>
 							</Include>
 						</ModulePaths>
+						<Functions>
+							<Exclude>
+								<Function>^ShortcutsGrid\.Services\.Image\.ExtractIcon\..*</Function>
+							</Exclude>
+						</Functions>
 						<UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>
 						<AllowLowIntegrityProcesses>True</AllowLowIntegrityProcesses>
 						<CollectFromChildProcesses>True</CollectFromChildProcesses>
