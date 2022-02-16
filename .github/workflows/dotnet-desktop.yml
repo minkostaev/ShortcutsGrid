@@ -63,15 +63,14 @@ jobs:
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
-        $Excluded1 = "-ShortcutsGrid.Services.Image.ExtractIcon"
+        $Excluded1 = "-ShortcutsGrid.App;-ShortcutsGrid.Models.MessageBoxWrapper"
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges "-classfilters:$Excluded1"
-        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html "-classfilters:$Excluded1"
         cd coveragereport
         copy badge_linecoverage.svg $curDir
     #        $Excluded1 = "-ShortcutsGrid.Services.Image.ExtractIcon"
     #        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges
     #        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
-    # reportgenerator "-reports:OpenCover.xml" "-targetdir:coveragereport" "-classfilters:-Excluded ShortcutsGrid.Services.Image.ExtractIcon"
 
     # Upload artifacts in the ations section
     - name: Upload artifacts
