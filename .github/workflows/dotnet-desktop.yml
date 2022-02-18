@@ -15,12 +15,11 @@ jobs:
         configuration: [Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: ShortcutsGrid
-      Test_Project_Path: ShortcutsGrid.Tests\ShortcutsGrid.Tests.csproj
-      Wap_Project_Directory: ShortcutsGrid.Tests
+      Proj_Name: ShortcutsGrid
+      Test_Proj_Dir: ShortcutsGrid.Tests
 
     steps:
     - name: Checkout
@@ -57,7 +56,7 @@ jobs:
     - name: Execute report generator
       run: |
         $curDir = Get-Location
-        cd ${{ env.Wap_Project_Directory }}
+        cd ${{ env.Test_Proj_Dir }}
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
@@ -74,7 +73,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: artifacts
-        path: ${{ env.Wap_Project_Directory }}\\TestResults
+        path: ${{ env.Test_Proj_Dir }}\\TestResults
         retention-days: 5
 
     # Git - upload artifact back in the repo
