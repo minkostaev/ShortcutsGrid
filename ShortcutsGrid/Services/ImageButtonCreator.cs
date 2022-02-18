@@ -98,8 +98,11 @@
             };
             imageButton.mnAbout.Click += delegate
             {
-                //todo
-                MessageBox.Show("todo");
+                Windows.About about = new Windows.About();
+                about.Topmost = true;
+                about.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                about.ResizeMode = ResizeMode.NoResize;
+                about.ShowDialog();
             };
             return imageButton;
         }
