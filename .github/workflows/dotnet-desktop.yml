@@ -60,7 +60,8 @@ jobs:
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
-        $ExcludeList = "-" + ${{ env.Proj_Name }} + ".App"
+        $nmspc = ${{ env.Proj_Name }}
+        $ExcludeList = "-" + $nmspc + ".App"
         $ExcludeList += ";-ShortcutsGrid.Models.MessageBoxWrapper"
         $ExcludeList += ";-ShortcutsGrid.Services.Run.RunDialog"
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges "-classfilters:$ExcludeList"
