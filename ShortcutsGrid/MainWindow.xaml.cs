@@ -2,6 +2,7 @@
 {
     using ShortcutsGrid.Models;
     using ShortcutsGrid.Services;
+    using ShortcutsGrid.Windows;
     using System.Windows;
     using System.Windows.Input;
 
@@ -48,6 +49,11 @@
                 {
                     stkPnl4.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
                 }
+            }
+
+            if (shortcuts.Count == 1)
+            {
+                new About().ShowDialog();
             }
 
         }

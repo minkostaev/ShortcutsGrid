@@ -6,18 +6,39 @@
         xmlns:local="clr-namespace:ShortcutsGrid.Windows"
         mc:Ignorable="d"
         Title="About" Height="440" Width="660">
-    
+
     <Grid>
 
         <Grid x:Name="pnlImg" Width="110" Height="110" Margin="10,10,540,304"/>
         <Label x:Name="lblHeader" Content="Header" HorizontalAlignment="Left" Margin="125,6,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblVersion" Content="Version" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="125,50,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblExeName" Content="ExeName" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="125,50,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblExeName" Content="ExeName" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="125,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="hypeLnk" NavigateUri="http://search.msn.com">Repo link</Hyperlink>
+        <Label x:Name="lblRepo" Content="Repo" HorizontalAlignment="Left" Margin="125,174,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="125,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Hyperlink x:Name="lnkThisRepo" NavigateUri="https://github.com/minkostaev/ShortcutsGrid">
+                https://github.com/minkostaev/ShortcutsGrid</Hyperlink>
         </TextBlock>
+
+        <Label x:Name="lblMyAd" Content="MyAd" HorizontalAlignment="Left" Margin="125,238,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="125,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Hyperlink x:Name="lnkMyPayPal" NavigateUri="https://www.paypal.com/paypalme/minkostaev">
+                https://www.paypal.com/paypalme/minkostaev</Hyperlink>
+        </TextBlock>
+
+        <!--<TextBlock HorizontalAlignment="Left" Margin="125,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Hyperlink x:Name="lnkBuyMeACoffee" NavigateUri="https://www.buymeacoffee.com/signup">
+                https://www.buymeacoffee.com/signup</Hyperlink>
+        </TextBlock>-->
+        <!--<TextBlock HorizontalAlignment="Left" Margin="125,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Hyperlink x:Name="lnkKoFi" NavigateUri="https://ko-fi.com/">
+                https://ko-fi.com/</Hyperlink>
+        </TextBlock>-->
+        <!--<TextBlock HorizontalAlignment="Left" Margin="125,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Hyperlink x:Name="lnkPatreon" NavigateUri="https://www.patreon.com/login">
+                https://www.patreon.com/login</Hyperlink>
+        </TextBlock>-->
 
     </Grid>
 </Window>

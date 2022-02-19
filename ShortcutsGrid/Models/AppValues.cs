@@ -1,7 +1,9 @@
 ﻿namespace ShortcutsGrid.Models
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
+    using System.Reflection;
 
     internal static class AppValues
     {
@@ -9,6 +11,21 @@
         public static string? ExePath => Environment.ProcessPath;
         public static string? ExeDir => Path.GetDirectoryName(ExePath);
         public static string? ExeName => Path.GetFileNameWithoutExtension(ExePath);
+
+        public static string? AppVersion
+        {
+            get
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                var fileInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+                ///string filePath = Assembly.GetExecutingAssembly().Location;
+                ///DateTime dt = new FileInfo(filePath).LastWriteTime;
+                ///var result = fileInfo.FileVersion + " [" + dt.Year.ToString().Substring(2) + "." + dt.Month.ToString() + "." + dt.Day.ToString() + "]";
+
+                return fileInfo.FileVersion;
+            }
+        }
 
         public static string? ListCsv => Path.Combine((ExeDir == null) ? ExeName + ".csv" : ExeDir, ExeName + ".csv");
         public static bool CsvExists => File.Exists(ListCsv);
