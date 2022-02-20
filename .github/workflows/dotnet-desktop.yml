@@ -1,4 +1,3 @@
-
 name: .NET Core Desktop
 
 on:
@@ -16,13 +15,11 @@ jobs:
         configuration: [Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: ShortcutsGrid.sln                                   # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: ShortcutsGrid.Tests\ShortcutsGrid.Tests.csproj  # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Wap_Project_Directory: ShortcutsGrid.Tests                         # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
-      Wap_Project_Path: ShortcutsGrid.Package\Package.wapproj            # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      Proj_Name: ShortcutsGrid
+      Test_Proj_Dir: ShortcutsGrid.Tests
 
     steps:
     - name: Checkout
@@ -59,13 +56,14 @@ jobs:
     - name: Execute report generator
       run: |
         $curDir = Get-Location
-        cd ShortcutsGrid.Tests
+        cd ${{ env.Test_Proj_Dir }}
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
-        $ExcludeList = "-ShortcutsGrid.App"
-        $ExcludeList += ";-ShortcutsGrid.Models.MessageBoxWrapper"
-        $ExcludeList += ";-ShortcutsGrid.Services.Run.RunDialog"
+        $nmspc = "${{ env.Proj_Name }}"
+        $ExcludeList = "-" + $nmspc + ".App"
+        $ExcludeList += ";-" + $nmspc + ".Models.MessageBoxWrapper"
+        $ExcludeList += ";-" + $nmspc + ".Services.Run.RunDialog"
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges "-classfilters:$ExcludeList"
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html "-classfilters:$ExcludeList"
         cd coveragereport
@@ -76,7 +74,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: artifacts
-        path: ${{ env.Wap_Project_Directory }}\\TestResults
+        path: ${{ env.Test_Proj_Dir }}\\TestResults
         retention-days: 5
 
     # Git - upload artifact back in the repo
