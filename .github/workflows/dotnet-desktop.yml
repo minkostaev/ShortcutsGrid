@@ -62,8 +62,8 @@ jobs:
         cd $dirList
         $nmspc = "${{ env.Proj_Name }}"
         $ExcludeList = "-" + $nmspc + ".App"
-        $ExcludeList += ";-ShortcutsGrid.Models.MessageBoxWrapper"
-        $ExcludeList += ";-ShortcutsGrid.Services.Run.RunDialog"
+        $ExcludeList += ";-" + $nmspc + ".Models.MessageBoxWrapper"
+        $ExcludeList += ";-" + $nmspc + ".Services.Run.RunDialog"
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges "-classfilters:$ExcludeList"
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html "-classfilters:$ExcludeList"
         cd coveragereport
