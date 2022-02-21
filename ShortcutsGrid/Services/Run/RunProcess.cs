@@ -47,5 +47,14 @@
             process.Start();
         }
 
+        public static void OpenLink(string uri)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = uri,
+                UseShellExecute = true
+            });
+        }
+
     }
 }

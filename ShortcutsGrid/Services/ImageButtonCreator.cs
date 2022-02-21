@@ -3,6 +3,7 @@
     using ShortcutsGrid.Controls;
     using ShortcutsGrid.Models;
     using ShortcutsGrid.Services.Run;
+    using ShortcutsGrid.Windows;
     using System;
     using System.Windows;
     using System.Windows.Input;
@@ -98,8 +99,7 @@
             };
             imageButton.mnAbout.Click += delegate
             {
-                //todo
-                MessageBox.Show("todo");
+                new About().ShowDialog();
             };
             return imageButton;
         }
