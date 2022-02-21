@@ -1,3 +1,0 @@
-        echo "CI_ACTION_REF_NAME=$Env:CI_ACTION_REF_NAME"
-        $Env:CI_ACTION_REF_NAME
-        CI_ACTION_REF_NAME

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
 	<RunConfiguration>
-		<MaxCpuCount>1</MaxCpuCount>
 		<ResultsDirectory>.\TestResults</ResultsDirectory>
-		<TestSessionTimeout>10000</TestSessionTimeout>
 	</RunConfiguration>
 	<DataCollectionRunSettings>
 		<DataCollectors>
 			<DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
 				<Configuration>
-				 <CoverageFileName>ShortcutsGrid.coverage</CoverageFileName>
 					<CodeCoverage>
 						<ModulePaths>
 							<Include>
@@ -18,7 +15,8 @@
 						</ModulePaths>
 						<Functions>
 							<Exclude>
-								<Function>^ShortcutsGrid\.Services\.Image\.ExtractIcon\..*</Function>
+								<Function>^ShortcutsGrid\.App\..*</Function>
+								<Function>^ShortcutsGrid\.Models\..*</Function>
 							</Exclude>
 						</Functions>
 						<UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>

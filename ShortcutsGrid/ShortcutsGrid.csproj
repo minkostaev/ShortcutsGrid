@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\ms-office-128.ico</ApplicationIcon>
-    <AssemblyVersion>1.1.5.1</AssemblyVersion>
-    <FileVersion>1.1.5.1</FileVersion>
-    <VersionPrefix>1.1.5</VersionPrefix>
+    <AssemblyVersion>1.1.6.1</AssemblyVersion>
+    <FileVersion>1.1.6.1</FileVersion>
+    <VersionPrefix>1.1.6</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyyy-MM-dd))</VersionSuffix>
   </PropertyGroup>
 
