@@ -1,62 +1,61 @@
-﻿namespace ShortcutsGrid
+﻿namespace ShortcutsGrid;
+
+using ShortcutsGrid.Models;
+using ShortcutsGrid.Services;
+using ShortcutsGrid.Windows;
+using System.Windows;
+using System.Windows.Input;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    using ShortcutsGrid.Models;
-    using ShortcutsGrid.Services;
-    using ShortcutsGrid.Windows;
-    using System.Windows;
-    using System.Windows.Input;
-
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
+        InitializeComponent();
+
+        #region setup window
+        this.AllowsTransparency = true;
+        this.WindowStyle = WindowStyle.None;
+        this.Background = System.Windows.Media.Brushes.Transparent;
+        this.Topmost = true;
+
+        this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        this.ResizeMode = ResizeMode.NoResize;
+
+        this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Close(); };
+        #endregion
+
+        var shortcuts = ReadShortcuts.FileToShortcuts();
+
+        shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseImage });
+
+        foreach (var shortcut in shortcuts)
         {
-            InitializeComponent();
-
-            #region setup window
-            this.AllowsTransparency = true;
-            this.WindowStyle = WindowStyle.None;
-            this.Background = System.Windows.Media.Brushes.Transparent;
-            this.Topmost = true;
-
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.ResizeMode = ResizeMode.NoResize;
-
-            this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Close(); };
-            #endregion
-
-            var shortcuts = ReadShortcuts.FileToShortcuts();
-
-            shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseImage });
-
-            foreach (var shortcut in shortcuts)
+            if (stkPnl1.Children.Count < 6)
             {
-                if (stkPnl1.Children.Count < 6)
-                {
-                    stkPnl1.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
-                }
-                else if (stkPnl2.Children.Count < 6)
-                {
-                    stkPnl2.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
-                }
-                else if (stkPnl3.Children.Count < 6)
-                {
-                    stkPnl3.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
-                }
-                else if (stkPnl4.Children.Count < 6)
-                {
-                    stkPnl4.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
-                }
+                stkPnl1.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
             }
-
-            if (shortcuts.Count == 1)
+            else if (stkPnl2.Children.Count < 6)
             {
-                new About().ShowDialog();
+                stkPnl2.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
             }
+            else if (stkPnl3.Children.Count < 6)
+            {
+                stkPnl3.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
+            }
+            else if (stkPnl4.Children.Count < 6)
+            {
+                stkPnl4.Children.Add(ImageButtonCreator.GetButton(this, shortcut));
+            }
+        }
 
+        if (shortcuts.Count == 1)
+        {
+            new About().ShowDialog();
         }
 
     }
+
 }
