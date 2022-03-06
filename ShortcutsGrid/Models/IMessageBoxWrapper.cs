@@ -1,17 +1,16 @@
-﻿namespace ShortcutsGrid.Models
+﻿namespace ShortcutsGrid.Models;
+
+using System.Windows;
+
+public interface IMessageBoxWrapper
 {
-    using System.Windows;
+    MessageBoxResult Show(string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon);
+}
 
-    public interface IMessageBoxWrapper
+public class MessageBoxWrapper : IMessageBoxWrapper
+{
+    public MessageBoxResult Show(string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon)
     {
-        MessageBoxResult Show(string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon);
-    }
-
-    public class MessageBoxWrapper : IMessageBoxWrapper
-    {
-        public MessageBoxResult Show(string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon)
-        {
-            return MessageBox.Show(messageBoxText, caption, button, icon);
-        }
+        return MessageBox.Show(messageBoxText, caption, button, icon);
     }
 }
