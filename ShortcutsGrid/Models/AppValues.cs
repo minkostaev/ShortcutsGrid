@@ -1,7 +1,6 @@
 ﻿namespace ShortcutsGrid.Models;
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -16,14 +15,14 @@ internal static class AppValues
     {
         get
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var fileInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-
-            ///string filePath = Assembly.GetExecutingAssembly().Location;
-            ///DateTime dt = new FileInfo(filePath).LastWriteTime;
-            ///var result = fileInfo.FileVersion + " [" + dt.Year.ToString().Substring(2) + "." + dt.Month.ToString() + "." + dt.Day.ToString() + "]";
-
-            return fileInfo.FileVersion;
+            try
+            {
+                return Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 
