@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
-using System.Windows.Media;
+﻿namespace ShortcutsGrid.Controls;
 
-namespace ShortcutsGrid.Controls;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 /// <summary>
 /// Interaction logic for ImageButton.xaml
