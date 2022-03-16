@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\windows-128.ico</ApplicationIcon>
-    <AssemblyVersion>1.1.6.1</AssemblyVersion>
-    <FileVersion>1.1.6.1</FileVersion>
-    <VersionPrefix>1.1.6</VersionPrefix>
+    <AssemblyVersion>1.1.7.1</AssemblyVersion>
+    <FileVersion>1.1.7.1</FileVersion>
+    <VersionPrefix>1.1.7</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyyy-MM-dd))</VersionSuffix>
   </PropertyGroup>
 
