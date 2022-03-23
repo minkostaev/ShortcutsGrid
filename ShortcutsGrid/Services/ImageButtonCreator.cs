@@ -42,10 +42,7 @@ public static class ImageButtonCreator
             {
                 if (!messageDialogs.IsErrorDisplayed(msg))
                 {
-                    ///Environment.Exit(0);
-                    ///App.Current.Shutdown();
-                    ///System.Diagnostics.Process.GetCurrentProcess().Kill();
-                    Application.Current.Shutdown();
+                    AppValues.Exit();
                 }
             }
         };
@@ -100,6 +97,10 @@ public static class ImageButtonCreator
         imageButton.mnAbout.Click += delegate
         {
             new About().ShowDialog();
+        };
+        imageButton.mnExit.Click += delegate
+        {
+            AppValues.Exit();
         };
         return imageButton;
     }

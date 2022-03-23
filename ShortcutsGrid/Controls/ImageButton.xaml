@@ -43,6 +43,8 @@
                     </MenuItem>
                     <Separator />
                     <MenuItem x:Name="mnAbout" Header="About" />
+                    <Separator />
+                    <MenuItem x:Name="mnExit" Header="Exit" />
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
