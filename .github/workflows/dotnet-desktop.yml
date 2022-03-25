@@ -74,7 +74,7 @@ jobs:
       run: |
         cd ${{ env.Proj_Name }}
         dotnet publish ShortcutsGrid.csproj /p:DeployOnBuild=true /p:PublishProfile=Win System
-        copy "bin\\Win System\\net6.0-windows\\publish\\win-x64\\Win System.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults
+        copy "..\\bin\\Win System\\net6.0-windows\\publish\\win-x64\\Win System.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults
         dotnet publish ShortcutsGrid.csproj /p:PublishProfile=Office
         copy bin\Office\net6.0-windows\publish\win-x64\Office.exe ..\\${{ env.Test_Proj_Dir }}\\TestResults
 
