@@ -74,7 +74,7 @@ jobs:
       run: |
         cd ${{ env.Proj_Name }}
         msbuild ShortcutsGrid.csproj /p:DeployOnBuild=true /p:PublishProfile=Office
-        copy bin\Debug\net6.0-windows\win-x64\Office.exe ..\\${{ env.Test_Proj_Dir }}\\TestResults
+        copy bin\Office\net6.0-windows\publish\win-x64\Office.exe ..\\${{ env.Test_Proj_Dir }}\\TestResults
 
     # Upload artifacts in the ations section
     - name: Upload artifacts
