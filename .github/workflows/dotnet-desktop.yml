@@ -69,6 +69,11 @@ jobs:
         cd coveragereport
         copy badge_linecoverage.svg $curDir
 
+    # Publish
+    - name: Publish
+      run: |
+        msbuild ShortcutsGrid.csproj /p:DeployOnBuild=true /p:PublishProfile=Office
+
     # Upload artifacts in the ations section
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
