@@ -16,6 +16,7 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         #region setup window
+        this.Title = AppValues.ExeName;
         this.AllowsTransparency = true;
         this.WindowStyle = WindowStyle.None;
         this.Background = System.Windows.Media.Brushes.Transparent;
