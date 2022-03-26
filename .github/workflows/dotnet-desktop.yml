@@ -78,7 +78,7 @@ jobs:
         dotnet publish ShortcutsGrid.csproj /p:PublishProfile="Win System"
         #copy "bin\Win System\net6.0-windows\publish\win-x64\Win System.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults
         $exes = "Office","Win System"
-        foreach ($name in $exes){copy "..\bin\$name\net6.0-windows\publish\win-x64\$name.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults}
+        foreach ($name in $exes){copy "bin\$name\net6.0-windows\publish\win-x64\$name.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults}
         #Copy-Item -Path bin\* -Destination ..\\${{ env.Test_Proj_Dir }}\\TestResults -Recurse
 
     # Upload artifacts in the ations section
