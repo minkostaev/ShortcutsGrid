@@ -1,6 +1,6 @@
 ﻿namespace ShortcutsGrid.Services;
 
-using ShortcutsGrid.Models;
+using Models;
 using System.Windows;
 
 public class MessageDialogs

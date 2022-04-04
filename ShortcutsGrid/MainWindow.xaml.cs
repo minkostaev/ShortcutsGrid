@@ -1,10 +1,10 @@
 ﻿namespace ShortcutsGrid;
 
-using ShortcutsGrid.Models;
-using ShortcutsGrid.Services;
-using ShortcutsGrid.Windows;
+using Models;
+using Services;
 using System.Windows;
 using System.Windows.Input;
+using Windows;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -30,7 +30,7 @@ public partial class MainWindow : Window
 
         var shortcuts = ReadShortcuts.FileToShortcuts();
 
-        shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseImage });
+        shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
 
         foreach (var shortcut in shortcuts)
         {

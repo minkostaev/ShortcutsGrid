@@ -1,8 +1,8 @@
 ﻿namespace ShortcutsGrid.Windows;
 
-using ShortcutsGrid.Controls;
-using ShortcutsGrid.Models;
-using ShortcutsGrid.Services.Run;
+using Controls;
+using Models;
+using Services.Run;
 using System;
 using System.Windows;
 using System.Windows.Input;

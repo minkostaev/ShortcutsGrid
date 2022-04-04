@@ -1,13 +1,13 @@
 ﻿namespace ShortcutsGrid.Services;
 
-using ShortcutsGrid.Controls;
-using ShortcutsGrid.Models;
-using ShortcutsGrid.Services.Run;
-using ShortcutsGrid.Windows;
+using Controls;
+using Models;
+using Services.Run;
 using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Windows;
 
 public static class ImageButtonCreator
 {
@@ -15,6 +15,7 @@ public static class ImageButtonCreator
     public static ImageButton GetButton(MainWindow mainWindow, Shortcut shortcutItem)
     {
         MessageDialogs messageDialogs = new MessageDialogs(new MessageBoxWrapper());
+        bool closeDragButton = shortcutItem.Tag is string && shortcutItem.Tag.ToString() == AppValues.CloseDragId;
         var imageButton = new ImageButton(shortcutItem.Image, shortcutItem.AppName)
         {
             Height = 110,
@@ -46,13 +47,12 @@ public static class ImageButtonCreator
                 }
             }
         };
-        imageButton.btn.Click += new((sender, e) => { dispatcherTimer.Start(); });
+        imageButton.btn.Click += new((sender, e) => { if (!closeDragButton) dispatcherTimer.Start(); });
         imageButton.btn.PreviewMouseDown += new((sender, e) =>
         {
-            bool cancelButton = shortcutItem.AppName == "Drag or Close" && shortcutItem.ExePath == "";
             if (e.ClickCount > 1)
             {
-                if (cancelButton)
+                if (closeDragButton)
                 {
                     Application.Current.Shutdown();
                     return;
@@ -63,7 +63,7 @@ public static class ImageButtonCreator
                 string msg = RunProcess.Run(shortcutItem.ExePath);
                 messageDialogs.IsErrorDisplayed(msg);
             }
-            else if (e.ClickCount == 1 && cancelButton)
+            else if (e.ClickCount == 1 && closeDragButton)
             {
                 try { mainWindow.DragMove(); }
                 catch (Exception ex) { _ = ex.Message; }
@@ -102,6 +102,8 @@ public static class ImageButtonCreator
         {
             AppValues.Exit();
         };
+        // todo finger touch and drag
+        ///imageButton.btn.TouchDown += delegate {; };
         return imageButton;
     }
 
