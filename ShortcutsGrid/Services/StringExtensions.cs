@@ -28,8 +28,15 @@ internal static class StringExtensions
 
     public static ImageSource? PathToImageSource(this string path)
     {
-        try { return new BitmapImage(new Uri(path ?? "")); }
+        var bitmap = new BitmapImage();
+        try
+        {
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(path, UriKind.Absolute);
+            bitmap.EndInit();
+        }
         catch (Exception) { return null; }
+        return bitmap;
     }
 
 }

@@ -53,6 +53,10 @@ internal static class ImageUtilities
                 }
                 return _image;
             }
+            else if (imgPath.StartsWith("http"))
+            {
+                return imgPath.PathToImageSource();
+            }
             return null;
         }
     }
