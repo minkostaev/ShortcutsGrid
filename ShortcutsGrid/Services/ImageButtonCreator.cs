@@ -102,8 +102,6 @@ public static class ImageButtonCreator
         {
             AppValues.Exit();
         };
-        // todo finger touch and drag
-        ///imageButton.btn.TouchDown += delegate {; };
         return imageButton;
     }
 
