@@ -9,7 +9,7 @@ internal static class AppValues
 {
 
     public static string? ExePath => Environment.ProcessPath;
-    public static string? ExeDir => Path.GetDirectoryName(ExePath);
+    public static string? ExeDir => Environment.CurrentDirectory;
     public static string? ExeName => Path.GetFileNameWithoutExtension(ExePath);
 
     public static string? AppVersion
