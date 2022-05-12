@@ -1,4 +1,4 @@
-﻿//namespace ShortcutsGrid;
+﻿namespace ShortcutsGrid;
 
 using Models;
 using Services;
@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Input;
 using Windows;
 
-namespace ShortcutsGrid;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
