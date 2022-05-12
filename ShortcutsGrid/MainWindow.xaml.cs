@@ -1,11 +1,13 @@
-﻿namespace ShortcutsGrid;
+﻿//namespace ShortcutsGrid;
 
 using Models;
 using Services;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using Windows;
 
+namespace ShortcutsGrid;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
@@ -13,7 +15,15 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        var watch = Stopwatch.StartNew();
+        
         InitializeComponent();
+
+        this.ContentRendered += delegate
+        {
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+        };
 
         #region setup window
         this.Title = AppValues.ExeName;
