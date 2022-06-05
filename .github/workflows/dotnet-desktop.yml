@@ -57,6 +57,11 @@ jobs:
       run: |
         $curDir = Get-Location
         cd ${{ env.Test_Proj_Dir }}
+        [xml]$xml = Get-Content ShortcutsGrid\ShortcutsGrid.csproj
+        $version = $xml.Project.PropertyGroup.VersionPrefix
+        $url = "https://img.shields.io/badge/Version-" + $version + "-blue.svg"
+        $wc = New-Object System.Net.WebClient
+        $wc.DownloadFile($url, "badge_version.svg")
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
@@ -94,6 +99,7 @@ jobs:
         git config --global user.email ${{ secrets.MY_EMAIL }}
         git config --global user.name "from workflow"
         git add badge_linecoverage.svg
-        git commit -m "add artifact file"
+        git add badge_version.svg
+        git commit -m "add artifact files"
         git push origin $github.ref_name
     # github.ref_name is branch name

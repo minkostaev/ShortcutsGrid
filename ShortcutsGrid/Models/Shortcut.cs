@@ -5,7 +5,6 @@ using System.Windows.Media;
 
 public class Shortcut : Extended.Models.Shortcut
 {
-
     ///public string ExePath { get; set; } = string.Empty;
     ///public string AppName { get; set; } = string.Empty;
     ///public string? ImgPath { get; set; } = string.Empty;//ImgPath or Base64String
@@ -25,4 +24,3 @@ public class Shortcut : Extended.Models.Shortcut
     }
 
 }
-
