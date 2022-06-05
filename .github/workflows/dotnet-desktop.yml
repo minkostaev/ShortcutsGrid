@@ -57,7 +57,7 @@ jobs:
       run: |
         $curDir = Get-Location
         cd ${{ env.Test_Proj_Dir }}
-        [xml]$xml = Get-Content ShortcutsGrid\ShortcutsGrid.csproj
+        [xml]$xml = Get-Content ..\ShortcutsGrid\ShortcutsGrid.csproj
         $version = $xml.Project.PropertyGroup.VersionPrefix
         $url = "https://img.shields.io/badge/Version-" + $version + "-blue.svg"
         $wc = New-Object System.Net.WebClient
