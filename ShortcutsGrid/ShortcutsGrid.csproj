@@ -7,9 +7,9 @@
     <UseWPF>true</UseWPF>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <ApplicationIcon>Resources\windows-128.ico</ApplicationIcon>
-    <AssemblyVersion>1.1.9.1</AssemblyVersion>
-    <FileVersion>1.1.9.1</FileVersion>
-    <VersionPrefix>1.1.9</VersionPrefix>
+    <AssemblyVersion>2.0.1.1</AssemblyVersion>
+    <FileVersion>2.0.1.1</FileVersion>
+    <VersionPrefix>2.0.1</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyyy-MM-dd))</VersionSuffix>
   </PropertyGroup>
 
@@ -18,7 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="[2.15.1]" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ShortcutsGrid.Extended">
+      <HintPath>..\libs\ShortcutsGrid.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="ShortcutsGrid.Nexum">
+      <HintPath>..\libs\ShortcutsGrid.Nexum.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

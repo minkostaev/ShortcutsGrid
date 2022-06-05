@@ -2,6 +2,8 @@
 
 using Models;
 using Services;
+using ShortcutsGrid.Extended.DB;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using Windows;
@@ -13,7 +15,24 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        ///var startTimer = Stopwatch.StartNew();
+        ///var endTimer = Stopwatch.StartNew();
+
         InitializeComponent();
+
+        var mongo = new MongoShortcutsGrid();
+
+        this.ContentRendered += delegate
+        {
+            ///startTimer.Stop();
+            ///var elapsedMs = startTimer.ElapsedMilliseconds;
+        };
+        this.Closed += delegate
+        {
+            ///endTimer.Stop();
+            ///var elapsedMs = endTimer.ElapsedMilliseconds;
+            mongo.MachineAdded();
+        };
 
         #region setup window
         this.Title = AppValues.ExeName;
