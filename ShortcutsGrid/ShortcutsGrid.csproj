@@ -24,10 +24,10 @@
 
   <ItemGroup>
     <Reference Include="ShortcutsGrid.Extended">
-      <HintPath>..\libs\ShortcutsGrid.Extended.dll</HintPath>
+      <HintPath>..\Resources\ShortcutsGrid.Extended.dll</HintPath>
     </Reference>
     <Reference Include="ShortcutsGrid.Nexum">
-      <HintPath>..\libs\ShortcutsGrid.Nexum.dll</HintPath>
+      <HintPath>..\Resources\ShortcutsGrid.Nexum.dll</HintPath>
     </Reference>
   </ItemGroup>
 
