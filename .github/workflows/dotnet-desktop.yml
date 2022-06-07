@@ -62,7 +62,6 @@ jobs:
         $url = "https://img.shields.io/badge/Version-" + $version + "-blue.svg"
         $wc = New-Object System.Net.WebClient
         $wc.DownloadFile($url, "Resources\badge_version.svg")
-    #copy badge_version.svg Resources
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
