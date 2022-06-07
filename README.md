@@ -11,8 +11,8 @@ My inspiration for making this was that Windows 11 start menu doesn't have the g
 
 *Basically it looks something like this:*
 
-![img](./screenshots/win11start.jpg "image")![img](./screenshots/win11myapp.jpg "image")  
-[Download this example](./examples/Administrative-Tools.zip)
+![img](./Resources/win11start.jpg "image")![img](./Resources/win11myapp.jpg "image")  
+[Download this example](./Resources/Administrative-Tools.zip)
 
 The idea is this exe to display user's group of apps. Copy or build new exe with different name and icon for other group of apps.
 
