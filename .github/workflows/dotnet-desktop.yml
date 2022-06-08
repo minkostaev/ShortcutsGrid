@@ -61,7 +61,7 @@ jobs:
         $version = $xml.Project.PropertyGroup.VersionPrefix
         $url = "https://img.shields.io/badge/Version-" + $version + "-blue.svg"
         $wc = New-Object System.Net.WebClient
-        $wc.DownloadFile($url, "Resources\badge_version.svg")
+        $wc.DownloadFile($url, ".github\badge_version.svg")
         cd TestResults
         $dirList = Get-ChildItem -Directory -Name -attributes D -Recurse
         cd $dirList
@@ -72,7 +72,7 @@ jobs:
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Badges "-classfilters:$ExcludeList"
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html "-classfilters:$ExcludeList"
         cd coveragereport
-        copy badge_linecoverage.svg $curDir\Resources
+        copy badge_linecoverage.svg $curDir\.github
 
     # PublishProfiles makes exes and adding them to artifacts
     - name: Publish profiles
@@ -98,8 +98,8 @@ jobs:
       run: |
         git config --global user.email ${{ secrets.MY_EMAIL }}
         git config --global user.name "from workflow"
-        git add Resources/badge_linecoverage.svg
-        git add Resources/badge_version.svg
+        git add .github/badge_linecoverage.svg
+        git add .github/badge_version.svg
         git commit -m "add artifact files"
         git push origin $github.ref_name
     # github.ref_name is branch name
