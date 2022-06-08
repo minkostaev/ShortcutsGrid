@@ -20,8 +20,6 @@ public partial class MainWindow : Window
 
         InitializeComponent();
 
-        var mongo = new MongoShortcutsGrid();
-
         this.ContentRendered += delegate
         {
             ///startTimer.Stop();
@@ -31,7 +29,7 @@ public partial class MainWindow : Window
         {
             ///endTimer.Stop();
             ///var elapsedMs = endTimer.ElapsedMilliseconds;
-            mongo.MachineAdded();
+            ///MongoShortcutsGrid.MachineAdded();
         };
 
         #region setup window
@@ -76,6 +74,19 @@ public partial class MainWindow : Window
             new About().ShowDialog();
         }
 
+    }
+
+    private MongoShortcutsGrid? _mongoShortcutsGrid;
+    public MongoShortcutsGrid MongoShortcutsGrid
+    {
+        get
+        {
+            if (_mongoShortcutsGrid == null)
+            {
+                _mongoShortcutsGrid = new MongoShortcutsGrid();
+            }
+            return _mongoShortcutsGrid;
+        }
     }
 
 }
