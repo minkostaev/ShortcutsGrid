@@ -16,7 +16,7 @@ public static class ImageButtonCreator
     {
         MessageDialogs messageDialogs = new MessageDialogs(new MessageBoxWrapper());
         bool closeDragButton = shortcutItem.Tag is string && shortcutItem.Tag.ToString() == AppValues.CloseDragId;
-        var imageButton = new ImageButton(shortcutItem.Image, shortcutItem.AppName)
+        var imageButton = new ImageButton(shortcutItem)
         {
             Height = 110,
             Width = 110

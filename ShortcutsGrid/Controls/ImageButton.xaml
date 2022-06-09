@@ -31,22 +31,6 @@
                     <TextBlock x:Name="tb" Text="Text" HorizontalAlignment="Center" Foreground="White" Background="Black" />
                 </StackPanel>
             </Button.Content>
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <MenuItem x:Name="mnOpen" Header="Open" />
-                    <MenuItem x:Name="mnAdmin" Header="Run as admin" />
-                    <Separator />
-                    <MenuItem Header="Open folder of">
-                        <MenuItem x:Name="mnFolderExe" Header="This app" />
-                        <MenuItem x:Name="mnFolderImg" Header="This icon" />
-                        <MenuItem x:Name="mnFolderThis" Header="Default" />
-                    </MenuItem>
-                    <Separator />
-                    <MenuItem x:Name="mnAbout" Header="About" />
-                    <Separator />
-                    <MenuItem x:Name="mnExit" Header="Exit" />
-                </ContextMenu>
-            </Button.ContextMenu>
         </Button>
 
     </Grid>

@@ -25,7 +25,7 @@ public partial class About : Window
 
         try
         {
-            var imageButton = new ImageButton(new Shortcut().Image, "")
+            var imageButton = new ImageButton(new Shortcut(), false)
             {
                 Height = 110,
                 Width = 110

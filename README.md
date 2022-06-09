@@ -2,8 +2,9 @@
 
 [![.NET Core Desktop](https://github.com/minkostaev/ShortcutsGrid/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/minkostaev/ShortcutsGrid/actions/workflows/dotnet-desktop.yml)
 [![.NET Core Desktop](.github/badge_linecoverage.svg)](https://github.com/minkostaev/ShortcutsGrid/actions/workflows/dotnet-desktop.yml)
-[![GitHub releases](.github/badge_version.svg)](https://github.com/minkostaev/ShortcutsGrid/releases)
+
 [![GitHub last commit](https://img.shields.io/github/last-commit/minkostaev/ShortcutsGrid?color=blue)](https://github.com/minkostaev/ShortcutsGrid/commits/)
+[![GitHub releases](.github/badge_version.svg)](https://github.com/minkostaev/ShortcutsGrid/releases)
 
 **WPF (.NET 6.0) desktop app with transparent background that displays 'custom list' grid with links to other programs on the PC or/and run commands. With customizable app names and icons/images.**
 

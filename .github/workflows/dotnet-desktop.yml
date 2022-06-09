@@ -59,7 +59,7 @@ jobs:
         cd ${{ env.Test_Proj_Dir }}
         [xml]$xml = Get-Content ..\ShortcutsGrid\ShortcutsGrid.csproj
         $version = $xml.Project.PropertyGroup.VersionPrefix
-        $url = "https://img.shields.io/badge/Version-" + $version + "-blue.svg"
+        $url = "https://img.shields.io/badge/version-" + $version + "-blue.svg"
         $wc = New-Object System.Net.WebClient
         $wc.DownloadFile($url, ".github\badge_version.svg")
         cd TestResults
