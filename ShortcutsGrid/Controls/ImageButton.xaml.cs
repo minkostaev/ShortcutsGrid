@@ -22,56 +22,58 @@ public partial class ImageButton : UserControl
         }
     }
 
-    public MenuItem? mnOpen { get; set; }
-    public MenuItem? mnAdmin { get; set; }
+    public MenuItem MnOpen { get; set; } = new MenuItem();
+    public MenuItem MnAdmin { get; set; } = new MenuItem();
 
-    public MenuItem? mnFolderExe { get; set; }
-    public MenuItem? mnFolderImg { get; set; }
-    public MenuItem? mnFolderThis { get; set; }
+    public MenuItem MnFolderExe { get; set; } = new MenuItem();
+    public MenuItem MnFolderImg { get; set; } = new MenuItem();
+    public MenuItem MnFolderThis { get; set; } = new MenuItem();
 
-    public MenuItem? mnAbout { get; set; }
+    public MenuItem MnAbout { get; set; } = new MenuItem();
 
-    public MenuItem? mnExit { get; set; }
+    public MenuItem MnExit { get; set; } = new MenuItem();
 
     private void ContextMenuInit(Shortcut shortcut)
     {
         bool showExe = File.Exists(shortcut.ExePath);
         bool showImg = File.Exists(shortcut.ImgPath);
+        bool showOpen = true;
+        bool showAdmin = true;
+        if (shortcut.Tag is string && shortcut.Tag.ToString() == AppValues.CloseDragId)
+        {
+            showOpen = false;
+            showAdmin = false;
+        }
 
         var contextMenu = new ContextMenu();
 
         var mnOpenFolder = new MenuItem();
         mnOpenFolder.Header = "Open folder of";
 
-        mnOpen = new MenuItem();
-        mnOpen.Header = "Open";
-        mnAdmin = new MenuItem();
-        mnAdmin.Header = "Run as admin";
-        mnFolderExe = new MenuItem();
-        mnFolderExe.Header = "This app";
-        mnFolderExe.IsEnabled = showExe;
-        mnFolderImg = new MenuItem();
-        mnFolderImg.Header = "This icon";
-        mnFolderImg.IsEnabled = showImg;
-        mnFolderThis = new MenuItem();
-        mnFolderThis.Header = "Default";
-        mnAbout = new MenuItem();
-        mnAbout.Header = "About";
-        mnExit = new MenuItem();
-        mnExit.Header = "Exit";
+        MnOpen.Header = "Open";
+        MnOpen.IsEnabled = showOpen;
+        MnAdmin.Header = "Run as admin";
+        MnAdmin.IsEnabled = showAdmin;
+        MnFolderExe.Header = "This app";
+        MnFolderExe.IsEnabled = showExe;
+        MnFolderImg.Header = "This icon";
+        MnFolderImg.IsEnabled = showImg;
+        MnFolderThis.Header = "Default";
+        MnAbout.Header = "About";
+        MnExit.Header = "Exit";
 
-        mnOpenFolder.Items.Add(mnFolderExe);
-        mnOpenFolder.Items.Add(mnFolderImg);
-        mnOpenFolder.Items.Add(mnFolderThis);
+        mnOpenFolder.Items.Add(MnFolderExe);
+        mnOpenFolder.Items.Add(MnFolderImg);
+        mnOpenFolder.Items.Add(MnFolderThis);
 
-        contextMenu.Items.Add(mnOpen);
-        contextMenu.Items.Add(mnAdmin);
+        contextMenu.Items.Add(MnOpen);
+        contextMenu.Items.Add(MnAdmin);
         contextMenu.Items.Add(new Separator());
         contextMenu.Items.Add(mnOpenFolder);
         contextMenu.Items.Add(new Separator());
-        contextMenu.Items.Add(mnAbout);
+        contextMenu.Items.Add(MnAbout);
         contextMenu.Items.Add(new Separator());
-        contextMenu.Items.Add(mnExit);
+        contextMenu.Items.Add(MnExit);
 
         btn.ContextMenu = contextMenu;
     }

@@ -69,36 +69,36 @@ public static class ImageButtonCreator
                 catch (Exception ex) { _ = ex.Message; }
             }
         });
-        imageButton.mnOpen.Click += delegate
+        imageButton.MnOpen.Click += delegate
         {
             string msg = RunProcess.Run(shortcutItem.ExePath);
             messageDialogs.IsErrorDisplayed(msg);
         };
-        imageButton.mnAdmin.Click += delegate
+        imageButton.MnAdmin.Click += delegate
         {
             string msg = RunProcess.Run(shortcutItem.ExePath, true);
             messageDialogs.IsErrorDisplayed(msg);
         };
-        imageButton.mnFolderExe.Click += delegate
+        imageButton.MnFolderExe.Click += delegate
         {
             string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ExePath));
             messageDialogs.IsErrorDisplayed(msg);
         };
-        imageButton.mnFolderImg.Click += delegate
+        imageButton.MnFolderImg.Click += delegate
         {
             string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ImgPath));
             messageDialogs.IsErrorDisplayed(msg);
         };
-        imageButton.mnFolderThis.Click += delegate
+        imageButton.MnFolderThis.Click += delegate
         {
             string msg = RunProcess.Run(FolderOpeningString(AppValues.ExePath));
             messageDialogs.IsErrorDisplayed(msg);
         };
-        imageButton.mnAbout.Click += delegate
+        imageButton.MnAbout.Click += delegate
         {
             new About().ShowDialog();
         };
-        imageButton.mnExit.Click += delegate
+        imageButton.MnExit.Click += delegate
         {
             AppValues.Exit();
         };
