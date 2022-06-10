@@ -29,7 +29,7 @@ public partial class MainWindow : Window
         {
             ///endTimer.Stop();
             ///var elapsedMs = endTimer.ElapsedMilliseconds;
-            ///MongoShortcutsGrid.MachineAdded();
+            MongoShortcutsGrid.MachineAdded();
         };
 
         #region setup window
