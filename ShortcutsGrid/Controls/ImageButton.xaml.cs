@@ -25,6 +25,10 @@ public partial class ImageButton : UserControl
     public MenuItem MnOpen { get; set; } = new MenuItem();
     public MenuItem MnAdmin { get; set; } = new MenuItem();
 
+    public MenuItem MnShortcutsAdd { get; set; } = new MenuItem();
+    public MenuItem MnShortcutsRemove { get; set; } = new MenuItem();
+    public MenuItem MnShortcutsList { get; set; } = new MenuItem();
+
     public MenuItem MnFolderExe { get; set; } = new MenuItem();
     public MenuItem MnFolderImg { get; set; } = new MenuItem();
     public MenuItem MnFolderThis { get; set; } = new MenuItem();
@@ -47,6 +51,9 @@ public partial class ImageButton : UserControl
 
         var contextMenu = new ContextMenu();
 
+        var mnShortcuts = new MenuItem();
+        mnShortcuts.Header = "Shortcuts";
+
         var mnOpenFolder = new MenuItem();
         mnOpenFolder.Header = "Open folder of";
 
@@ -54,13 +61,24 @@ public partial class ImageButton : UserControl
         MnOpen.IsEnabled = showOpen;
         MnAdmin.Header = "Run as admin";
         MnAdmin.IsEnabled = showAdmin;
+
+        MnShortcutsAdd.Header = "Add new";
+        MnShortcutsRemove.Header = "Remove this";
+        MnShortcutsRemove.IsEnabled = showOpen;
+        MnShortcutsList.Header = "Show list";
+
         MnFolderExe.Header = "This app";
         MnFolderExe.IsEnabled = showExe;
         MnFolderImg.Header = "This icon";
         MnFolderImg.IsEnabled = showImg;
         MnFolderThis.Header = "Default";
+        
         MnAbout.Header = "About";
         MnExit.Header = "Exit";
+
+        mnShortcuts.Items.Add(MnShortcutsAdd);
+        mnShortcuts.Items.Add(MnShortcutsRemove);
+        mnShortcuts.Items.Add(MnShortcutsList);
 
         mnOpenFolder.Items.Add(MnFolderExe);
         mnOpenFolder.Items.Add(MnFolderImg);
@@ -68,6 +86,8 @@ public partial class ImageButton : UserControl
 
         contextMenu.Items.Add(MnOpen);
         contextMenu.Items.Add(MnAdmin);
+        contextMenu.Items.Add(new Separator());
+        contextMenu.Items.Add(mnShortcuts);
         contextMenu.Items.Add(new Separator());
         contextMenu.Items.Add(mnOpenFolder);
         contextMenu.Items.Add(new Separator());

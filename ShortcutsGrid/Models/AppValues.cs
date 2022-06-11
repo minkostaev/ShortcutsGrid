@@ -1,5 +1,6 @@
 ﻿namespace ShortcutsGrid.Models;
 
+using ShortcutsGrid.Extended.DB;
 using System;
 using System.IO;
 using System.Reflection;
@@ -50,6 +51,19 @@ internal static class AppValues
         ///App.Current.Shutdown();
         ///System.Diagnostics.Process.GetCurrentProcess().Kill();
         Application.Current.Shutdown();
+    }
+
+    private static MongoShortcutsGrid? _mongoShortcutsGrid;
+    public static MongoShortcutsGrid MongoShortcutsGrid
+    {
+        get
+        {
+            if (_mongoShortcutsGrid == null)
+            {
+                _mongoShortcutsGrid = new MongoShortcutsGrid();
+            }
+            return _mongoShortcutsGrid;
+        }
     }
 
 }

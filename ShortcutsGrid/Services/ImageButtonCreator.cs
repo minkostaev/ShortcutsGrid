@@ -79,6 +79,18 @@ public static class ImageButtonCreator
             string msg = RunProcess.Run(shortcutItem.ExePath, true);
             messageDialogs.IsErrorDisplayed(msg);
         };
+        imageButton.MnShortcutsAdd.Click += delegate
+        {
+            messageDialogs.IsErrorDisplayed("todo");
+        };
+        imageButton.MnShortcutsRemove.Click += delegate
+        {
+            messageDialogs.IsErrorDisplayed("todo");
+        };
+        imageButton.MnShortcutsList.Click += delegate
+        {
+            messageDialogs.IsErrorDisplayed("todo");
+        };
         imageButton.MnFolderExe.Click += delegate
         {
             string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ExePath));

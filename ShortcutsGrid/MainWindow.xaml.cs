@@ -2,8 +2,6 @@
 
 using Models;
 using Services;
-using ShortcutsGrid.Extended.DB;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using Windows;
@@ -29,7 +27,7 @@ public partial class MainWindow : Window
         {
             ///endTimer.Stop();
             ///var elapsedMs = endTimer.ElapsedMilliseconds;
-            MongoShortcutsGrid.MachineAdded();
+            ///AppValues.MongoShortcutsGrid.MachineAdded();
         };
 
         #region setup window
@@ -74,19 +72,6 @@ public partial class MainWindow : Window
             new About().ShowDialog();
         }
 
-    }
-
-    private MongoShortcutsGrid? _mongoShortcutsGrid;
-    public MongoShortcutsGrid MongoShortcutsGrid
-    {
-        get
-        {
-            if (_mongoShortcutsGrid == null)
-            {
-                _mongoShortcutsGrid = new MongoShortcutsGrid();
-            }
-            return _mongoShortcutsGrid;
-        }
     }
 
 }
