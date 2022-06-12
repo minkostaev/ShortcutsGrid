@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 
 internal static class AppValues
 {
@@ -65,5 +66,8 @@ internal static class AppValues
             return _mongoShortcutsGrid;
         }
     }
+
+    public static MainWindow? MainWin { get; set; }
+    
 
 }

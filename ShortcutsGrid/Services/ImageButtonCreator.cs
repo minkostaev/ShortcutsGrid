@@ -12,7 +12,7 @@ using Windows;
 public static class ImageButtonCreator
 {
 
-    public static ImageButton GetButton(MainWindow mainWindow, Shortcut shortcutItem)
+    public static ImageButton GetButton(Shortcut shortcutItem)
     {
         MessageDialogs messageDialogs = new MessageDialogs(new MessageBoxWrapper());
         bool closeDragButton = shortcutItem.Tag is string && shortcutItem.Tag.ToString() == AppValues.CloseDragId;
@@ -65,7 +65,7 @@ public static class ImageButtonCreator
             }
             else if (e.ClickCount == 1 && closeDragButton)
             {
-                try { mainWindow.DragMove(); }
+                try { AppValues.MainWin?.DragMove(); }
                 catch (Exception ex) { _ = ex.Message; }
             }
         });
