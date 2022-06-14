@@ -1,7 +1,7 @@
 ﻿namespace ShortcutsGrid.Tests.Ui;
 
 using NUnit.Framework;
-using ShortcutsGrid.Windows;
+using Windows;
 using System.IO;
 using System.Reflection;
 using System.Threading;
