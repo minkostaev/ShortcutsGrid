@@ -9,11 +9,11 @@
 
     <Grid>
 
-        <Grid x:Name="pnlImg" Width="110" Height="110" Margin="10,10,540,304"/>
-        <Label x:Name="lblHeader" Content="Header" HorizontalAlignment="Left" Margin="125,6,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblVersion" Content="Version" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="125,50,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblExeName" Content="ExeName" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top"/>
+        <Grid x:Name="pnlImg" Width="130" Height="130" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="lblHeader" Content="Header" Margin="140,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="lblVersion" Content="Version" Margin="471,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescription" Content="Description" Margin="140,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="lblExeName" Content="ExeName" Margin="10,140,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <Label x:Name="lblRepo" Content="Repo" HorizontalAlignment="Left" Margin="125,174,0,0" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="125,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
@@ -27,14 +27,14 @@
                 https://www.paypal.com/paypalme/minkostaev</Hyperlink>
         </TextBlock>
 
-        <!--<TextBlock HorizontalAlignment="Left" Margin="125,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="lnkBuyMeACoffee" NavigateUri="https://www.buymeacoffee.com/signup">
-                https://www.buymeacoffee.com/signup</Hyperlink>
-        </TextBlock>-->
-        <!--<TextBlock HorizontalAlignment="Left" Margin="125,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="lnkKoFi" NavigateUri="https://ko-fi.com/">
-                https://ko-fi.com/</Hyperlink>
-        </TextBlock>-->
+        <TextBlock HorizontalAlignment="Left" Margin="125,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Hyperlink x:Name="lnkBuyMeACoffee" NavigateUri="https://www.buymeacoffee.com/minkostaev">
+                https://www.buymeacoffee.com/minkostaev</Hyperlink>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="125,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Hyperlink x:Name="lnkKoFi" NavigateUri="https://ko-fi.com/minkostaev">
+                https://ko-fi.com/minkostaev</Hyperlink>
+        </TextBlock>
         <!--<TextBlock HorizontalAlignment="Left" Margin="125,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
             <Hyperlink x:Name="lnkPatreon" NavigateUri="https://www.patreon.com/login">
                 https://www.patreon.com/login</Hyperlink>

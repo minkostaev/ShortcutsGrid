@@ -27,8 +27,8 @@ public partial class About : Window
         {
             var imageButton = new ImageButton(new Shortcut(), false)
             {
-                Height = 110,
-                Width = 110
+                Height = 128,
+                Width = 128
             };
             pnlImg.Children.Add(imageButton);
         }
