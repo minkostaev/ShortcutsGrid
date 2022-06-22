@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShortcutsGrid.Windows"
-        mc:Ignorable="d"
-        Title="About" Height="440" Width="660">
+        mc:Ignorable="d" Title="About" Height="440" Width="660">
 
     <Grid>
 
