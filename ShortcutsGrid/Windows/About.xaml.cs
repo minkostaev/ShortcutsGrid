@@ -67,12 +67,20 @@ public partial class About : Window
 
         lblRepo.Content = "Source code available in github on this link:";
         lblRepo.FontStyle = FontStyles.Italic;
-        lnkThisRepo.Click += delegate { RunProcess.OpenLink(lnkThisRepo.NavigateUri.ToString()); };
 
         lblMyAd.Content = "You can buy me a beer:";
         lblMyAd.FontStyle = FontStyles.Italic;
         lblMyAd.FontWeight = FontWeights.Bold;
-        lnkMyPayPal.Click += delegate { RunProcess.OpenLink(lnkMyPayPal.NavigateUri.ToString()); };
+
+        string github = "https://github.com/minkostaev/ShortcutsGrid";
+        pnlGit.Children.Add(new TextLink(github));
+
+        string paypal = "https://www.paypal.com/paypalme/minkostaev";
+        string buymeacoffee = "https://www.buymeacoffee.com/minkostaev";
+        string kofi = "https://www.ko-fi.com/minkostaev";
+        pnlDons.Children.Add(new TextLink(paypal));
+        pnlDons.Children.Add(new TextLink(buymeacoffee));
+        pnlDons.Children.Add(new TextLink(kofi));
 
     }
 

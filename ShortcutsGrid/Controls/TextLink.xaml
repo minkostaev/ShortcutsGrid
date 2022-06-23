@@ -7,8 +7,8 @@
              mc:Ignorable="d" d:DesignHeight="20" d:DesignWidth="200">
     <Grid>
         <TextBlock TextWrapping="Wrap">
-            <Hyperlink x:Name="hprLnk" NavigateUri="https://ko-fi.com/minkostaev">
-                <TextBlock x:Name="tbText" Text="http;//link.link" />
+            <Hyperlink x:Name="hprLnk" NavigateUri="https://www.google.com/">
+                <TextBlock x:Name="tbText" Text="https://www.google.com/" />
             </Hyperlink>
         </TextBlock>
     </Grid>

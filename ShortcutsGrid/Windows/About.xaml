@@ -15,29 +15,10 @@
         <Label x:Name="lblExeName" Content="ExeName" Margin="10,140,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <Label x:Name="lblRepo" Content="Repo" HorizontalAlignment="Left" Margin="125,174,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="125,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="lnkThisRepo" NavigateUri="https://github.com/minkostaev/ShortcutsGrid">
-                https://github.com/minkostaev/ShortcutsGrid</Hyperlink>
-        </TextBlock>
+        <StackPanel x:Name="pnlGit" Margin="110,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
         <Label x:Name="lblMyAd" Content="MyAd" HorizontalAlignment="Left" Margin="125,238,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="125,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="lnkMyPayPal" NavigateUri="https://www.paypal.com/paypalme/minkostaev">
-                https://www.paypal.com/paypalme/minkostaev</Hyperlink>
-        </TextBlock>
-
-        <TextBlock HorizontalAlignment="Left" Margin="125,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="lnkBuyMeACoffee" NavigateUri="https://www.buymeacoffee.com/minkostaev">
-                https://www.buymeacoffee.com/minkostaev</Hyperlink>
-        </TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="125,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="lnkKoFi" NavigateUri="https://ko-fi.com/minkostaev">
-                https://ko-fi.com/minkostaev</Hyperlink>
-        </TextBlock>
-        <!--<TextBlock HorizontalAlignment="Left" Margin="125,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
-            <Hyperlink x:Name="lnkPatreon" NavigateUri="https://www.patreon.com/login">
-                https://www.patreon.com/login</Hyperlink>
-        </TextBlock>-->
+        <StackPanel x:Name="pnlDons" Margin="110,264,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
     </Grid>
 </Window>
