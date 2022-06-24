@@ -78,9 +78,13 @@ public partial class About : Window
         string paypal = "https://www.paypal.com/paypalme/minkostaev";
         string buymeacoffee = "https://www.buymeacoffee.com/minkostaev";
         string kofi = "https://www.ko-fi.com/minkostaev";
+        string revolut = "https://www.revolut.com/";
+        string wise = "https://wise.com/";
         pnlDons.Children.Add(new TextLink(paypal));
         pnlDons.Children.Add(new TextLink(buymeacoffee));
         pnlDons.Children.Add(new TextLink(kofi));
+        pnlDons.Children.Add(new TextLink(revolut, "Revolut: @minkostaev", "@minkostaev"));
+        pnlDons.Children.Add(new TextLink(wise, "Wise: minkostaev@yahoo.com", "minkostaev@yahoo.com"));
 
     }
 
