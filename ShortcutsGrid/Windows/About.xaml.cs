@@ -2,7 +2,6 @@
 
 using Controls;
 using Models;
-using Services.Run;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -72,6 +71,7 @@ public partial class About : Window
         lblMyAd.FontStyle = FontStyles.Italic;
         lblMyAd.FontWeight = FontWeights.Bold;
 
+        #region Links
         string github = "https://github.com/minkostaev/ShortcutsGrid";
         pnlGit.Children.Add(new TextLink(github));
 
@@ -85,6 +85,7 @@ public partial class About : Window
         pnlDons.Children.Add(new TextLink(kofi));
         pnlDons.Children.Add(new TextLink(revolut, "Revolut: @minkostaev", "@minkostaev"));
         pnlDons.Children.Add(new TextLink(wise, "Wise: minkostaev@yahoo.com", "minkostaev@yahoo.com"));
+        #endregion
 
     }
 
