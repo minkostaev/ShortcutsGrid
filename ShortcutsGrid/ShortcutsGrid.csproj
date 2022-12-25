@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <ApplicationIcon>Resources\utils-i-128.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\utils-128.ico</ApplicationIcon>
     <AssemblyVersion>1.2.2.1</AssemblyVersion>
     <FileVersion>1.2.2.1</FileVersion>
     <VersionPrefix>1.2.2</VersionPrefix>
@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="[2.15.1]" />
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="[6.0.0]" />
   </ItemGroup>
 
   <ItemGroup>
