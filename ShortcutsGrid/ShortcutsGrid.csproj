@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <ApplicationIcon>Resources\utils-128.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\connections-128.ico</ApplicationIcon>
     <AssemblyVersion>1.2.2.1</AssemblyVersion>
     <FileVersion>1.2.2.1</FileVersion>
     <VersionPrefix>1.2.2</VersionPrefix>
