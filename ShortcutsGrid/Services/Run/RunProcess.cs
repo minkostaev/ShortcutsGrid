@@ -2,6 +2,9 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows.Documents;
 
 public static class RunProcess
 {
@@ -27,8 +30,29 @@ public static class RunProcess
             try
             {
                 string[] cmdAndArgs = commandOrPath.Split(' ');
-                string args = commandOrPath.Remove(0, cmdAndArgs[0].Length);
-                ProcessStart(cmdAndArgs[0], admin, args);
+                string processCommandOrPath = string.Empty;
+                string args = string.Empty;
+                if (commandOrPath.Contains('\\'))
+                {
+                    var pathStructure = cmdAndArgs.ToList();
+                    for (int i = cmdAndArgs.Length - 1; i > 0; i--)
+                    {
+                        pathStructure.RemoveAt(i);
+                        var fileOrFolder = String.Join(" ", pathStructure.ToArray());
+                        if (File.Exists(fileOrFolder))//to do case for folder if needed
+                        {
+                            processCommandOrPath = fileOrFolder;
+                            args = commandOrPath.Replace(processCommandOrPath, "");
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    args = commandOrPath.Remove(0, cmdAndArgs[0].Length);
+                    processCommandOrPath = cmdAndArgs[0];
+                }
+                ProcessStart(processCommandOrPath, admin, args);
                 return string.Empty;
             }
             catch (Exception ex) { return ex.Message; }
@@ -39,7 +63,7 @@ public static class RunProcess
     {
         Process process = new Process();
         process.StartInfo.UseShellExecute = true;
-        //todo
+        //to do
         ///process.StartInfo.WorkingDirectory = "c:\\";
         process.StartInfo.FileName = commandOrPath;
         process.StartInfo.Arguments = args;
