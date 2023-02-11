@@ -61,13 +61,18 @@ public static class RunProcess
 
     private static void ProcessStart(string commandOrPath, bool admin, string args = "")
     {
-        Process process = new Process();
-        process.StartInfo.UseShellExecute = true;
-        //to do
-        ///process.StartInfo.WorkingDirectory = "c:\\";
+        var process = new Process();
         process.StartInfo.FileName = commandOrPath;
         process.StartInfo.Arguments = args;
         process.StartInfo.Verb = admin ? "runas" : "";
+        if (File.Exists(commandOrPath))
+        {
+            process.StartInfo.WorkingDirectory = Path.GetDirectoryName(commandOrPath);
+        }
+        else
+        {
+            process.StartInfo.UseShellExecute = true;
+        }
         process.Start();
     }
 
