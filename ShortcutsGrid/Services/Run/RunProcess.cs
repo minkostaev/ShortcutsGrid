@@ -3,8 +3,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Windows.Documents;
 
 public static class RunProcess
 {
@@ -29,30 +27,26 @@ public static class RunProcess
         {
             try
             {
-                string[] cmdAndArgs = commandOrPath.Split(' ');
-                string processCommandOrPath = string.Empty;
+                string[] cmdFlAndArgs = commandOrPath.Split(' ');
+                string cmdOrPath = string.Empty;
                 string args = string.Empty;
-                if (commandOrPath.Contains('\\'))
+                bool isCommand = true;
+                foreach (string arg in cmdFlAndArgs)
                 {
-                    var pathStructure = cmdAndArgs.ToList();
-                    for (int i = cmdAndArgs.Length - 1; i > 0; i--)
+                    cmdOrPath = string.IsNullOrEmpty(cmdOrPath) ? arg : cmdOrPath + " " + arg;
+                    if (File.Exists(cmdOrPath))
                     {
-                        pathStructure.RemoveAt(i);
-                        var fileOrFolder = String.Join(" ", pathStructure.ToArray());
-                        if (File.Exists(fileOrFolder))//to do case for folder if needed
-                        {
-                            processCommandOrPath = fileOrFolder;
-                            args = commandOrPath.Replace(processCommandOrPath, "");
-                            break;
-                        }
+                        args = commandOrPath.Replace(cmdOrPath, "");
+                        isCommand = false;
+                        break;
                     }
                 }
-                else
+                if (isCommand)
                 {
-                    args = commandOrPath.Remove(0, cmdAndArgs[0].Length);
-                    processCommandOrPath = cmdAndArgs[0];
+                    cmdOrPath = cmdFlAndArgs[0];
+                    args = commandOrPath.Replace(cmdOrPath, "");
                 }
-                ProcessStart(processCommandOrPath, admin, args);
+                ProcessStart(cmdOrPath, admin, args);
                 return string.Empty;
             }
             catch (Exception ex) { return ex.Message; }
@@ -69,10 +63,7 @@ public static class RunProcess
         {
             process.StartInfo.WorkingDirectory = Path.GetDirectoryName(commandOrPath);
         }
-        else
-        {
-            process.StartInfo.UseShellExecute = true;
-        }
+        process.StartInfo.UseShellExecute = true;
         process.Start();
     }
 
