@@ -26,7 +26,7 @@ public partial class MainWindow : Window
         {
             ///endTimer.Stop();
             ///var elapsedMs = endTimer.ElapsedMilliseconds;
-            AppValues.MongoShortcutsGrid.MachineAdded();
+            ///AppValues.MongoShortcutsGrid.MachineAdded();
         };
 
         AppValues.MainWin = this;
