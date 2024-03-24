@@ -1,9 +1,14 @@
 ﻿namespace ShortcutsGrid;
 
+using Forms.Wpf.Mls.Tools.Models;
+using Forms.Wpf.Mls.Tools.Services;
 using Models;
 using Services;
+using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -14,8 +19,10 @@ public partial class MainWindow : Window
     {
         ///var startTimer = Stopwatch.StartNew();
         ///var endTimer = Stopwatch.StartNew();
-
+        
         InitializeComponent();
+
+        ///WaitForResponseOnClose();
 
         this.ContentRendered += delegate
         {
@@ -26,7 +33,6 @@ public partial class MainWindow : Window
         {
             ///endTimer.Stop();
             ///var elapsedMs = endTimer.ElapsedMilliseconds;
-            ///AppValues.MongoShortcutsGrid.MachineAdded();
         };
 
         AppValues.MainWin = this;
@@ -45,7 +51,38 @@ public partial class MainWindow : Window
         #endregion
 
         ShowShortcuts.Load();
+    }
 
+    private void WaitForResponseOnClose()
+    {
+        var closeTime = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 250) };
+        closeTime.Tick += delegate { this.Close(); };
+
+        RequestResponse? response = null;
+        var worker = new BackgroundWorker();
+        worker.DoWork += async delegate
+        {
+            var requestManager = new RequestManager();
+            response = await requestManager.SendRequest("", RequestMethod.GET, "");
+        };
+        worker.RunWorkerCompleted += delegate { this.Close(); };
+
+        bool started = false;
+        Closing += (sender, e) =>
+        {
+            if (!started)
+            {
+                worker.RunWorkerAsync();
+                started = true;
+                closeTime.Start();
+                e.Cancel = true;
+            }
+            if (response == null)
+            {
+                closeTime.Stop();
+                e.Cancel = true;
+            }
+        };
     }
 
 }

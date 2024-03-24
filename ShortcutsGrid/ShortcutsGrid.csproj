@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Forms.Wpf.Mls.Tools" Version="1.0.7" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
   </ItemGroup>
 
