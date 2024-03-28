@@ -1,6 +1,7 @@
 ﻿namespace ShortcutsGrid;
 
 using Forms.Wpf.Mls.Tools.Models;
+using Forms.Wpf.Mls.Tools.Models.TheMachine;
 using Forms.Wpf.Mls.Tools.Services;
 using Models;
 using Services;
@@ -57,13 +58,15 @@ public partial class MainWindow : Window
     {
         var closeTime = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 250) };
         closeTime.Tick += delegate { this.Close(); };
-
+        
+        //var theMachine = new TheMachine();
+        
         RequestResponse? response = null;
         var worker = new BackgroundWorker();
         worker.DoWork += async delegate
         {
             var requestManager = new RequestManager();
-            response = await requestManager.SendRequest("", RequestMethod.GET, "");
+            response = await requestManager.SendRequest("", RequestMethod.POST, "");
         };
         worker.RunWorkerCompleted += delegate { this.Close(); };
 
