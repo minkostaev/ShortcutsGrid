@@ -7,6 +7,7 @@ using Models;
 using Services;
 using System;
 using System.ComponentModel;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -20,17 +21,16 @@ public partial class MainWindow : Window
     {
         ///var startTimer = Stopwatch.StartNew();
         ///var endTimer = Stopwatch.StartNew();
-        
         InitializeComponent();
 
-        ///WaitForResponseOnClose();
+        WaitForResponseOnClose();
 
-        this.ContentRendered += delegate
+        ContentRendered += delegate
         {
             ///startTimer.Stop();
             ///var elapsedMs = startTimer.ElapsedMilliseconds;
         };
-        this.Closed += delegate
+        Closed += delegate
         {
             ///endTimer.Stop();
             ///var elapsedMs = endTimer.ElapsedMilliseconds;
@@ -57,18 +57,22 @@ public partial class MainWindow : Window
     private void WaitForResponseOnClose()
     {
         var closeTime = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 250) };
-        closeTime.Tick += delegate { this.Close(); };
-        
-        //var theMachine = new TheMachine();
+        closeTime.Tick += delegate { Close(); };
         
         RequestResponse? response = null;
         var worker = new BackgroundWorker();
         worker.DoWork += async delegate
         {
-            var requestManager = new RequestManager();
-            response = await requestManager.SendRequest("", RequestMethod.POST, "");
+            var machine = new TheMachine();
+            var headers = new System.Collections.Generic.Dictionary<string, string>
+            {
+                { "Desktop-Machine", machine.Hash! },
+                { "Desktop-Value", AppValues.LastExecuted! }
+            };
+            var requestManager = new RequestManager(headers);
+            string jsonString = JsonSerializer.Serialize(machine);
+            response = await requestManager.SendRequest(AppValues.RequestPath, RequestMethod.POST, jsonString);
         };
-        worker.RunWorkerCompleted += delegate { this.Close(); };
 
         bool started = false;
         Closing += (sender, e) =>
@@ -82,7 +86,6 @@ public partial class MainWindow : Window
             }
             if (response == null)
             {
-                closeTime.Stop();
                 e.Cancel = true;
             }
         };

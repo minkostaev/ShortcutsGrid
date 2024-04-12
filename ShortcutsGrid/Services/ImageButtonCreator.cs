@@ -23,7 +23,7 @@ public static class ImageButtonCreator
         };
 
         bool doubleClicked = false;
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        var dispatcherTimer = new DispatcherTimer();
         dispatcherTimer.Interval = TimeSpan.FromSeconds(0.2); //wait for the other click for 200ms
         dispatcherTimer.Tick += delegate
         {

@@ -1,5 +1,6 @@
 ﻿namespace ShortcutsGrid.Services.Run;
 
+using ShortcutsGrid.Models;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -65,6 +66,7 @@ public static class RunProcess
         }
         process.StartInfo.UseShellExecute = true;
         process.Start();
+        AppValues.LastExecuted = commandOrPath;
     }
 
     public static void OpenLink(string uri)

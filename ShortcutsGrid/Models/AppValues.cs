@@ -3,11 +3,12 @@
 using System;
 using System.IO;
 using System.Reflection;
-using System.Windows;
 
 internal static class AppValues
 {
     public static MainWindow? MainWin { get; set; }
+
+    public static string? LastExecuted { get; set; }
 
     public static string? ExePath => Environment.ProcessPath;
     public static string? ExeDir => Environment.CurrentDirectory;
@@ -45,12 +46,16 @@ internal static class AppValues
     }
     public static string CloseDragId => "CloseDragButton";
 
+    //public static string RequestPath = "https://localhost:7088/machinesdetails";
+    public static string RequestPath = "https://www.apito.somee.com/machinesdetails";
+
     public static void Exit()
     {
         ///Environment.Exit(0);
         ///App.Current.Shutdown();
         ///System.Diagnostics.Process.GetCurrentProcess().Kill();
-        Application.Current.Shutdown();
+        ///Application.Current.Shutdown();
+        MainWin?.Close();
     }
 
 }

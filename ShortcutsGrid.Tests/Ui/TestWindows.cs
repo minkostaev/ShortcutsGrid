@@ -18,7 +18,7 @@ internal class TestWindows
         string csvContent = GetInputFile(testhost);
         File.WriteAllText(testhost, csvContent);
 
-        MainWindow mainWindow = new MainWindow();
+        var mainWindow = new MainWindow();
         mainWindow.Show();
 
         if (File.Exists(testhost))
@@ -31,7 +31,7 @@ internal class TestWindows
     [Apartment(ApartmentState.STA)]
     public void TestAbout()
     {
-        About about = new About();
+        var about = new About();
         ///about.Show();
 
         Assert.IsInstanceOf<About>(about);
@@ -39,17 +39,16 @@ internal class TestWindows
 
     public string GetInputFile(string fileName)
     {
+        string result = string.Empty;
         Assembly assembly = Assembly.GetExecutingAssembly();
-
-        string content = string.Empty;
-        var stream = assembly.GetManifestResourceStream("ShortcutsGrid.Tests.Resources." + fileName);
+        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.Resources." + fileName);
         if (stream != null)
         {
             var reader = new StreamReader(stream);
-            content = reader.ReadToEnd();
+            result = reader.ReadToEnd();
+            reader.Dispose();
         }
-
-        return content;
+        return result;
     }
 
 }
