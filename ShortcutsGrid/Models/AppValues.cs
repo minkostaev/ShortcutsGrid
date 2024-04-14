@@ -55,6 +55,7 @@ internal static class AppValues
         ///App.Current.Shutdown();
         ///System.Diagnostics.Process.GetCurrentProcess().Kill();
         ///Application.Current.Shutdown();
+        MainWin?.Hide();
         MainWin?.Close();
     }
 
