@@ -24,7 +24,7 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         WaitForResponseOnClose();
-
+        
         ContentRendered += delegate
         {
             ///startTimer.Stop();
@@ -48,7 +48,7 @@ public partial class MainWindow : Window
         this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         this.ResizeMode = ResizeMode.NoResize;
 
-        this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Close(); };
+        this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) AppValues.Exit(); };
         #endregion
 
         ShowShortcuts.Load();
@@ -57,12 +57,14 @@ public partial class MainWindow : Window
     private void WaitForResponseOnClose()
     {
         var closeTime = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 250) };
-        closeTime.Tick += delegate { Close(); };
+        closeTime.Tick += delegate { AppValues.Exit(); };
         
         RequestResponse? response = null;
         var worker = new BackgroundWorker();
         worker.DoWork += async delegate
         {
+            if (AppValues.LastExecuted == null)
+                return;
             var machine = new TheMachine();
             var headers = new System.Collections.Generic.Dictionary<string, string>
             {

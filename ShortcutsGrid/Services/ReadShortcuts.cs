@@ -47,7 +47,7 @@ public static class ReadShortcuts
                 result.Add(new Shortcut() { ExePath = path, AppName = label, ImgPath = img });
             }
         }
-        stream.Close();
+        stream.Dispose();
 
         return result;
     }
