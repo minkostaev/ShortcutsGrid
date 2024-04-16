@@ -59,6 +59,9 @@ jobs:
         dotnet tool install dotnet-reportgenerator-globaltool --version 4.8.13
     #https://danielpalme.github.io/ReportGenerator/usage.html
 
+    - name: Set SolutionDir
+      run: echo "SolutionDir=$(pwd)" >> $GITHUB_OUTPUT
+
     # Execute report generator
     - name: Execute report generator
       run: |
@@ -80,9 +83,6 @@ jobs:
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html "-classfilters:$ExcludeList"
         cd coveragereport
         copy badge_linecoverage.svg $curDir\.github
-
-    - name: Set SolutionDir
-      run: echo "SolutionDir=$(pwd)" >> $GITHUB_OUTPUT
 
     # PublishProfiles makes exes and adding them to artifacts
     - name: Publish profiles
