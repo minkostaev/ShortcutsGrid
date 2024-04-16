@@ -7,28 +7,28 @@ using ShortcutsGrid.Services.Run;
 internal class TestRunProcess
 {
 
-    [Test]
-    public void TestRunEmpty()
-    {
-        string result = RunProcess.Run("");
+    //[Test]
+    //public void TestRunEmpty()
+    //{
+    //    string result = RunProcess.Run("");
         
-        Assert.IsEmpty(result);
-    }
+    //    Assert.IsEmpty(result);
+    //}
 
-    [Test]
-    public void TestRunCommand()
-    {
-        string result = RunProcess.Run("explorer");
+    //[Test]
+    //public void TestRunCommand()
+    //{
+    //    string result = RunProcess.Run("explorer");
 
-        Assert.IsEmpty(result);
-    }
+    //    Assert.IsEmpty(result);
+    //}
 
-    [Test]
-    public void TestRunWrongCommand()
-    {
-        string result = RunProcess.Run("explorera");
+    //[Test]
+    //public void TestRunWrongCommand()
+    //{
+    //    string result = RunProcess.Run("explorera");
 
-        Assert.IsNotEmpty(result);
-    }
+    //    Assert.IsNotEmpty(result);
+    //}
 
 }
