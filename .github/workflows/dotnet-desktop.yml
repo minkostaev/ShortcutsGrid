@@ -20,6 +20,7 @@ jobs:
     env:
       Proj_Name: ShortcutsGrid
       Test_Proj_Dir: ShortcutsGrid.Tests
+      SolutionDir: 'todo'
 
     steps:
     - name: Checkout
@@ -79,6 +80,9 @@ jobs:
         reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html "-classfilters:$ExcludeList"
         cd coveragereport
         copy badge_linecoverage.svg $curDir\.github
+
+    - name: Set SolutionDir
+      run: echo "SolutionDir=$(pwd)" >> $GITHUB_OUTPUT
 
     # PublishProfiles makes exes and adding them to artifacts
     - name: Publish profiles
