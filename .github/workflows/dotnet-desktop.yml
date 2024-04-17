@@ -20,6 +20,7 @@ jobs:
     env:
       Proj_Name: ShortcutsGrid
       Test_Proj_Dir: ShortcutsGrid.Tests
+      SolutionDir: todo
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
