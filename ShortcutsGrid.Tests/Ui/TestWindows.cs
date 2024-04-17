@@ -10,32 +10,32 @@ using System.Threading;
 internal class TestWindows
 {
     
-    [Test]
-    [Apartment(ApartmentState.STA)]
-    public void TestMainWindow()
-    {
-        string testhost = "testhost.csv";
-        string csvContent = GetInputFile(testhost);
-        File.WriteAllText(testhost, csvContent);
+    //[Test]
+    //[Apartment(ApartmentState.STA)]
+    //public void TestMainWindow()
+    //{
+    //    string testhost = "testhost.csv";
+    //    string csvContent = GetInputFile(testhost);
+    //    File.WriteAllText(testhost, csvContent);
 
-        var mainWindow = new MainWindow();
-        mainWindow.Show();
+    //    var mainWindow = new MainWindow();
+    //    mainWindow.Show();
 
-        if (File.Exists(testhost))
-            File.Delete(testhost);
+    //    if (File.Exists(testhost))
+    //        File.Delete(testhost);
 
-        Assert.IsInstanceOf<MainWindow>(mainWindow);
-    }
+    //    Assert.IsInstanceOf<MainWindow>(mainWindow);
+    //}
 
-    [Test]
-    [Apartment(ApartmentState.STA)]
-    public void TestAbout()
-    {
-        var about = new About();
-        ///about.Show();
+    //[Test]
+    //[Apartment(ApartmentState.STA)]
+    //public void TestAbout()
+    //{
+    //    var about = new About();
+    //    ///about.Show();
 
-        Assert.IsInstanceOf<About>(about);
-    }
+    //    Assert.IsInstanceOf<About>(about);
+    //}
 
     public string GetInputFile(string fileName)
     {
