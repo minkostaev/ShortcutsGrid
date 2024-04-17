@@ -59,9 +59,6 @@ jobs:
         dotnet tool install dotnet-reportgenerator-globaltool --version 4.8.13
     #https://danielpalme.github.io/ReportGenerator/usage.html
 
-    - name: Set SolutionDir
-      run: echo "SolutionDir=$(pwd)" >> $GITHUB_OUTPUT
-
     # Execute report generator
     - name: Execute report generator
       run: |
@@ -87,6 +84,9 @@ jobs:
     # PublishProfiles makes exes and adding them to artifacts
     - name: Publish profiles
       run: |
+        $solutionDir = "$(Get-Location)"
+        echo "Solution directory is: $solutionDir"
+        echo "::set-env name=SolutionDir::$solutionDir"
         cd ${{ env.Proj_Name }}
         #dotnet publish ShortcutsGrid.csproj /p:PublishProfile="Win System"
         #copy "bin\Win System\net8.0-windows\publish\win-x64\Win System.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults
