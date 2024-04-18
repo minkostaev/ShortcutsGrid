@@ -9,23 +9,23 @@ using System.Threading;
 [TestFixture]
 internal class TestWindows
 {
-    
-    //[Test]
-    //[Apartment(ApartmentState.STA)]
-    //public void TestMainWindow()
-    //{
-    //    string testhost = "testhost.csv";
-    //    string csvContent = GetInputFile(testhost);
-    //    File.WriteAllText(testhost, csvContent);
 
-    //    var mainWindow = new MainWindow();
-    //    mainWindow.Show();
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void TestMainWindow()
+    {
+        string testhost = "testhost.csv";
+        string csvContent = GetInputFile(testhost);
+        File.WriteAllText(testhost, csvContent);
 
-    //    if (File.Exists(testhost))
-    //        File.Delete(testhost);
+        var mainWindow = new MainWindow();
+        mainWindow.Show();
 
-    //    Assert.IsInstanceOf<MainWindow>(mainWindow);
-    //}
+        if (File.Exists(testhost))
+            File.Delete(testhost);
+
+        Assert.That(mainWindow, Is.InstanceOf<MainWindow>());
+    }
 
     //[Test]
     //[Apartment(ApartmentState.STA)]
