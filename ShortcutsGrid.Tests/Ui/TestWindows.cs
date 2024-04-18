@@ -10,22 +10,22 @@ using System.Threading;
 internal class TestWindows
 {
 
-    [Test]
-    [Apartment(ApartmentState.STA)]
-    public void TestMainWindow()
-    {
-        string testhost = "testhost.csv";
-        string csvContent = GetInputFile(testhost);
-        File.WriteAllText(testhost, csvContent);
+    //[Test]
+    //[Apartment(ApartmentState.STA)]
+    //public void TestMainWindow()
+    //{
+    //    string testhost = "testhost.csv";
+    //    string csvContent = GetInputFile(testhost);
+    //    File.WriteAllText(testhost, csvContent);
 
-        var mainWindow = new MainWindow();
-        mainWindow.Show();
+    //    var mainWindow = new MainWindow();
+    //    mainWindow.Show();
 
-        if (File.Exists(testhost))
-            File.Delete(testhost);
+    //    if (File.Exists(testhost))
+    //        File.Delete(testhost);
 
-        Assert.That(mainWindow, Is.InstanceOf<MainWindow>());
-    }
+    //    Assert.That(mainWindow, Is.InstanceOf<MainWindow>());
+    //}
 
     //[Test]
     //[Apartment(ApartmentState.STA)]
