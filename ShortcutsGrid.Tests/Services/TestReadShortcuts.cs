@@ -19,7 +19,7 @@ internal class TestReadShortcuts
     {
         var result = ReadShortcuts.FileToShortcuts();
 
-        Assert.AreEqual(3, result.Count);
+        Assert.That(3, Is.EqualTo(result.Count));
     }
 
     [Test, Order(2)]
@@ -29,7 +29,7 @@ internal class TestReadShortcuts
 
         var result = ReadShortcuts.FileToShortcuts();
 
-        Assert.AreEqual(4, result.Count);
+        Assert.That(4, Is.EqualTo(result.Count));
     }
 
     [Test, Order(3)]
@@ -40,7 +40,7 @@ internal class TestReadShortcuts
 
         var result = ReadShortcuts.FileToShortcuts();
 
-        Assert.AreEqual(0, result.Count);
+        Assert.That(0, Is.EqualTo(result.Count));
     }
 
     [Test, Order(4)]
@@ -51,7 +51,7 @@ internal class TestReadShortcuts
 
         var result = ReadShortcuts.FileToShortcuts();
 
-        Assert.AreEqual(0, result.Count);
+        Assert.That(0, Is.EqualTo(result.Count));
     }
 
 }

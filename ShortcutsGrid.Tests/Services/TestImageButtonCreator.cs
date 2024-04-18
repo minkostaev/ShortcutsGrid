@@ -17,7 +17,7 @@ internal class TestImageButtonCreator
         var result = methodInfo?.Invoke(null, parameters);
 
         string expected = "explorer.exe /select, \"file.exe\"";
-        Assert.AreEqual(expected, result);
+        Assert.That(expected, Is.EqualTo(result));
     }
 
     //reflection private

@@ -1,16 +1,9 @@
 ﻿namespace ShortcutsGrid;
 
-using Forms.Wpf.Mls.Tools.Models;
-using Forms.Wpf.Mls.Tools.Models.TheMachine;
-using Forms.Wpf.Mls.Tools.Services;
 using Models;
 using Services;
-using System;
-using System.ComponentModel;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -23,7 +16,7 @@ public partial class MainWindow : Window
         ///var endTimer = Stopwatch.StartNew();
         InitializeComponent();
 
-        WaitForResponseOnClose();
+        ShowShortcuts.WaitForResponseOnClose(this);
         
         ContentRendered += delegate
         {
@@ -36,8 +29,6 @@ public partial class MainWindow : Window
             ///var elapsedMs = endTimer.ElapsedMilliseconds;
         };
 
-        AppValues.MainWin = this;
-
         #region setup window
         this.Title = AppValues.ExeName;
         this.AllowsTransparency = true;
@@ -48,49 +39,20 @@ public partial class MainWindow : Window
         this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         this.ResizeMode = ResizeMode.NoResize;
 
-        this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) AppValues.Exit(); };
+        this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Exit(); };
         #endregion
 
-        ShowShortcuts.Load();
+        ShowShortcuts.Load(this);
     }
 
-    private void WaitForResponseOnClose()
+    public void Exit()
     {
-        var closeTime = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 250) };
-        closeTime.Tick += delegate { AppValues.Exit(); };
-        
-        RequestResponse? response = null;
-        var worker = new BackgroundWorker();
-        worker.DoWork += async delegate
-        {
-            if (AppValues.LastExecuted == null)
-                return;
-            var machine = new TheMachine();
-            var headers = new System.Collections.Generic.Dictionary<string, string>
-            {
-                { "Desktop-Machine", machine.Hash! },
-                { "Desktop-Value", AppValues.LastExecuted! }
-            };
-            var requestManager = new RequestManager(headers);
-            string jsonString = JsonSerializer.Serialize(machine);
-            response = await requestManager.SendRequest(AppValues.RequestPath, RequestMethod.POST, jsonString);
-        };
-
-        bool started = false;
-        Closing += (sender, e) =>
-        {
-            if (!started)
-            {
-                worker.RunWorkerAsync();
-                started = true;
-                closeTime.Start();
-                e.Cancel = true;
-            }
-            if (response == null)
-            {
-                e.Cancel = true;
-            }
-        };
+        ///Environment.Exit(0);
+        ///App.Current.Shutdown();
+        ///System.Diagnostics.Process.GetCurrentProcess().Kill();
+        ///Application.Current.Shutdown();
+        Hide();
+        Close();
     }
 
 }

@@ -21,7 +21,7 @@ internal class TestErrorDialog
         if (!result)
             result = sut.IsErrorDisplayed("error");
 
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
     //IMessageBox test
     //https://stackoverflow.com/questions/49146068/unit-tests-for-a-function-with-messagebox

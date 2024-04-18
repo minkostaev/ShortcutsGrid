@@ -1,16 +1,62 @@
 ﻿namespace ShortcutsGrid.Services;
 
+using Forms.Wpf.Mls.Tools.Models;
+using Forms.Wpf.Mls.Tools.Models.TheMachine;
+using Forms.Wpf.Mls.Tools.Services;
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Windows;
+using System;
+using System.ComponentModel;
+using System.Text.Json;
+using System.Windows.Threading;
 
 public static class ShowShortcuts
 {
-    public static void Load()
+    public static void WaitForResponseOnClose(MainWindow window)
     {
-        AppValues.MainWin?.stkPnl1.Children.Clear();
-        AppValues.MainWin?.stkPnl2.Children.Clear();
-        AppValues.MainWin?.stkPnl3.Children.Clear();
-        AppValues.MainWin?.stkPnl4.Children.Clear();
+        var closeTime = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 250) };
+        closeTime.Tick += delegate { window.Exit(); };
+
+        RequestResponse? response = null;
+        var worker = new BackgroundWorker();
+        worker.DoWork += async delegate
+        {
+            if (AppValues.LastExecuted == null)
+                return;
+            var machine = new TheMachine();
+            var headers = new System.Collections.Generic.Dictionary<string, string>
+            {
+                { "Desktop-Machine", machine.Hash! },
+                { "Desktop-Value", AppValues.LastExecuted! }
+            };
+            var requestManager = new RequestManager(headers);
+            string jsonString = JsonSerializer.Serialize(machine);
+            response = await requestManager.SendRequest(AppValues.RequestPath, RequestMethod.POST, jsonString);
+        };
+
+        bool started = false;
+        window.Closing += (sender, e) =>
+        {
+            if (!started)
+            {
+                worker.RunWorkerAsync();
+                started = true;
+                closeTime.Start();
+                e.Cancel = true;
+            }
+            if (response == null)
+            {
+                e.Cancel = true;
+            }
+        };
+    }
+
+    public static void Load(MainWindow window)
+    {
+        window.stkPnl1.Children.Clear();
+        window.stkPnl2.Children.Clear();
+        window.stkPnl3.Children.Clear();
+        window.stkPnl4.Children.Clear();
 
         var shortcuts = ReadShortcuts.FileToShortcuts();
 
@@ -18,21 +64,21 @@ public static class ShowShortcuts
 
         foreach (var shortcut in shortcuts)
         {
-            if (AppValues.MainWin?.stkPnl1.Children.Count < 6)
+            if (window.stkPnl1.Children.Count < 6)
             {
-                AppValues.MainWin?.stkPnl1.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                window.stkPnl1.Children.Add(ImageButtonCreator.GetButton(shortcut, window));
             }
-            else if (AppValues.MainWin?.stkPnl2.Children.Count < 6)
+            else if (window.stkPnl2.Children.Count < 6)
             {
-                AppValues.MainWin?.stkPnl2.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                window.stkPnl2.Children.Add(ImageButtonCreator.GetButton(shortcut, window));
             }
-            else if (AppValues.MainWin?.stkPnl3.Children.Count < 6)
+            else if (window.stkPnl3.Children.Count < 6)
             {
-                AppValues.MainWin?.stkPnl3.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                window.stkPnl3.Children.Add(ImageButtonCreator.GetButton(shortcut, window));
             }
-            else if (AppValues.MainWin?.stkPnl4.Children.Count < 6)
+            else if (window.stkPnl4.Children.Count < 6)
             {
-                AppValues.MainWin?.stkPnl4.Children.Add(ImageButtonCreator.GetButton(shortcut));
+                window.stkPnl4.Children.Add(ImageButtonCreator.GetButton(shortcut, window));
             }
         }
 
@@ -41,4 +87,5 @@ public static class ShowShortcuts
             new About().ShowDialog();
         }
     }
+
 }

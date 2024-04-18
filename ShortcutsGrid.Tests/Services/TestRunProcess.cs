@@ -12,7 +12,7 @@ internal class TestRunProcess
     {
         string result = RunProcess.Run("");
 
-        Assert.IsEmpty(result);
+        Assert.That(result, Is.Empty);
     }
 
     [Test]
@@ -20,7 +20,7 @@ internal class TestRunProcess
     {
         string result = RunProcess.Run("explorer");
 
-        Assert.IsEmpty(result);
+        Assert.That(result, Is.Empty);
     }
 
     [Test]
@@ -28,7 +28,7 @@ internal class TestRunProcess
     {
         string result = RunProcess.Run("explorera");
 
-        Assert.IsNotEmpty(result);
+        Assert.That(result, Is.Not.Empty);
     }
 
 }
