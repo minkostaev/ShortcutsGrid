@@ -1,43 +1,41 @@
 ﻿namespace ShortcutsGrid.Tests.Ui;
 
 using NUnit.Framework;
-using Windows;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using Windows;
 
 [TestFixture]
 internal class TestWindows
 {
 
-    //[Test]
-    //[Apartment(ApartmentState.STA)]
-    //public void TestMainWindow()
-    //{
-    //    string testhost = "testhost.csv";
-    //    string csvContent = GetInputFile(testhost);
-    //    File.WriteAllText(testhost, csvContent);
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void TestMainWindow()
+    {
+        string testhost = "testhost.csv";
+        string csvContent = GetInputFile(testhost);
+        File.WriteAllText(testhost, csvContent);
 
-    //    var mainWindow = new MainWindow();
-    //    mainWindow.Show();
+        var mainWindow = new MainWindow();
 
-    //    if (File.Exists(testhost))
-    //        File.Delete(testhost);
+        if (File.Exists(testhost))
+            File.Delete(testhost);
 
-    //    Assert.That(mainWindow, Is.InstanceOf<MainWindow>());
-    //}
+        Assert.That(mainWindow, Is.InstanceOf<MainWindow>());
+    }
 
-    //[Test]
-    //[Apartment(ApartmentState.STA)]
-    //public void TestAbout()
-    //{
-    //    var about = new About();
-    //    ///about.Show();
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void TestAbout()
+    {
+        var about = new About();
 
-    //    Assert.IsInstanceOf<About>(about);
-    //}
+        Assert.That(about, Is.InstanceOf<About>());
+    }
 
-    public string GetInputFile(string fileName)
+    public static string GetInputFile(string fileName)
     {
         string result = string.Empty;
         Assembly assembly = Assembly.GetExecutingAssembly();
