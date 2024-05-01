@@ -27,7 +27,8 @@ public static class ShowShortcuts
             var headers = new System.Collections.Generic.Dictionary<string, string>
             {
                 { "Desktop-Machine", machine.Hash! },
-                { "Desktop-Value", AppValues.LastExecuted! }
+                { "Desktop-Value", AppValues.LastExecuted! },
+                { "Desktop-Version", AppValues.AppVersion! }
             };
             var requestManager = new RequestManager(headers);
             string jsonString = JsonSerializer.Serialize(machine);
