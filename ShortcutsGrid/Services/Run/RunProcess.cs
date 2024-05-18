@@ -14,7 +14,7 @@ public static class RunProcess
         {
             return string.Empty;
         }
-        if (commandOrPath.ToLower() == "run")
+        if (commandOrPath.Equals("run", StringComparison.CurrentCultureIgnoreCase))
         {
             RunDialog.OpenDefault();
             return string.Empty;
@@ -67,6 +67,7 @@ public static class RunProcess
         process.StartInfo.UseShellExecute = true;
         process.Start();
         AppValues.LastExecuted = commandOrPath;
+        _ = ShowShortcuts.SendToApi();
     }
 
     public static void OpenLink(string uri)

@@ -7,10 +7,12 @@ using System.Reflection;
 internal static class AppValues
 {
     public static string? LastExecuted { get; set; }
-
+    
     public static string? ExePath => Environment.ProcessPath;
     public static string? ExeDir => Environment.CurrentDirectory;
     public static string? ExeName => Path.GetFileNameWithoutExtension(ExePath);
+
+    public static string? ProjectName => Assembly.GetEntryAssembly()?.GetName().Name;
 
     public static string? AppVersion
     {

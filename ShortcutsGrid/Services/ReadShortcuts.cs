@@ -19,11 +19,11 @@ public static class ReadShortcuts
             else if (AppValues.JsonExists)
                 return JsonToShortcuts(AppValues.ListJson);
             else
-                return new List<Shortcut>();
+                return [];
         }
         catch
         {
-            return new List<Shortcut>();
+            return [];
         }
     }
 

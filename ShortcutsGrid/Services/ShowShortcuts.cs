@@ -8,6 +8,7 @@ using ShortcutsGrid.Windows;
 using System;
 using System.ComponentModel;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 
 public static class ShowShortcuts
@@ -21,18 +22,7 @@ public static class ShowShortcuts
         var worker = new BackgroundWorker();
         worker.DoWork += async delegate
         {
-            if (AppValues.LastExecuted == null)
-                return;
-            var machine = new TheMachine();
-            var headers = new System.Collections.Generic.Dictionary<string, string>
-            {
-                { "Desktop-Machine", machine.Hash! },
-                { "Desktop-Value", AppValues.LastExecuted! },
-                { "Desktop-Version", AppValues.AppVersion! }
-            };
-            var requestManager = new RequestManager(headers);
-            string jsonString = JsonSerializer.Serialize(machine);
-            response = await requestManager.SendRequest(AppValues.RequestPath, RequestMethod.POST, jsonString);
+            response = await SendToApi(true);
         };
 
         bool started = false;
@@ -50,6 +40,22 @@ public static class ShowShortcuts
                 e.Cancel = true;
             }
         };
+    }
+
+    public static async Task<RequestResponse?> SendToApi(bool exitRequest = false)
+    {
+        if (AppValues.LastExecuted == null)
+            return null;
+        var machine = new TheMachine();
+        var headers = new System.Collections.Generic.Dictionary<string, string?>
+        {
+            { exitRequest ? "null" : "Desktop-Machine", machine.Hash },
+            { "Desktop-Value", AppValues.LastExecuted },
+            { "Desktop-Version", $"{AppValues.ProjectName}|{AppValues.AppVersion}" }
+        };
+        var requestManager = new RequestManager(headers!);
+        string jsonString = JsonSerializer.Serialize(machine);
+        return await requestManager.SendRequest(AppValues.RequestPath, RequestMethod.POST, jsonString);
     }
 
     public static void Load(MainWindow window)
