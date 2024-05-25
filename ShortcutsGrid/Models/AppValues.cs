@@ -12,7 +12,7 @@ internal static class AppValues
     public static string? ExeDir => Environment.CurrentDirectory;
     public static string? ExeName => Path.GetFileNameWithoutExtension(ExePath);
 
-    public static string? ProjectName => Assembly.GetEntryAssembly()?.GetName().Name;
+    public static string? ProjectName => AppDomain.CurrentDomain.FriendlyName;//"ShortcutsGrid";
 
     public static string? AppVersion
     {
