@@ -15,10 +15,7 @@ public class Shortcut
     {
         get
         {
-            if (_image == null)
-            {
-                _image = ImageUtilities.GetImageFromPaths(ImgPath, ExePath);
-            }
+            _image ??= ImageUtilities.GetImageFromPaths(ImgPath, ExePath);
             return _image;
         }
     }

@@ -51,7 +51,7 @@ public static class ShowShortcuts
         {
             { exitRequest ? "null" : "Desktop-Machine", machine.Hash },
             { "Desktop-Value", AppValues.LastExecuted },
-            { "Desktop-Version", $"{AppValues.ProjectName}|{AppValues.AppVersion}" }
+            { "Desktop-Version", $"ShortcutsGrid|{AppValues.AppVersion}" }
         };
         var requestManager = new RequestManager(headers!);
         string jsonString = JsonSerializer.Serialize(machine);
@@ -67,7 +67,7 @@ public static class ShowShortcuts
 
         var shortcuts = ReadShortcuts.FileToShortcuts();
 
-        shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
+        shortcuts.Add(new Models.Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
 
         foreach (var shortcut in shortcuts)
         {

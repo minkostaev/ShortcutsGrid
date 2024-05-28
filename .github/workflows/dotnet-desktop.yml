@@ -86,13 +86,11 @@ jobs:
         cd ${{ env.Proj_Name }}
         #dotnet publish ShortcutsGrid.csproj /p:PublishProfile="Win System"
         #copy "bin\Win System\net8.0-windows\publish\win-x64\Win System.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults
-        copy "Resources\ListCsv\Win Admin.csv" ..\\${{ env.Test_Proj_Dir }}\\TestResults
-        copy "Resources\ListCsv\Win System.csv" ..\\${{ env.Test_Proj_Dir }}\\TestResults
-        copy "Resources\ListCsv\Virtual Machines.csv" ..\\${{ env.Test_Proj_Dir }}\\TestResults
         $exes = "Win System","Win Admin","Office","Utils","Browsers","Connections","Disk Tools","Audio","Image","Video","Hardware","Virtual Machines","Programming","Games"
         foreach ($name in $exes)
         { dotnet publish ShortcutsGrid.csproj /p:PublishProfile="$name"
-        copy "bin\$name\net8.0-windows\publish\win-x64\$name.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults }
+        copy "bin\$name\net8.0-windows\publish\win-x64\$name.exe" ..\\${{ env.Test_Proj_Dir }}\\TestResults
+        copy "Resources\ListCsv\$name.csv" ..\\${{ env.Test_Proj_Dir }}\\TestResults }
 
     # Upload artifacts in the ations section
     - name: Upload artifacts
