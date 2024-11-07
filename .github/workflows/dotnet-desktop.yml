@@ -94,7 +94,7 @@ jobs:
 
     # Upload artifacts in the ations section
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: artifacts
         path: ${{ env.Test_Proj_Dir }}\\TestResults
