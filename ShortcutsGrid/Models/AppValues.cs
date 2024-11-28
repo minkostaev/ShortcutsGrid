@@ -44,7 +44,7 @@ internal static class AppValues
     }
     public static string CloseDragId => "CloseDragButton";
 
-    //public static string RequestPath = "https://localhost:7088/machinesdetails";
-    public static string RequestPath = "https://www.apito.somee.com/machinesdetails";
+    ///public readonly static string RequestPath = $"https://localhost:7088/machinesdetails";
+    public readonly static string RequestPath = $"https://www.apito.somee.com/machinesdetails";
 
 }
