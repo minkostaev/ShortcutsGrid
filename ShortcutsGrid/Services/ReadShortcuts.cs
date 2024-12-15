@@ -3,7 +3,6 @@
 using Models;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -29,9 +28,10 @@ public static class ReadShortcuts
 
     private static List<Shortcut> CsvToShortcuts(string? filePath, string delimiter)
     {
-        var result = new List<Shortcut>();//todo list with list
+        var result = new List<Shortcut>();
 
-        if (filePath == null) return result;
+        if (filePath == null)
+            return result;
 
         var stream = new StreamReader(filePath, Encoding.Default);//UTF7
         while (!stream.EndOfStream)
@@ -42,10 +42,8 @@ public static class ReadShortcuts
             string path = (items.Length >= 1) ? items[0] : "";
             string label = (items.Length >= 2) ? items[1] : "";
             string? img = (items.Length >= 3) ? items[2] : null;
-            if (items.Count() > 1 && !path.StartsWith("//"))
-            {
+            if (items.Length > 1 && !path.StartsWith("//"))
                 result.Add(new Shortcut() { ExePath = path, AppName = label, ImgPath = img });
-            }
         }
         stream.Dispose();
 
