@@ -2,6 +2,7 @@
 
 using Models;
 using Services;
+using ShortcutsGrid.Extensions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,9 +16,9 @@ public partial class MainWindow : Window
         ///var startTimer = Stopwatch.StartNew();
         ///var endTimer = Stopwatch.StartNew();
         InitializeComponent();
-
-        ShowShortcuts.WaitForResponseOnClose(this);
         
+        this.AttachRequest();
+
         ContentRendered += delegate
         {
             ///startTimer.Stop();

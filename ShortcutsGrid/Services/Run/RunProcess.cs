@@ -1,5 +1,6 @@
 ﻿namespace ShortcutsGrid.Services.Run;
 
+using ShortcutsGrid.Extensions;
 using ShortcutsGrid.Models;
 using System;
 using System.Diagnostics;
@@ -7,6 +8,15 @@ using System.IO;
 
 public static class RunProcess
 {
+
+    public static void OpenLink(string uri)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = uri,
+            UseShellExecute = true
+        });
+    }
 
     public static string Run(string commandOrPath, bool admin = false)
     {
@@ -67,16 +77,7 @@ public static class RunProcess
         process.StartInfo.UseShellExecute = true;
         process.Start();
         AppValues.LastExecuted = commandOrPath;
-        _ = ShowShortcuts.SendToApi();
-    }
-
-    public static void OpenLink(string uri)
-    {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = uri,
-            UseShellExecute = true
-        });
+        _ = WindowRequest.SendToApi();
     }
 
 }

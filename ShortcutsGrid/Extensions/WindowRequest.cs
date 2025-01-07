@@ -1,0 +1,61 @@
+﻿namespace ShortcutsGrid.Extensions;
+
+using Forms.Wpf.Mls.Tools.Models;
+using Forms.Wpf.Mls.Tools.Models.TheMachine;
+using Forms.Wpf.Mls.Tools.Services;
+using ShortcutsGrid.Models;
+using System;
+using System.ComponentModel;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Windows.Threading;
+
+public static class WindowRequest
+{
+
+    public static void AttachRequest(this MainWindow window)
+    {
+        var closeTime = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 250) };
+        closeTime.Tick += delegate { window.Exit(); };
+
+        RequestResponse? response = null;
+        var worker = new BackgroundWorker();
+        worker.DoWork += async delegate
+        {
+            response = await SendToApi(true);
+        };
+
+        bool started = false;
+        window.Closing += (sender, e) =>
+        {
+            if (!started)
+            {
+                worker.RunWorkerAsync();
+                started = true;
+                closeTime.Start();
+                e.Cancel = true;
+            }
+            if (response == null)
+            {
+                e.Cancel = true;
+            }
+        };
+    }
+
+    public static async Task<RequestResponse?> SendToApi(bool exitRequest = false)
+    {
+        if (AppValues.LastExecuted == null)
+            return null;
+        var machine = new TheMachine();
+        var headers = new System.Collections.Generic.Dictionary<string, string?>
+        {
+            { exitRequest ? "null" : "Desktop-Machine", machine.Hash },
+            { "Desktop-Value", AppValues.LastExecuted },
+            { "Desktop-Version", $"ShortcutsGrid|{AppValues.AppVersion}" }
+        };
+        var requestManager = new RequestManager(headers!);
+        string jsonString = JsonSerializer.Serialize(machine);
+        return await requestManager.SendRequest(AppValues.RequestPath, RequestMethod.POST, jsonString);
+    }
+
+}
