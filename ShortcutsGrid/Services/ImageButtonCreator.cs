@@ -14,7 +14,7 @@ public static class ImageButtonCreator
 
     public static ImageButton GetButton(Shortcut shortcutItem, MainWindow window)
     {
-        MessageDialogs messageDialogs = new MessageDialogs(new MessageBoxWrapper());
+        var messageDialogs = new MessageDialogs();
         bool closeDragButton = shortcutItem.Tag is string && shortcutItem.Tag.ToString() == AppValues.CloseDragId;
         var imageButton = new ImageButton(shortcutItem)
         {

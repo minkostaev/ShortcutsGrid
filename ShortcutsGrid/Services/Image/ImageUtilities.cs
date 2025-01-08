@@ -1,6 +1,7 @@
 ﻿namespace ShortcutsGrid.Services.Image;
 
 using Models;
+using ShortcutsGrid.Extensions;
 using System;
 using System.Drawing;
 using System.IO;

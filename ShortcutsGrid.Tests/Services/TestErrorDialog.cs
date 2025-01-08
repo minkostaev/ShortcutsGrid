@@ -4,6 +4,7 @@ using Moq;
 using NUnit.Framework;
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Services;
+using ShortcutsGrid.Windows;
 using System.Windows;
 
 [TestFixture]

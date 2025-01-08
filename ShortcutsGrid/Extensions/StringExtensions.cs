@@ -1,11 +1,11 @@
-﻿namespace ShortcutsGrid.Services;
+﻿namespace ShortcutsGrid.Extensions;
 
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-internal static class StringExtensions
+public static class StringExtensions
 {
     private static readonly Regex _base64RegexPattern = new(BASE64_REGEX_STRING, RegexOptions.Compiled);
 
@@ -13,16 +13,16 @@ internal static class StringExtensions
 
     public static bool IsBase64(this string base64String)
     {
-        var rs = (!string.IsNullOrEmpty(base64String)
+        var rs = !string.IsNullOrEmpty(base64String)
             && !string.IsNullOrWhiteSpace(base64String)
             && base64String.Length != 0
             && base64String.Length % 4 == 0
             && !base64String.Contains(' ')
             && !base64String.Contains('\t')
             && !base64String.Contains('\r')
-            && !base64String.Contains('\n'))
-            && (base64String.Length % 4 == 0
-            && _base64RegexPattern.Match(base64String, 0).Success);
+            && !base64String.Contains('\n')
+            && base64String.Length % 4 == 0
+            && _base64RegexPattern.Match(base64String, 0).Success;
         return rs;
     }
 
