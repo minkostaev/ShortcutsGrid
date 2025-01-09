@@ -40,76 +40,52 @@ internal static class ExtractIcon
     {
         IntPtr hModule = LoadLibraryEx(path, IntPtr.Zero, LOAD_LIBRARY_AS_DATAFILE);
         var tmpData = new List<byte[]>();
-
         ENUMRESNAMEPROC callback = (h, t, name, l) =>
         {
             var dir = GetDataFromResource(hModule, RT_GROUP_ICON, name);
-
             // Calculate the size of an entire .icon file.
-
             int count = BitConverter.ToUInt16(dir, 4);  // GRPICONDIR.idCount
             int len = 6 + 16 * count;                   // sizeof(ICONDIR) + sizeof(ICONDIRENTRY) * count
             for (int i = 0; i < count; ++i)
-                len += BitConverter.ToInt32(dir, 6 + 14 * i + 8);   // GRPICONDIRENTRY.dwBytesInRes
-
+                len += BitConverter.ToInt32(dir, 6 + 14 * i + 8); // GRPICONDIRENTRY.dwBytesInRes
             using (var dst = new BinaryWriter(new MemoryStream(len)))
             {
                 // Copy GRPICONDIR to ICONDIR.
-
                 dst.Write(dir, 0, 6);
-
                 int picOffset = 6 + 16 * count; // sizeof(ICONDIR) + sizeof(ICONDIRENTRY) * count
-
                 for (int i = 0; i < count; ++i)
                 {
                     // Load the picture.
-
-                    ushort id = BitConverter.ToUInt16(dir, 6 + 14 * i + 12);    // GRPICONDIRENTRY.nID
+                    ushort id = BitConverter.ToUInt16(dir, 6 + 14 * i + 12); // GRPICONDIRENTRY.nID
                     var pic = GetDataFromResource(hModule, RT_ICON, (IntPtr)id);
-
                     // Copy GRPICONDIRENTRY to ICONDIRENTRY.
-
                     dst.Seek(6 + 16 * i, 0);
-
                     dst.Write(dir, 6 + 14 * i, 8);  // First 8bytes are identical.
                     dst.Write(pic.Length);          // ICONDIRENTRY.dwBytesInRes
                     dst.Write(picOffset);           // ICONDIRENTRY.dwImageOffset
-
                     // Copy a picture.
-
                     dst.Seek(picOffset, 0);
                     dst.Write(pic, 0, pic.Length);
-
                     picOffset += pic.Length;
                 }
-
                 tmpData.Add(((MemoryStream)dst.BaseStream).ToArray());
             }
             return true;
         };
         EnumResourceNames(hModule, RT_GROUP_ICON, callback, IntPtr.Zero);
-        byte[][] iconData = tmpData.ToArray();
-        using (var ms = new MemoryStream(iconData[0]))
-        {
-            return new Icon(ms);
-        }
+        byte[][] iconData = [.. tmpData];
+        using (var ms = new MemoryStream(iconData[0])) { return new Icon(ms); }
     }
 
     private static byte[] GetDataFromResource(IntPtr hModule, IntPtr type, IntPtr name)
     {
         // Load the binary data from the specified resource.
-
         IntPtr hResInfo = FindResource(hModule, name, type);
-
         IntPtr hResData = LoadResource(hModule, hResInfo);
-
         IntPtr pResData = LockResource(hResData);
-
         uint size = SizeofResource(hModule, hResInfo);
-
         byte[] buf = new byte[size];
         Marshal.Copy(pResData, buf, 0, buf.Length);
-
         return buf;
     }
 

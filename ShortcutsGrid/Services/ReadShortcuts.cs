@@ -57,7 +57,7 @@ public static class ReadShortcuts
             return shortcuts;
 
         string json = File.ReadAllText(filePath);
-        return JsonSerializer.Deserialize<List<Shortcut>>(json) ?? new List<Shortcut>();
+        return JsonSerializer.Deserialize<List<Shortcut>>(json) ?? [];
     }
 
 }

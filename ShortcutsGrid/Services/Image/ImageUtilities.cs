@@ -42,7 +42,7 @@ internal static class ImageUtilities
         {
             if (imgPath.IsBase64())
             {
-                return ImageUtilities.Base64StringToImage(imgPath);
+                return Base64StringToImage(imgPath);
             }
             else if (File.Exists(imgPath))
             {
