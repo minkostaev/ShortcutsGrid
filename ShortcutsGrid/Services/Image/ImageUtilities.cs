@@ -12,26 +12,28 @@ using System.Windows.Media.Imaging;
 
 internal static class ImageUtilities
 {
-    public static ImageSource Base64StringToImage(string base64ImageString)
+
+    public static ImageSource Base64ToImage(byte[] base64Image)
     {
-        byte[] b;
-        b = Convert.FromBase64String(base64ImageString);
-        var ms = new MemoryStream(b);
+        var ms = new MemoryStream(base64Image);
         var img = Image.FromStream(ms);
-
         var bmp = new Bitmap(img);
-        IntPtr hBitmap = bmp.GetHbitmap();
-        ImageSource imageSource = Imaging.CreateBitmapSourceFromHBitmap(
-            hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-        return imageSource;
+        IntPtr btmp = bmp.GetHbitmap();
+        ImageSource imgSrc = Imaging.CreateBitmapSourceFromHBitmap(
+            btmp, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+        return imgSrc;
+    }
+    public static ImageSource Base64ToImage(string base64ImageString)
+    {
+        var bt = Convert.FromBase64String(base64ImageString);
+        return Base64ToImage(bt);
     }
 
-    public static ImageSource? GetImageFromPaths(string? imgPath, string exePath)
+    public static ImageSource? GetImageFromPaths(string? imgPath, string? exePath)
     {
         if (string.IsNullOrWhiteSpace(imgPath))
         {
-            if (imgPath != null)
+            if (!string.IsNullOrWhiteSpace(exePath))
             {
                 Icon icon = ExtractIcon.ExtractIconFromExecutable(exePath);
                 return icon.ToImageSource();
@@ -40,9 +42,10 @@ internal static class ImageUtilities
         }
         else
         {
-            if (imgPath.IsBase64())
+            var bt64 = imgPath.IsToBase64();
+            if (bt64.Item1 && bt64.Item2 != null)
             {
-                return Base64StringToImage(imgPath);
+                return Base64ToImage(bt64.Item2);
             }
             else if (File.Exists(imgPath))
             {
