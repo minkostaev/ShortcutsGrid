@@ -15,7 +15,7 @@ public static class ShowShortcuts
 
         var shortcuts = ReadShortcuts.FileToShortcuts();
 
-        shortcuts.Add(new Models.Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
+        shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
 
         foreach (var shortcut in shortcuts)
         {

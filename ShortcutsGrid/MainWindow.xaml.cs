@@ -3,6 +3,7 @@
 using Models;
 using Services;
 using ShortcutsGrid.Extensions;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,21 +14,21 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        ///var startTimer = Stopwatch.StartNew();
-        ///var endTimer = Stopwatch.StartNew();
+        var startTimer = Stopwatch.StartNew();
+        var endTimer = Stopwatch.StartNew();// to do better
         InitializeComponent();
         
         this.AttachRequest();
 
         ContentRendered += delegate
         {
-            ///startTimer.Stop();
-            ///var elapsedMs = startTimer.ElapsedMilliseconds;
+            startTimer.Stop();
+            AppValues.TimeToStart = startTimer.ElapsedMilliseconds;
         };
         Closed += delegate
         {
-            ///endTimer.Stop();
-            ///var elapsedMs = endTimer.ElapsedMilliseconds;
+            endTimer.Stop();
+            AppValues.TimeUsed = endTimer.ElapsedMilliseconds;
         };
 
         #region setup window

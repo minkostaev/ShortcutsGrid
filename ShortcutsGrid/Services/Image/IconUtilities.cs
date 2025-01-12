@@ -40,7 +40,7 @@ internal static class IconUtilities
     {
         IntPtr hModule = LoadLibraryEx(path, IntPtr.Zero, LOAD_LIBRARY_AS_DATAFILE);
         var tmpData = new List<byte[]>();
-        ENUMRESNAMEPROC callback = (h, t, name, l) =>
+        bool callback(nint h, nint t, nint name, nint l)
         {
             var dir = GetDataFromResource(hModule, RT_GROUP_ICON, name);
             // Calculate the size of an entire .icon file.
@@ -66,7 +66,7 @@ internal static class IconUtilities
             }
             tmpData.Add(((MemoryStream)dst.BaseStream).ToArray());
             return true;
-        };
+        }
         EnumResourceNames(hModule, RT_GROUP_ICON, callback, IntPtr.Zero);
         byte[][] iconData = [.. tmpData];
         using var ms = new MemoryStream(iconData[0]);

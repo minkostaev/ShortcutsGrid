@@ -37,7 +37,7 @@ public static class ReadShortcuts
         while (!stream.EndOfStream)
         {
             var line = stream.ReadLine();
-            string[] items = (line != null) ? line.Split(delimiter) : new string[] { "" };
+            string[] items = (line != null) ? line.Split(delimiter) : [""];
             //path or command | label | image path or base64
             string path = (items.Length >= 1) ? items[0] : "";
             string label = (items.Length >= 2) ? items[1] : "";
