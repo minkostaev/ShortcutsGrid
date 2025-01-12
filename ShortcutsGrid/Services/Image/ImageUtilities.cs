@@ -35,7 +35,7 @@ internal static class ImageUtilities
         {
             if (!string.IsNullOrWhiteSpace(exePath))
             {
-                Icon icon = ExtractIcon.ExtractIconFromExecutable(exePath);
+                Icon icon = IconUtilities.ExtractIconFromExecutable(exePath);
                 return icon.ToImageSource();
             }
             return null;
