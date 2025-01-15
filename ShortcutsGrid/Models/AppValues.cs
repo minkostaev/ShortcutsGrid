@@ -6,6 +6,7 @@ using System.Reflection;
 
 internal static class AppValues
 {
+    public static bool WillBeClosed { get; set; }
     public static string? LastExecuted { get; set; }
     public static long TimeToStart { get; set; }
     public static long TimeUsed { get; set; }

@@ -15,21 +15,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         var startTimer = Stopwatch.StartNew();
-        var endTimer = Stopwatch.StartNew();// to do better
-        InitializeComponent();
-        
-        this.AttachRequest();
 
-        ContentRendered += delegate
-        {
-            startTimer.Stop();
-            AppValues.TimeToStart = startTimer.ElapsedMilliseconds;
-        };
-        Closed += delegate
-        {
-            endTimer.Stop();
-            AppValues.TimeUsed = endTimer.ElapsedMilliseconds;
-        };
+        InitializeComponent();
+
+        this.AttachRequest(startTimer);
 
         #region setup window
         this.Title = AppValues.ExeName;

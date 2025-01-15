@@ -36,6 +36,7 @@ public static class ImageButtonCreator
                 return;
             }
             // Handle Single Click Actions
+            AppValues.WillBeClosed = true;
             string msg = RunProcess.Run(shortcutItem.ExePath);
             if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
