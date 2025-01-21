@@ -59,7 +59,7 @@ public static class WindowRequest
         if (AppValues.WillBeClosed && !exitRequest)
             return null;
 
-        var machine = new TheMachine(true, true);
+        var machine = new TheMachine();
         var headers = new System.Collections.Generic.Dictionary<string, string?>
         {
             { "Desktop-Machine", machine.Hash },
