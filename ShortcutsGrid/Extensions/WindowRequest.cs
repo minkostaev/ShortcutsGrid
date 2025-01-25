@@ -1,8 +1,8 @@
 ﻿namespace ShortcutsGrid.Extensions;
 
 using Forms.Wpf.Mls.Tools.Models;
-using Forms.Wpf.Mls.Tools.Models.TheMachine;
 using Forms.Wpf.Mls.Tools.Services;
+using Mintzat.Email.Models.TheMachine;
 using ShortcutsGrid.Models;
 using System;
 using System.ComponentModel;
