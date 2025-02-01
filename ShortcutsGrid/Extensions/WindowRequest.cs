@@ -67,10 +67,7 @@ public static class WindowRequest
             { "Desktop-Version", $"ShortcutsGrid|{AppValues.AppVersion}" }
         };
         if (AppValues.TimeUsed != 0)
-        {
-            headers.Add("Desktop-Inittime", AppValues.TimeToStart.ToString());
-            headers.Add("Desktop-Totaltime", AppValues.TimeUsed.ToString());
-        }
+            headers.Add("Desktop-Time", $"{AppValues.TimeToStart}|{AppValues.TimeUsed}");
         var requestManager = new RequestManager(headers!);
         string jsonString = JsonSerializer.Serialize(machine);
         return await requestManager.SendRequest(AppValues.RequestPath, RequestMethod.POST, jsonString);
