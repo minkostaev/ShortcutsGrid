@@ -13,17 +13,19 @@ using System.Windows.Media.Imaging;
 internal static class ImageUtilities
 {
 
-    public static ImageSource Base64ToImage(byte[] base64Image)
+    public static ImageSource? Base64ToImage(byte[] base64Image)
     {
         var ms = new MemoryStream(base64Image);
-        var img = Image.FromStream(ms);
+        Image img;
+        try { img = Image.FromStream(ms); }
+        catch (Exception) { return null; }
         var bmp = new Bitmap(img);
         IntPtr btmp = bmp.GetHbitmap();
         ImageSource imgSrc = Imaging.CreateBitmapSourceFromHBitmap(
             btmp, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         return imgSrc;
     }
-    public static ImageSource Base64ToImage(string base64ImageString)
+    public static ImageSource? Base64ToImage(string base64ImageString)
     {
         var bt = Convert.FromBase64String(base64ImageString);
         return Base64ToImage(bt);
@@ -33,19 +35,19 @@ internal static class ImageUtilities
     {
         if (string.IsNullOrWhiteSpace(imgPath))
         {
-            if (!string.IsNullOrWhiteSpace(exePath))
-            {
-                Icon icon = IconUtilities.ExtractIconFromExecutable(exePath);
-                return icon.ToImageSource();
-            }
-            return null;
+            return ExeToImage(exePath);
         }
         else
         {
             var bt64 = imgPath.IsToBase64();
             if (bt64.Item1 && bt64.Item2 != null)
             {
-                return Base64ToImage(bt64.Item2);
+                var image = Base64ToImage(bt64.Item2);
+                if (image == null)
+                {
+                    return ExeToImage(exePath);
+                }
+                return image;
             }
             else if (File.Exists(imgPath))
             {
@@ -61,8 +63,21 @@ internal static class ImageUtilities
             {
                 return imgPath.PathToImageSource();
             }
-            return null;
+            else
+            {
+                return null;
+            }
         }
+    }
+
+    private static ImageSource? ExeToImage(string? exePath)
+    {
+        if (!string.IsNullOrWhiteSpace(exePath))
+        {
+            Icon icon = IconUtilities.ExtractIconFromExecutable(exePath);
+            return icon.ToImageSource();
+        }
+        return null;
     }
 
 }
