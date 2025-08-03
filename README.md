@@ -6,7 +6,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/minkostaev/ShortcutsGrid?color=blue)](https://github.com/minkostaev/ShortcutsGrid/commits/)
 [![GitHub releases](.github/badge_version.svg)](https://github.com/minkostaev/ShortcutsGrid/releases)
 
-**WPF (.NET 8.0) desktop app with transparent background that displays 'custom list' grid with links to other programs on the PC or/and run commands. With customizable app names and icons/images.**
+**WPF (.NET 9.0) desktop app with transparent background that displays 'custom list' grid with links to other programs on the PC or/and run commands. With customizable app names and icons/images.**
 
 My inspiration for making this was that Windows 11 start menu doesn't have the grouping apps option. And I start thinking of better way to sort my installed apps so I can access them faster.
 
