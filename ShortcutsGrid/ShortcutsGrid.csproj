@@ -7,9 +7,9 @@
     <UseWPF>true</UseWPF>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <ApplicationIcon>Resources\web-browser-128.ico</ApplicationIcon>
-    <AssemblyVersion>1.4.1.0</AssemblyVersion>
-    <FileVersion>1.4.1.0</FileVersion>
-    <VersionPrefix>1.4.1</VersionPrefix>
+    <AssemblyVersion>1.4.2.0</AssemblyVersion>
+    <FileVersion>1.4.2.0</FileVersion>
+    <VersionPrefix>1.4.2</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyyy-MM-dd))</VersionSuffix>
     <NoWarn>SYSLIB1054</NoWarn>
   </PropertyGroup>
@@ -21,7 +21,7 @@
   <ItemGroup>
     <PackageReference Include="Forms.Wpf.Mls.Tools" Version="1.0.14" />
     <PackageReference Include="Mintzat.Email" Version="1.0.16" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.7" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.8" />
   </ItemGroup>
 
   <ItemGroup>
