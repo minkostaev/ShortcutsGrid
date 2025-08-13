@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿namespace ShortcutsGrid.Windows;
 
-namespace ShortcutsGrid.Windows
+using ShortcutsGrid.Services;
+using System.Windows;
+using System.Windows.Input;
+
+/// <summary>
+/// Interaction logic for List.xaml
+/// </summary>
+public partial class List : Window
 {
-    /// <summary>
-    /// Interaction logic for List.xaml
-    /// </summary>
-    public partial class List : Window
+    public List()
     {
-        public List()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        this.ResizeMode = ResizeMode.NoResize;
+        this.Topmost = true;
+        this.Title = "Edit Shortcuts List";
+        this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Close(); };
+
+        var shortcuts = ReadShortcuts.FileToShortcuts();
+        dgrShortcuts.ItemsSource = shortcuts;
+
     }
 }

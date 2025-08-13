@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="List" Height="400" Width="600">
     <Grid>
-        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,444,0"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="180,12,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="180,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="180,58,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="43" Width="120"/>
-        <Button x:Name="button" Content="Update" HorizontalAlignment="Left" Margin="180,106,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dgrShortcuts" Margin="0,0,444,0"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="180,12,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtPath" HorizontalAlignment="Left" Margin="180,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="tbImg" HorizontalAlignment="Left" Margin="180,58,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="43" Width="120"/>
+        <Button x:Name="btnCommit" Content="Update" HorizontalAlignment="Left" Margin="180,106,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

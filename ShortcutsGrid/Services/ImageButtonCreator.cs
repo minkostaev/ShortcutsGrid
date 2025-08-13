@@ -92,7 +92,7 @@ public static class ImageButtonCreator
         };
         imageButton.MnShortcutsList.Click += delegate
         {
-            messageDialogs.IsErrorDisplayed("todo");
+            new List().ShowDialog();
         };
         imageButton.MnFolderExe.Click += delegate
         {
