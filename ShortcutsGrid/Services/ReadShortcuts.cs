@@ -9,14 +9,22 @@ using System.Text.Json;
 public static class ReadShortcuts
 {
 
-    public static List<Shortcut> FileToShortcuts()
+    public static List<Shortcut> FileToShortcuts()// TO DO
     {
         try
         {
             if (AppValues.CsvExists)
-                return CsvToShortcuts(AppValues.ListCsv, "|");
+            {
+                AppValues.FileTypeLoaded = "csv";
+                AppValues.Shortcuts = CsvToShortcuts(AppValues.ListCsv, "|");
+                return AppValues.Shortcuts;
+            }
             else if (AppValues.JsonExists)
-                return JsonToShortcuts(AppValues.ListJson);
+            {
+                AppValues.FileTypeLoaded = "json";
+                AppValues.Shortcuts = JsonToShortcuts(AppValues.ListJson);
+                return AppValues.Shortcuts;
+            }
             else
                 return [];
         }
@@ -48,6 +56,19 @@ public static class ReadShortcuts
         stream.Dispose();
 
         return result;
+    }
+
+    private static bool ShortcutsToCsv(List<Shortcut> shortcuts, string filePath, string delimiter)
+    {
+        if (string.IsNullOrWhiteSpace(filePath))
+            return false;
+        using var stream = new StreamWriter(filePath, false, Encoding.Default);
+        foreach (var shortcut in shortcuts)
+        {
+            string line = $"{shortcut.ExePath}{delimiter}{shortcut.AppName}{delimiter}{shortcut.ImgPath}";
+            stream.WriteLine(line);
+        }
+        return true;
     }
 
     private static List<Shortcut> JsonToShortcuts(string? filePath)

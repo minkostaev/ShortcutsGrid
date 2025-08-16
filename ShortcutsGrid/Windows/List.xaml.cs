@@ -43,5 +43,20 @@ public partial class List : Window
         var shortcuts = ReadShortcuts.FileToShortcuts();
         dgrShortcuts.ItemsSource = shortcuts;
 
+        btnCommit.Click += (s, e) =>
+        {
+            if (dgrShortcuts.SelectedItem is not null)
+            {
+                var shortcut = dgrShortcuts.SelectedItem as Models.Shortcut;
+                if (shortcut != null)
+                {
+                    shortcut.AppName = txtName.Text;
+                    shortcut.ExePath = txtPath.Text;
+                    shortcut.ImgPath = txtImg.Text;
+                    dgrShortcuts.Items.Refresh();
+                }
+            }
+        };
+
     }
 }
