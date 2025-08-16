@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShortcutsGrid.Windows"
         mc:Ignorable="d"
-        Title="List" Height="400" Width="600">
+        Title="List" Height="440" Width="400">
     <Grid>
-        <DataGrid x:Name="dgrShortcuts" Margin="0,0,444,0"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="180,12,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtPath" HorizontalAlignment="Left" Margin="180,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="tbImg" HorizontalAlignment="Left" Margin="180,58,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="43" Width="120"/>
-        <Button x:Name="btnCommit" Content="Update" HorizontalAlignment="Left" Margin="180,106,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dgrShortcuts" HorizontalAlignment="Left" Width="160"/>
+        <Button x:Name="btnUp" Content="Up" Margin="165,10,135,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnDown" Content="Down" Margin="165,35,135,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnCommit" Content="Update" Margin="165,125,135,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtName" Margin="165,150,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPath" Margin="165,173,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56"/>
+        <TextBox x:Name="txtImg" Margin="165,234,10,10" TextWrapping="Wrap"/>
 
     </Grid>
 </Window>

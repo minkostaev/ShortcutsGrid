@@ -2,9 +2,9 @@
 
 using Controls;
 using Models;
+using ShortcutsGrid.Services;
 using System;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 
 /// <summary>
@@ -16,11 +16,7 @@ public partial class About : Window
     {
         InitializeComponent();
 
-        this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        this.ResizeMode = ResizeMode.NoResize;
-        this.Topmost = true;
-        this.Title = "About Shortcuts Grid";
-        this.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) Close(); };
+        this.CenterTopNoResize("About Shortcuts Grid");
 
         try
         {

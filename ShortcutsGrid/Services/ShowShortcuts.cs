@@ -2,6 +2,8 @@
 
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Windows;
+using System.Windows;
+using System.Windows.Input;
 
 public static class ShowShortcuts
 {
@@ -41,6 +43,15 @@ public static class ShowShortcuts
         {
             new About().ShowDialog();
         }
+    }
+
+    public static void CenterTopNoResize(this Window window, string title)
+    {
+        window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        window.ResizeMode = ResizeMode.NoResize;
+        window.Topmost = true;
+        window.Title = title;
+        window.PreviewKeyDown += (s, e) => { if (e.Key == Key.Escape) window.Close(); };
     }
 
 }
