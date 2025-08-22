@@ -8,12 +8,16 @@
         Title="List" Height="440" Width="400">
     <Grid>
         <DataGrid x:Name="dgrShortcuts" HorizontalAlignment="Left" Width="160"/>
-        <Button x:Name="btnUp" Content="Up" Margin="165,10,135,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnDown" Content="Down" Margin="165,35,135,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnCommit" Content="Update" Margin="165,125,135,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtName" Margin="165,150,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtPath" Margin="165,173,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56"/>
-        <TextBox x:Name="txtImg" Margin="165,234,10,10" TextWrapping="Wrap"/>
+        <TextBlock x:Name="tbNotAllowed" Text="Not Allowed" HorizontalAlignment="Left" Width="240" Margin="160,0,0,0"/>
+        <Grid x:Name="pnlControl" HorizontalAlignment="Left" Width="240" Margin="160,0,0,0">
+            <Button x:Name="btnUp" Content="Up" Margin="0,10,135,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnDown" Content="Down" Margin="0,35,135,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnCommit" Content="Update" Margin="0,125,135,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtName" Margin="0,150,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtPath" Margin="0,173,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56"/>
+            <TextBox x:Name="txtImg" Margin="0,234,10,10" TextWrapping="Wrap"/>
+        </Grid>
+        
 
     </Grid>
 </Window>

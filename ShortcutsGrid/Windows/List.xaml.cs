@@ -1,5 +1,6 @@
 ﻿namespace ShortcutsGrid.Windows;
 
+using ShortcutsGrid.Models;
 using ShortcutsGrid.Services;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,13 +27,25 @@ public partial class List : Window
             Binding = new System.Windows.Data.Binding("AppName")
         });
 
+        tbNotAllowed.Visibility = Visibility.Hidden;
         dgrShortcuts.SelectionChanged += (s, e) =>
         {
             if (dgrShortcuts.SelectedItem is not null)
             {
-                var shortcut = dgrShortcuts.SelectedItem as Models.Shortcut;
+                var shortcut = (Shortcut)dgrShortcuts.SelectedItem;
                 if (shortcut != null)
                 {
+                    var tag = shortcut.Tag as string;
+                    if (tag == AppValues.CloseDragId)
+                    {
+                        pnlControl.Visibility = Visibility.Hidden;
+                        tbNotAllowed.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        pnlControl.Visibility = Visibility.Visible;
+                        tbNotAllowed.Visibility = Visibility.Hidden;
+                    }
                     txtName.Text = shortcut.AppName;
                     txtPath.Text = shortcut.ExePath;
                     txtImg.Text = shortcut.ImgPath;
@@ -40,14 +53,13 @@ public partial class List : Window
             }
         };
 
-        var shortcuts = ReadShortcuts.FileToShortcuts();
-        dgrShortcuts.ItemsSource = shortcuts;
+        dgrShortcuts.ItemsSource = AppValues.Shortcuts;
 
         btnCommit.Click += (s, e) =>
         {
             if (dgrShortcuts.SelectedItem is not null)
             {
-                var shortcut = dgrShortcuts.SelectedItem as Models.Shortcut;
+                var shortcut = (Shortcut)dgrShortcuts.SelectedItem;
                 if (shortcut != null)
                 {
                     shortcut.AppName = txtName.Text;

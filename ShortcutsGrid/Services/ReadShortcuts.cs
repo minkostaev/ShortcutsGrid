@@ -9,7 +9,7 @@ using System.Text.Json;
 public static class ReadShortcuts
 {
 
-    public static List<Shortcut> FileToShortcuts()// TO DO
+    public static void FileToShortcuts()
     {
         try
         {
@@ -17,21 +17,24 @@ public static class ReadShortcuts
             {
                 AppValues.FileTypeLoaded = "csv";
                 AppValues.Shortcuts = CsvToShortcuts(AppValues.ListCsv, "|");
-                return AppValues.Shortcuts;
             }
             else if (AppValues.JsonExists)
             {
                 AppValues.FileTypeLoaded = "json";
                 AppValues.Shortcuts = JsonToShortcuts(AppValues.ListJson);
-                return AppValues.Shortcuts;
             }
             else
-                return [];
+            {
+                AppValues.FileTypeLoaded = string.Empty;
+                AppValues.Shortcuts = [];
+            }
         }
         catch
         {
-            return [];
+            AppValues.FileTypeLoaded = null;
+            AppValues.Shortcuts = [];
         }
+        AppValues.Shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
     }
 
     private static List<Shortcut> CsvToShortcuts(string? filePath, string delimiter)

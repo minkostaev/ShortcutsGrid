@@ -15,11 +15,9 @@ public static class ShowShortcuts
         window.stkPnl3.Children.Clear();
         window.stkPnl4.Children.Clear();
 
-        var shortcuts = ReadShortcuts.FileToShortcuts();
+        ReadShortcuts.FileToShortcuts();
 
-        shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
-
-        foreach (var shortcut in shortcuts)
+        foreach (var shortcut in AppValues.Shortcuts)
         {
             if (window.stkPnl1.Children.Count < 6)
             {
@@ -39,7 +37,7 @@ public static class ShowShortcuts
             }
         }
 
-        if (shortcuts.Count == 1)
+        if (AppValues.Shortcuts.Count == 1)
         {
             new About().ShowDialog();
         }

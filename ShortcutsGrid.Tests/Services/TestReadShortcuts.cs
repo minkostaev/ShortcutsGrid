@@ -1,6 +1,7 @@
 ﻿namespace ShortcutsGrid.Tests.Services;
 
 using NUnit.Framework;
+using ShortcutsGrid.Models;
 using ShortcutsGrid.Services;
 using System.IO;
 
@@ -10,16 +11,15 @@ internal class TestReadShortcuts
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
-        if (!File.Exists("testhostCSV.json"))
-            File.Copy("testhost.csv", "testhostCSV.json");
+        File.Copy("testhost.csv", "testhostCSV.json");
     }
 
     [Test, Order(1)]
     public void TestFileToShortcuts_Csv()
     {
-        var result = ReadShortcuts.FileToShortcuts();
+        ReadShortcuts.FileToShortcuts();
 
-        Assert.That(3, Is.EqualTo(result.Count));
+        Assert.That(4, Is.EqualTo(AppValues.Shortcuts.Count));
     }
 
     [Test, Order(2)]
@@ -27,9 +27,9 @@ internal class TestReadShortcuts
     {
         File.Delete("testhost.csv");
 
-        var result = ReadShortcuts.FileToShortcuts();
+        ReadShortcuts.FileToShortcuts();
 
-        Assert.That(4, Is.EqualTo(result.Count));
+        Assert.That(5, Is.EqualTo(AppValues.Shortcuts.Count));
     }
 
     [Test, Order(3)]
@@ -38,9 +38,9 @@ internal class TestReadShortcuts
         File.Delete("testhost.json");
         File.Move("testhostCSV.json", "testhost.json");
 
-        var result = ReadShortcuts.FileToShortcuts();
-
-        Assert.That(0, Is.EqualTo(result.Count));
+        ReadShortcuts.FileToShortcuts();
+         
+        Assert.That(1, Is.EqualTo(AppValues.Shortcuts.Count));
     }
 
     [Test, Order(4)]
@@ -49,9 +49,9 @@ internal class TestReadShortcuts
         File.Delete("testhost.csv");
         File.Delete("testhost.json");
 
-        var result = ReadShortcuts.FileToShortcuts();
+        ReadShortcuts.FileToShortcuts();
 
-        Assert.That(0, Is.EqualTo(result.Count));
+        Assert.That(1, Is.EqualTo(AppValues.Shortcuts.Count));
     }
 
 }

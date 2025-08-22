@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-internal static class AppValues
+public static class AppValues
 {
     public static bool WillBeClosed { get; set; }
     public static string? LastExecuted { get; set; }
@@ -35,7 +35,7 @@ internal static class AppValues
     public static bool CsvExists => File.Exists(ListCsv);
     public static string? ListJson => Path.Combine(ExeDir ?? ExeName + ".json", ExeName + ".json");
     public static bool JsonExists => File.Exists(ListJson);
-    public static List<Shortcut>? Shortcuts { get; set; }
+    public static List<Shortcut> Shortcuts { get; set; } = [];
     public static string? FileTypeLoaded { get; set; }
 
     public static string? GetSubPath(string path) => Path.Combine(ExeDir ?? string.Empty, path);
