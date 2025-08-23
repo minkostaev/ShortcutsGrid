@@ -1,7 +1,9 @@
 ﻿namespace ShortcutsGrid.Windows;
 
+using ShortcutsGrid.Controls;
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Services;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +16,28 @@ public partial class List : Window
     {
         InitializeComponent();
 
-        this.CenterTopNoResize("Edit Shortcuts List");
+        this.CenterTopNoResize("Manage Shortcuts List");
+        
+        _ = new DataGridsScrollersTogether(dgrNumbers, dgrShortcuts);
+
+        tbNotAllowed.Visibility = Visibility.Hidden;
+        btnUp.IsEnabled = false;
+        btnDown.IsEnabled = false;
+
+        dgrNumbers.AutoGenerateColumns = false;
+        dgrNumbers.IsEnabled = false;
+        dgrNumbers.IsReadOnly = true;
+        dgrNumbers.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+        dgrNumbers.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+        dgrNumbers.HeadersVisibility = DataGridHeadersVisibility.None;
+        dgrNumbers.CanUserAddRows = false;
+        dgrNumbers.Columns.Add(new DataGridTextColumn
+        {
+            Header = "#",
+            Width = new DataGridLength(1, DataGridLengthUnitType.Star),
+            Binding = new System.Windows.Data.Binding(".")// Bind to the string itself
+        });
+        dgrNumbers.ItemsSource = numberRows;
 
         dgrShortcuts.AutoGenerateColumns = false;
         dgrShortcuts.IsReadOnly = true;
@@ -26,8 +49,8 @@ public partial class List : Window
             Width = new DataGridLength(1, DataGridLengthUnitType.Star),
             Binding = new System.Windows.Data.Binding("AppName")
         });
+        dgrShortcuts.ItemsSource = AppValues.Shortcuts;
 
-        tbNotAllowed.Visibility = Visibility.Hidden;
         dgrShortcuts.SelectionChanged += (s, e) =>
         {
             if (dgrShortcuts.SelectedItem is not null)
@@ -53,8 +76,6 @@ public partial class List : Window
             }
         };
 
-        dgrShortcuts.ItemsSource = AppValues.Shortcuts;
-
         btnCommit.Click += (s, e) =>
         {
             if (dgrShortcuts.SelectedItem is not null)
@@ -68,7 +89,15 @@ public partial class List : Window
                     dgrShortcuts.Items.Refresh();
                 }
             }
+            ReadShortcuts.ShortcutsToFile();
         };
 
     }
+
+    private readonly List<string> numberRows =
+    [   "1", "2", "3", "4", "5", "6",
+        "1", "2", "3", "4", "5", "6",
+        "1", "2", "3", "4", "5", "6",
+        "1", "2", "3", "4", "5", "6" ];
+
 }
