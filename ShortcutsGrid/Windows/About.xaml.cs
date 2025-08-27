@@ -20,7 +20,7 @@ public partial class About : Window
 
         try
         {
-            var imageButton = new ImageButton(new Shortcut(), false)
+            var imageButton = new ImageButton(new Shortcut() { ExePath = "exe.exe" }, false)
             {
                 Height = 128,
                 Width = 128
@@ -40,7 +40,7 @@ public partial class About : Window
             " in csv or json file - which has to be placed next to\n" +
             "this exe with same file name as it." +
             " The structure you can see in my repo + examples too.";
-
+        
         #region Exe name and CSV or JSON name
         string listFileName = AppValues.CsvExists ? AppValues.ExeName + ".csv" : "";
         if (string.IsNullOrWhiteSpace(listFileName))

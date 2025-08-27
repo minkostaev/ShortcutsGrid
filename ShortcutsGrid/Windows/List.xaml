@@ -13,6 +13,8 @@
         <Grid x:Name="pnlControl" Margin="180,0,0,0">
             <Button x:Name="btnUp" Content="↑" Margin="10,10,180,0" VerticalAlignment="Top"/>
             <Button x:Name="btnDown" Content="↓" Margin="10,35,180,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnNew" Content="New" Margin="125,10,10,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnRemove" Content="Remove" Margin="125,40,10,0" VerticalAlignment="Top"/>
             <Button x:Name="btnCommit" Content="Update" Margin="125,70,10,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtName" Margin="10,95,10,0" TextWrapping="Wrap" Height="18" VerticalAlignment="Top"/>
             <TextBox x:Name="txtPath" Margin="10,118,10,0" TextWrapping="Wrap" Height="56" VerticalAlignment="Top"/>
