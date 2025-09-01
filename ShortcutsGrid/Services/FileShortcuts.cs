@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 
-public static class ReadShortcuts
+public static class FileShortcuts
 {
     public static void FileToShortcuts()
     {
@@ -48,24 +48,37 @@ public static class ReadShortcuts
     }
 
     #region CSV
-    private static string CsvDelimiter => "|";
+    private static string CsvDelimiter => "@|@";
     private static Encoding CsvEncoding => Encoding.Default;//UTF7
     private static List<Shortcut> CsvToShortcuts(string? filePath, string delimiter)
     {
         var result = new List<Shortcut>();
         if (filePath == null)
             return result;
+
+        string lbl = "";
+        string exe = "";
+        int count = 0;
+
         var stream = new StreamReader(filePath, CsvEncoding);
         while (!stream.EndOfStream)
         {
+            count++;
             var line = stream.ReadLine();
-            string[] items = (line != null) ? line.Split(delimiter) : [""];
-            //path or command | label | image path or base64
-            string path = (items.Length >= 1) ? items[0] : "";
-            string label = (items.Length >= 2) ? items[1] : "";
-            string? img = (items.Length >= 3) ? items[2] : null;
-            if (items.Length > 1 && !path.StartsWith("//"))
-                result.Add(new Shortcut() { ExePath = path, AppName = label, ImgPath = img });
+            switch (count)
+            {
+                case 1:
+                    lbl = line ?? "";
+                    break;
+                case 2:
+                    exe = line ?? "";
+                    break;
+                case 3:
+                    string? icon = line;
+                    result.Add(new Shortcut() { ExePath = exe, AppName = lbl, ImgPath = icon });
+                    count = 0;
+                    break;
+            }
         }
         stream.Dispose();
         return result;
@@ -81,8 +94,9 @@ public static class ReadShortcuts
             {
                 if (shortcut.Tag as string == AppValues.CloseDragId)
                     continue;
-                string line = $"{shortcut.ExePath}{delimiter}{shortcut.AppName}{delimiter}{shortcut.ImgPath}";
-                stream.WriteLine(line);
+                stream.WriteLine(shortcut.AppName);
+                stream.WriteLine(shortcut.ExePath);
+                stream.WriteLine(shortcut.ImgPath);
             }
         }
         catch { return false; }

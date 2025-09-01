@@ -17,7 +17,7 @@ internal class TestReadShortcuts
     [Test, Order(1)]
     public void TestFileToShortcuts_Csv()
     {
-        ReadShortcuts.FileToShortcuts();
+        FileShortcuts.FileToShortcuts();
 
         Assert.That(4, Is.EqualTo(AppValues.Shortcuts.Count));
     }
@@ -27,7 +27,7 @@ internal class TestReadShortcuts
     {
         File.Delete("testhost.csv");
 
-        ReadShortcuts.FileToShortcuts();
+        FileShortcuts.FileToShortcuts();
 
         Assert.That(5, Is.EqualTo(AppValues.Shortcuts.Count));
     }
@@ -38,7 +38,7 @@ internal class TestReadShortcuts
         File.Delete("testhost.json");
         File.Move("testhostCSV.json", "testhost.json");
 
-        ReadShortcuts.FileToShortcuts();
+        FileShortcuts.FileToShortcuts();
          
         Assert.That(1, Is.EqualTo(AppValues.Shortcuts.Count));
     }
@@ -49,7 +49,7 @@ internal class TestReadShortcuts
         File.Delete("testhost.csv");
         File.Delete("testhost.json");
 
-        ReadShortcuts.FileToShortcuts();
+        FileShortcuts.FileToShortcuts();
 
         Assert.That(1, Is.EqualTo(AppValues.Shortcuts.Count));
     }

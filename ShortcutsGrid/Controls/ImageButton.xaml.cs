@@ -61,6 +61,11 @@ public partial class ImageButton : UserControl
         MnAdmin.Header = "Run as admin";
         MnAdmin.IsEnabled = showAdmin;
 
+        // to do
+        // exe folder
+        // icon folder
+        // this folder (maybe in About window)
+
         MnFolderExe.Header = "This app";
         MnFolderExe.IsEnabled = showExe;
         MnFolderImg.Header = "This icon";

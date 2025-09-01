@@ -15,7 +15,7 @@ public static class ShowShortcuts
         window.stkPnl3.Children.Clear();
         window.stkPnl4.Children.Clear();
 
-        ReadShortcuts.FileToShortcuts();
+        FileShortcuts.FileToShortcuts();
 
         foreach (var shortcut in AppValues.Shortcuts)
         {

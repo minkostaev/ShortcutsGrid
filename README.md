@@ -58,26 +58,25 @@ The text file can be [csv](#csv-structure) **or** [json](#json-structure)
 
 ### CSV structure:
 
-Every row is one program. The parameters is divided by '|':
+Every 3 rows are 1 icon
 
-app_path_OR_run_command argument|app_label|image_path_OR_base64_string_of_image
+1. Name to display under the program's icon
+2. Path, folder or command
+3. Image to display from path or base64 string
 
-argument is optional!
-
-image_path_OR_base64_string_of_image is optional!
+### Example with 2 'icons'
 
 ```
-C:\Windows\System32\control.exe|Control Panel
-|
-C:\Windows\System32\control.exe|Control Panel|iVBORw0KGgoAAAA...
-control|Control Panel|C:\Images\Control-Panel-128.png
-control printers|Devices & Printers|Control-Printers-128.png
-//control|Control Panel|Control-Panel-128.png
+Control Panel
+C:\Windows\System32\control.exe
+iVBORw0KGgoAAAA...
+Devices & Printers
+control printers
+C:\Images\Control-Printer-128.png
+
 ```
 
-*If it has a row with only '|' it adds empty slot.*
-
-*If row starts '//' it is ignored.*
+*If it has 3 empty rows it'll adds empty slot.*
 
 ---
 

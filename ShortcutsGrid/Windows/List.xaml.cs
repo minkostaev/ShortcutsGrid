@@ -89,7 +89,7 @@ public partial class List : Window
                     dgrShortcuts.Items.Refresh();
                 }
             }
-            ReadShortcuts.ShortcutsToFile();
+            FileShortcuts.ShortcutsToFile();
         };
 
     }
