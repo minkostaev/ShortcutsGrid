@@ -11,7 +11,8 @@ internal class TestReadShortcuts
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
-        File.Copy("testhost.csv", "testhostCSV.json");
+        if (!File.Exists("testhostCSV.json"))
+            File.Copy("testhost.csv", "testhostCSV.json");
     }
 
     [Test, Order(1)]
