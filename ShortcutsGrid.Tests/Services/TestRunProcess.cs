@@ -1,7 +1,7 @@
 ﻿namespace ShortcutsGrid.Tests.Services;
 
 using NUnit.Framework;
-using ShortcutsGrid.Services.Run;
+using ShortcutsGrid.Services;
 
 [TestFixture]
 internal class TestRunProcess

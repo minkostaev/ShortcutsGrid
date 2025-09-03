@@ -1,6 +1,6 @@
 ﻿namespace ShortcutsGrid.Controls;
 
-using ShortcutsGrid.Services.Run;
+using ShortcutsGrid.Services;
 using System;
 using System.Windows;
 using System.Windows.Controls;

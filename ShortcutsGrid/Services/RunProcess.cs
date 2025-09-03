@@ -1,4 +1,4 @@
-﻿namespace ShortcutsGrid.Services.Run;
+﻿namespace ShortcutsGrid.Services;
 
 using ShortcutsGrid.Extensions;
 using ShortcutsGrid.Models;
@@ -21,14 +21,7 @@ public static class RunProcess
     public static string Run(string commandOrPath, bool admin = false)
     {
         if (string.IsNullOrWhiteSpace(commandOrPath))
-        {
             return string.Empty;
-        }
-        if (commandOrPath.Equals("run", StringComparison.CurrentCultureIgnoreCase))
-        {
-            RunDialog.OpenDefault();
-            return string.Empty;
-        }
         try
         {
             ProcessStart(commandOrPath, admin);
@@ -38,30 +31,37 @@ public static class RunProcess
         {
             try
             {
-                string[] cmdFlAndArgs = commandOrPath.Split(' ');
-                string cmdOrPath = string.Empty;
-                string args = string.Empty;
-                bool isCommand = true;
-                foreach (string arg in cmdFlAndArgs)
-                {
-                    cmdOrPath = string.IsNullOrEmpty(cmdOrPath) ? arg : cmdOrPath + " " + arg;
-                    if (File.Exists(cmdOrPath))
-                    {
-                        args = commandOrPath.Replace(cmdOrPath, "");
-                        isCommand = false;
-                        break;
-                    }
-                }
-                if (isCommand)
-                {
-                    cmdOrPath = cmdFlAndArgs[0];
-                    args = commandOrPath.Replace(cmdOrPath, "");
-                }
-                ProcessStart(cmdOrPath, admin, args);
+                var (executable, arguments) = ParseTarget(commandOrPath);
+                ProcessStart(executable, admin, arguments);
                 return string.Empty;
             }
-            catch (Exception ex) { return ex.Message; }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
+    }
+
+    private static (string Executable, string Arguments) ParseTarget(string line)
+    {
+        string[] list = line.Split(' ');
+        bool isCommand = true;
+        string cmdOrPath = string.Empty;
+        foreach (string arg in list)
+        {
+            cmdOrPath = string.IsNullOrEmpty(cmdOrPath) ? arg : cmdOrPath + " " + arg;
+            if (File.Exists(cmdOrPath))
+            {
+                isCommand = false;
+                break;
+            }
+        }
+        if (isCommand && list.Length > 0)
+        {
+            cmdOrPath = list[0];
+        }
+        string args = line.Replace(cmdOrPath, "");
+        return (cmdOrPath, args);
     }
 
     private static void ProcessStart(string commandOrPath, bool admin, string args = "")
