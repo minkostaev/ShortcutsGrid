@@ -33,7 +33,7 @@ public static class FileShortcuts
             AppValues.FileTypeLoaded = null;
             AppValues.Shortcuts = [];
         }
-        AppValues.Shortcuts.Add(new Shortcut() { AppName = "Drag or Close", ImgPath = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
+        AppValues.Shortcuts.Add(new Shortcut() { Label = "Drag or Close", Image = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
     }
     public static void ShortcutsToFile()
     {
@@ -48,7 +48,7 @@ public static class FileShortcuts
     }
 
     #region CSV
-    private static string CsvDelimiter => "@|@";
+    private static string CsvDelimiter => "|||";
     private static Encoding CsvEncoding => Encoding.Default;//UTF7
     private static List<Shortcut> CsvToShortcuts(string? filePath, string delimiter)
     {
@@ -56,8 +56,9 @@ public static class FileShortcuts
         if (filePath == null)
             return result;
 
-        string lbl = "";
-        string exe = "";
+        string lbl = string.Empty;
+        string dsc = string.Empty;
+        string exe = string.Empty;
         int count = 0;
 
         var stream = new StreamReader(filePath, CsvEncoding);
@@ -68,14 +69,16 @@ public static class FileShortcuts
             switch (count)
             {
                 case 1:
-                    lbl = line ?? "";
+                    string[] items = (line != null) ? line.Split(delimiter) : [""];
+                    lbl = (items.Length >= 1) ? items[0] : "";
+                    dsc = (items.Length >= 2) ? items[1] : "";
                     break;
                 case 2:
                     exe = line ?? "";
                     break;
                 case 3:
                     string? icon = line;
-                    result.Add(new Shortcut() { ExePath = exe, AppName = lbl, ImgPath = icon });
+                    result.Add(new Shortcut() { Execution = exe, Label = lbl, Image = icon, Description = dsc });
                     count = 0;
                     break;
             }
@@ -94,9 +97,11 @@ public static class FileShortcuts
             {
                 if (shortcut.Tag as string == AppValues.CloseDragId)
                     continue;
-                stream.WriteLine(shortcut.AppName);
-                stream.WriteLine(shortcut.ExePath);
-                stream.WriteLine(shortcut.ImgPath);
+                string description = string.IsNullOrEmpty(shortcut.Description)
+                    ? string.Empty : delimiter + shortcut.Description;
+                stream.WriteLine(shortcut.Label + description);
+                stream.WriteLine(shortcut.Execution);// to do
+                stream.WriteLine(shortcut.Image);
             }
         }
         catch { return false; }

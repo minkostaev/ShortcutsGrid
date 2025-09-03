@@ -12,9 +12,9 @@ public partial class ImageButton : UserControl
     public ImageButton(Shortcut shortcut, bool showContextMenu = true)
     {
         InitializeComponent();
-        img.Source = shortcut.Image;
-        tb.Text = shortcut.AppName;
-        ///btn.ToolTip = shortcut.AppName;
+        img.Source = shortcut.ImageSource;
+        tb.Text = shortcut.Label;
+        ///btn.ToolTip = shortcut.Label;
 
         if (showContextMenu)
         {
@@ -37,8 +37,8 @@ public partial class ImageButton : UserControl
 
     private void ContextMenuInit(Shortcut shortcut)
     {
-        bool showExe = File.Exists(shortcut.ExePath);
-        bool showImg = File.Exists(shortcut.ImgPath);
+        bool showExe = File.Exists(shortcut.Execution);
+        bool showImg = File.Exists(shortcut.Image);
         bool showOpen = true;
         bool showAdmin = true;
         if (shortcut.Tag is string && shortcut.Tag.ToString() == AppValues.CloseDragId)

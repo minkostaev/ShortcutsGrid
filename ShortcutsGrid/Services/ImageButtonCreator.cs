@@ -37,7 +37,7 @@ public static class ImageButtonCreator
             }
             // Handle Single Click Actions
             AppValues.WillBeClosed = true;
-            string msg = RunProcess.Run(shortcutItem.ExePath);
+            string msg = RunProcess.Run(shortcutItem.Execution);
             if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
                 messageDialogs.IsErrorDisplayed(msg);
@@ -63,7 +63,7 @@ public static class ImageButtonCreator
                 dispatcherTimer.Stop();
 
                 doubleClicked = true;
-                string msg = RunProcess.Run(shortcutItem.ExePath);
+                string msg = RunProcess.Run(shortcutItem.Execution);
                 messageDialogs.IsErrorDisplayed(msg);
             }
             else if (e.ClickCount == 1 && closeDragButton)
@@ -74,12 +74,12 @@ public static class ImageButtonCreator
         });
         imageButton.MnOpen.Click += delegate
         {
-            string msg = RunProcess.Run(shortcutItem.ExePath);
+            string msg = RunProcess.Run(shortcutItem.Execution);
             messageDialogs.IsErrorDisplayed(msg);
         };
         imageButton.MnAdmin.Click += delegate
         {
-            string msg = RunProcess.Run(shortcutItem.ExePath, true);
+            string msg = RunProcess.Run(shortcutItem.Execution, true);
             messageDialogs.IsErrorDisplayed(msg);
         };
         imageButton.MnManageList.Click += delegate
@@ -88,12 +88,12 @@ public static class ImageButtonCreator
         };
         imageButton.MnFolderExe.Click += delegate
         {
-            string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ExePath));
+            string msg = RunProcess.Run(FolderOpeningString(shortcutItem.Execution));
             messageDialogs.IsErrorDisplayed(msg);
         };
         imageButton.MnFolderImg.Click += delegate
         {
-            string msg = RunProcess.Run(FolderOpeningString(shortcutItem.ImgPath));
+            string msg = RunProcess.Run(FolderOpeningString(shortcutItem.Image));
             messageDialogs.IsErrorDisplayed(msg);
         };
         imageButton.MnFolderThis.Click += delegate

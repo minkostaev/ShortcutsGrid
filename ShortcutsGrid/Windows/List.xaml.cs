@@ -69,9 +69,9 @@ public partial class List : Window
                         pnlControl.Visibility = Visibility.Visible;
                         tbNotAllowed.Visibility = Visibility.Hidden;
                     }
-                    txtName.Text = shortcut.AppName;
-                    txtPath.Text = shortcut.ExePath;
-                    txtImg.Text = shortcut.ImgPath;
+                    txtName.Text = shortcut.Label;
+                    txtPath.Text = shortcut.Execution;
+                    txtImg.Text = shortcut.Image;
                 }
             }
         };
@@ -83,9 +83,9 @@ public partial class List : Window
                 var shortcut = (Shortcut)dgrShortcuts.SelectedItem;
                 if (shortcut != null)
                 {
-                    shortcut.AppName = txtName.Text;
-                    shortcut.ExePath = txtPath.Text;
-                    shortcut.ImgPath = txtImg.Text;
+                    shortcut.Label = txtName.Text;
+                    shortcut.Execution = txtPath.Text;
+                    shortcut.Image = txtImg.Text;
                     dgrShortcuts.Items.Refresh();
                 }
             }
