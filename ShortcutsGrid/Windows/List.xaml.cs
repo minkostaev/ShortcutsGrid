@@ -45,9 +45,9 @@ public partial class List : Window
         dgrShortcuts.CanUserAddRows = false;
         dgrShortcuts.Columns.Add(new DataGridTextColumn
         {
-            Header = "Name",
+            Header = nameof(Shortcut.Label),
             Width = new DataGridLength(1, DataGridLengthUnitType.Star),
-            Binding = new System.Windows.Data.Binding("AppName")
+            Binding = new System.Windows.Data.Binding(nameof(Shortcut.Label))
         });
         dgrShortcuts.ItemsSource = AppValues.Shortcuts;
 

@@ -21,6 +21,8 @@ public static class ImageButtonCreator
             Width = 110
         };
 
+        string execution = shortcutItem.Execution;
+
         bool doubleClicked = false;
         var dispatcherTimer = new DispatcherTimer
         {//wait for the other click for 200ms
@@ -36,17 +38,17 @@ public static class ImageButtonCreator
             }
             // Handle Single Click Actions
             AppValues.WillBeClosed = true;
-            string msg = RunProcess.Run(shortcutItem.Execution);
             if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
-                messageDialogs.IsErrorDisplayed(msg);
+                if (!RunProcess.Run(execution))
+                    messageDialogs.IsErrorDisplayed(execution);
             }
             else
             {
-                if (!messageDialogs.IsErrorDisplayed(msg))
-                {
+                if (!RunProcess.Run(execution))
+                    messageDialogs.IsErrorDisplayed(execution);
+                else
                     window.Exit();
-                }
             }
         };
         imageButton.btn.Click += new((sender, e) => { if (!closeDragButton) dispatcherTimer.Start(); });
@@ -62,8 +64,8 @@ public static class ImageButtonCreator
                 dispatcherTimer.Stop();
 
                 doubleClicked = true;
-                string msg = RunProcess.Run(shortcutItem.Execution);
-                messageDialogs.IsErrorDisplayed(msg);
+                if (!RunProcess.Run(execution))
+                    messageDialogs.IsErrorDisplayed(execution);
             }
             else if (e.ClickCount == 1 && closeDragButton)
             {
@@ -73,13 +75,13 @@ public static class ImageButtonCreator
         });
         imageButton.MnOpen.Click += delegate
         {
-            string msg = RunProcess.Run(shortcutItem.Execution);
-            messageDialogs.IsErrorDisplayed(msg);
+            if (!RunProcess.Run(execution))
+                messageDialogs.IsErrorDisplayed(execution);
         };
         imageButton.MnAdmin.Click += delegate
         {
-            string msg = RunProcess.Run(shortcutItem.Execution, true);
-            messageDialogs.IsErrorDisplayed(msg);
+            if (!RunProcess.Run(execution, true))
+                messageDialogs.IsErrorDisplayed(execution);
         };
         imageButton.MnManageList.Click += delegate
         {
@@ -87,18 +89,18 @@ public static class ImageButtonCreator
         };
         imageButton.MnFolderExe.Click += delegate
         {
-            string msg = RunProcess.Run(FolderOpeningString(shortcutItem.Execution));
-            messageDialogs.IsErrorDisplayed(msg);
+            if (!RunProcess.Run(FolderOpeningString(execution)))
+                messageDialogs.IsErrorDisplayed(execution);
         };
         imageButton.MnFolderImg.Click += delegate
         {
-            string msg = RunProcess.Run(FolderOpeningString(shortcutItem.Image));
-            messageDialogs.IsErrorDisplayed(msg);
+            if (!RunProcess.Run(FolderOpeningString(shortcutItem.Image)))
+                messageDialogs.IsErrorDisplayed("Image path missing.");
         };
         imageButton.MnFolderThis.Click += delegate
         {
-            string msg = RunProcess.Run(FolderOpeningString(AppValues.ExePath));
-            messageDialogs.IsErrorDisplayed(msg);
+            if (!RunProcess.Run(FolderOpeningString(AppValues.ExePath)))
+                messageDialogs.IsErrorDisplayed("Exe path missing.");
         };
         imageButton.MnAbout.Click += delegate
         {

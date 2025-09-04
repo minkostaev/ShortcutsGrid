@@ -55,30 +55,37 @@ public static class FileShortcuts
         var result = new List<Shortcut>();
         if (filePath == null)
             return result;
-
+        var exes = new List<string>();
+        string exe = string.Empty;
         string lbl = string.Empty;
         string dsc = string.Empty;
-        string exe = string.Empty;
         int count = 0;
-
         var stream = new StreamReader(filePath, CsvEncoding);
         while (!stream.EndOfStream)
         {
-            count++;
             var line = stream.ReadLine();
+            count++;
             switch (count)
             {
                 case 1:
-                    string[] items = (line != null) ? line.Split(delimiter) : [""];
-                    lbl = (items.Length >= 1) ? items[0] : "";
-                    dsc = (items.Length >= 2) ? items[1] : "";
-                    break;
+                    {
+                        string[] items = (line != null) ? line.Split(delimiter) : [""];
+                        lbl = (items.Length >= 1) ? items[0] : "";
+                        dsc = (items.Length >= 2) ? items[1] : "";
+                        break;
+                    }
                 case 2:
-                    exe = line ?? "";
-                    break;
+                    {
+                        exes = [];
+                        string[] items = (line != null) ? line.Split(delimiter) : [""];
+                        foreach (var item in items)
+                            exes.Add(item);
+                        exe = line ?? "";
+                        break;
+                    }
                 case 3:
                     string? icon = line;
-                    result.Add(new Shortcut() { Execution = exe, Label = lbl, Image = icon, Description = dsc });
+                    result.Add(new Shortcut() { Executions = exes, Execution = exe, Label = lbl, Image = icon, Description = dsc });
                     count = 0;
                     break;
             }
@@ -100,7 +107,7 @@ public static class FileShortcuts
                 string description = string.IsNullOrEmpty(shortcut.Description)
                     ? string.Empty : delimiter + shortcut.Description;
                 stream.WriteLine(shortcut.Label + description);
-                stream.WriteLine(shortcut.Execution);// to do
+                stream.WriteLine(string.Join(delimiter, shortcut.Executions.ToArray()));
                 stream.WriteLine(shortcut.Image);
             }
         }

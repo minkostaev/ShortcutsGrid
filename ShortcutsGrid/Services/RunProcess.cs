@@ -18,27 +18,19 @@ public static class RunProcess
         });
     }
 
-    public static string Run(string commandOrPath, bool admin = false)
+    public static bool Run(string commandOrPath, bool admin = false)
     {
         if (string.IsNullOrWhiteSpace(commandOrPath))
-            return string.Empty;
+            return false;
         try
         {
-            ProcessStart(commandOrPath, admin);
-            return string.Empty;
+            var (executable, arguments) = ParseTarget(commandOrPath);
+            ProcessStart(executable, admin, arguments);
+            return true;
         }
         catch (Exception)
         {
-            try
-            {
-                var (executable, arguments) = ParseTarget(commandOrPath);
-                ProcessStart(executable, admin, arguments);
-                return string.Empty;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            return false;
         }
     }
 

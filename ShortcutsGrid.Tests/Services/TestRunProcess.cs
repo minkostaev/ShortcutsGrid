@@ -10,25 +10,25 @@ internal class TestRunProcess
     [Test]
     public void TestRunEmpty()
     {
-        string result = RunProcess.Run("");
+        bool result = RunProcess.Run("");
 
-        Assert.That(result, Is.Empty);
+        Assert.That(result, Is.False);
     }
 
     [Test]
     public void TestRunCommand()
     {
-        string result = RunProcess.Run("explorer");
+        bool result = RunProcess.Run("explorer");
 
-        Assert.That(result, Is.Empty);
+        Assert.That(result, Is.True);
     }
 
     [Test]
     public void TestRunWrongCommand()
     {
-        string result = RunProcess.Run("explorera");
+        bool result = RunProcess.Run("explorera");
 
-        Assert.That(result, Is.Not.Empty);
+        Assert.That(result, Is.False);
     }
 
 }

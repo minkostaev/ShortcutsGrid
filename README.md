@@ -47,8 +47,6 @@ The text file can be [csv](#csv-structure) **or** [json](#json-structure)
 2. name to display under the program's icon
 3. image to display (not required) - if left black it'll try to get icon from exe's path; custom image can be assign by path or base64 string
 
-*It has custom command, the app checks for: 'run' - it displays run dialog.*
-
 ### Text file types supported:
 
 * [csv](#csv-structure) (default choice)
