@@ -26,7 +26,7 @@ internal class TestRunProcess
     [Test]
     public void TestRunWrongCommand()
     {
-        bool result = RunProcess.Run("explorera");
+        bool result = RunProcess.Run("explorera", true);
 
         Assert.That(result, Is.False);
     }

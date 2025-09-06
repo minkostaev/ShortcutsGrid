@@ -20,7 +20,7 @@ public static class RunProcess
         });
     }
 
-    public static bool Run(string commandOrPath, bool admin = false)
+    public static bool Run(string commandOrPath, bool skipError = false, bool admin = false)
     {
         if (string.IsNullOrWhiteSpace(commandOrPath))
             return false;
@@ -32,8 +32,11 @@ public static class RunProcess
         }
         catch (Exception)
         {
-            var messageDialogs = new MessageDialogs();
-            messageDialogs.SimpleError(commandOrPath);
+            if (!skipError)
+            {
+                var messageDialogs = new MessageDialogs();
+                messageDialogs.SimpleError(commandOrPath);
+            }
             return false;
         }
     }
