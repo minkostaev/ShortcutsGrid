@@ -20,7 +20,7 @@ public partial class About : Window
 
         try
         {
-            var imageButton = new ImageButton(new Shortcut() { Execution = "exe.exe" }, false)
+            var imageButton = new ImageButton(new Shortcut() { Executions = ["exe.exe"] }, false)
             {
                 Height = 128,
                 Width = 128

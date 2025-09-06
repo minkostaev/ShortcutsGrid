@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShortcutsGrid.Windows"
         mc:Ignorable="d"
-        Title="List" Height="440" Width="400">
+        Title="List" Height="476" Width="400">
     <Grid>
         <DataGrid x:Name="dgrNumbers" HorizontalAlignment="Left" Width="20"/>
         <DataGrid x:Name="dgrShortcuts" HorizontalAlignment="Left" Width="160" Margin="20,0,0,0"/>

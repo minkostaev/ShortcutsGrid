@@ -25,4 +25,8 @@ public class MessageDialogs(IMessageBoxWrapper? messageBox = null)
         }
         return false;
     }
+    public void SimpleError(string message, string caption = "Error")
+    {
+        _messageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
+    }
 }

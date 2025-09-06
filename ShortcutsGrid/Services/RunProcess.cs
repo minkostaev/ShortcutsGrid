@@ -2,13 +2,15 @@
 
 using ShortcutsGrid.Extensions;
 using ShortcutsGrid.Models;
+using ShortcutsGrid.Windows;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 public static class RunProcess
 {
-
     public static void OpenLink(string uri)
     {
         Process.Start(new ProcessStartInfo
@@ -30,9 +32,22 @@ public static class RunProcess
         }
         catch (Exception)
         {
+            var messageDialogs = new MessageDialogs();
+            messageDialogs.SimpleError(commandOrPath);
             return false;
         }
     }
+    //public static bool Run(List<string> commandsOrPaths, bool admin = false)
+    //{
+    //    foreach (string commandOrPath in commandsOrPaths)
+    //    {
+    //        if (Run(commandOrPath, admin))
+    //            return true;
+    //    }
+    //    var messageDialogs = new MessageDialogs();
+    //    messageDialogs.SimpleError(string.Join("\n", commandsOrPaths));
+    //    return false;
+    //}
 
     private static (string Executable, string Arguments) ParseTarget(string line)
     {

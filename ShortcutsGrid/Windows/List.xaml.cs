@@ -42,6 +42,7 @@ public partial class List : Window
         dgrShortcuts.AutoGenerateColumns = false;
         dgrShortcuts.IsReadOnly = true;
         dgrShortcuts.HeadersVisibility = DataGridHeadersVisibility.None;
+        dgrShortcuts.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
         dgrShortcuts.CanUserAddRows = false;
         dgrShortcuts.Columns.Add(new DataGridTextColumn
         {
@@ -84,7 +85,7 @@ public partial class List : Window
                 if (shortcut != null)
                 {
                     shortcut.Label = txtName.Text;
-                    shortcut.Execution = txtPath.Text;
+                    //shortcut.Execution = txtPath.Text;
                     shortcut.Image = txtImg.Text;
                     dgrShortcuts.Items.Refresh();
                 }
@@ -95,9 +96,9 @@ public partial class List : Window
     }
 
     private readonly List<string> numberRows =
-    [   "1", "2", "3", "4", "5", "6",
-        "1", "2", "3", "4", "5", "6",
-        "1", "2", "3", "4", "5", "6",
-        "1", "2", "3", "4", "5", "6" ];
+    [   "11", "12", "13", "14", "15", "16",
+        "21", "22", "23", "24", "25", "26",
+        "31", "32", "33", "34", "35", "36",
+        "41", "42", "43", "44", "45", "46" ];
 
 }

@@ -56,7 +56,6 @@ public static class FileShortcuts
         if (filePath == null)
             return result;
         var exes = new List<string>();
-        string exe = string.Empty;
         string lbl = string.Empty;
         string dsc = string.Empty;
         int count = 0;
@@ -80,12 +79,11 @@ public static class FileShortcuts
                         string[] items = (line != null) ? line.Split(delimiter) : [""];
                         foreach (var item in items)
                             exes.Add(item);
-                        exe = line ?? "";
                         break;
                     }
                 case 3:
                     string? icon = line;
-                    result.Add(new Shortcut() { Executions = exes, Execution = exe, Label = lbl, Image = icon, Description = dsc });
+                    result.Add(new Shortcut() { Executions = exes, Label = lbl, Image = icon, Description = dsc });
                     count = 0;
                     break;
             }
