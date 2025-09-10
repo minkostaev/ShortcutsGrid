@@ -3,6 +3,7 @@
 using Controls;
 using Models;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -19,8 +20,6 @@ public static class ImageButtonCreator
             Height = 110,
             Width = 110
         };
-
-        string execution = shortcutItem.Execution;
 
         bool doubleClicked = false;
         var dispatcherTimer = new DispatcherTimer
@@ -39,11 +38,11 @@ public static class ImageButtonCreator
             AppValues.WillBeClosed = true;
             if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
-                RunProcess.Run(execution);
+                RunProcess.Run(shortcutItem.Executions);
             }
             else
             {
-                if (RunProcess.Run(execution))
+                if (RunProcess.Run(shortcutItem.Executions))
                     window.Exit();
             }
         };
@@ -60,7 +59,7 @@ public static class ImageButtonCreator
                 dispatcherTimer.Stop();
 
                 doubleClicked = true;
-                RunProcess.Run(execution);
+                RunProcess.Run(shortcutItem.Executions);
             }
             else if (e.ClickCount == 1 && closeDragButton)
             {
@@ -70,11 +69,11 @@ public static class ImageButtonCreator
         });
         imageButton.MnOpen.Click += delegate
         {
-            RunProcess.Run(execution);
+            RunProcess.Run(shortcutItem.Executions);
         };
         imageButton.MnAdmin.Click += delegate
         {
-            RunProcess.Run(execution, true);
+            RunProcess.Run(shortcutItem.Executions, true);
         };
         imageButton.MnManageList.Click += delegate
         {
@@ -82,7 +81,7 @@ public static class ImageButtonCreator
         };
         imageButton.MnFolderExe.Click += delegate
         {
-            RunProcess.Run(FolderOpeningString(execution));
+            RunProcess.Run(FolderOpeningString(shortcutItem.Executions.FirstOrDefault()));
         };
         imageButton.MnFolderImg.Click += delegate
         {

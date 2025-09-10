@@ -2,6 +2,7 @@
 
 using ShortcutsGrid.Models;
 using System.IO;
+using System.Linq;
 using System.Windows.Controls;
 
 /// <summary>
@@ -14,7 +15,8 @@ public partial class ImageButton : UserControl
         InitializeComponent();
         img.Source = shortcut.ImageSource;
         tb.Text = shortcut.Label;
-        ///btn.ToolTip = shortcut.Label;
+        if (!string.IsNullOrWhiteSpace(shortcut.Description))
+            btn.ToolTip = shortcut.Description;
 
         if (showContextMenu)
         {
@@ -37,7 +39,7 @@ public partial class ImageButton : UserControl
 
     private void ContextMenuInit(Shortcut shortcut)
     {
-        bool showExe = File.Exists(shortcut.Execution);
+        bool showExe = File.Exists(shortcut.Executions.FirstOrDefault());
         bool showImg = File.Exists(shortcut.Image);
         bool showOpen = true;
         bool showAdmin = true;

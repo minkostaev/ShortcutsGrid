@@ -40,17 +40,17 @@ public static class RunProcess
             return false;
         }
     }
-    //public static bool Run(List<string> commandsOrPaths, bool admin = false)
-    //{
-    //    foreach (string commandOrPath in commandsOrPaths)
-    //    {
-    //        if (Run(commandOrPath, admin))
-    //            return true;
-    //    }
-    //    var messageDialogs = new MessageDialogs();
-    //    messageDialogs.SimpleError(string.Join("\n", commandsOrPaths));
-    //    return false;
-    //}
+    public static bool Run(List<string> commandsOrPaths, bool admin = false)
+    {
+        foreach (string commandOrPath in commandsOrPaths)
+        {
+            if (Run(commandOrPath, true, admin))
+                return true;
+        }
+        var messageDialogs = new MessageDialogs();
+        messageDialogs.SimpleError(string.Join("\n", commandsOrPaths));
+        return false;
+    }
 
     private static (string Executable, string Arguments) ParseTarget(string line)
     {

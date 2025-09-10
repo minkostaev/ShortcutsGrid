@@ -71,7 +71,7 @@ public partial class List : Window
                         tbNotAllowed.Visibility = Visibility.Hidden;
                     }
                     txtName.Text = shortcut.Label;
-                    txtPath.Text = shortcut.Execution;
+                    //txtPath.Text = shortcut.Execution; to do
                     txtImg.Text = shortcut.Image;
                 }
             }
