@@ -13,6 +13,16 @@ using System.Windows.Media.Imaging;
 internal static class ImageUtilities
 {
 
+    private static ImageSource? ExeToImage(string? exePath)
+    {
+        if (!string.IsNullOrWhiteSpace(exePath))
+        {
+            Icon icon = IconUtilities.ExtractIconFromExecutable(exePath);
+            return icon.ToImageSource();
+        }
+        return null;
+    }
+
     public static ImageSource? Base64ToImage(byte[] base64Image)
     {
         var ms = new MemoryStream(base64Image);
@@ -34,15 +44,15 @@ internal static class ImageUtilities
     public static ImageSource? GetImageFromPaths(string? imgPath, string? exePath)
     {
         if (string.IsNullOrWhiteSpace(imgPath))
-        {
+        {// this app exe icon as image
             return ExeToImage(exePath);
         }
         else
         {
-            var bt64 = imgPath.IsToBase64();
-            if (bt64.Item1 && bt64.Item2 != null)
+            var bt64 = imgPath.Base64();
+            if (bt64.isBase64 && bt64.byteResult != null)
             {
-                var image = Base64ToImage(bt64.Item2);
+                var image = Base64ToImage(bt64.byteResult);
                 if (image == null)
                 {
                     return ExeToImage(exePath);
@@ -68,16 +78,6 @@ internal static class ImageUtilities
                 return null;
             }
         }
-    }
-
-    private static ImageSource? ExeToImage(string? exePath)
-    {
-        if (!string.IsNullOrWhiteSpace(exePath))
-        {
-            Icon icon = IconUtilities.ExtractIconFromExecutable(exePath);
-            return icon.ToImageSource();
-        }
-        return null;
     }
 
 }

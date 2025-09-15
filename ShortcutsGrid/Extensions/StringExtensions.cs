@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 public static class StringExtensions
 {
 
-    public static byte[]? ToBase64(this string input)
+    private static byte[]? ToBase64(this string input)
     {
         if (string.IsNullOrEmpty(input))
             return null;
@@ -22,10 +22,10 @@ public static class StringExtensions
             return null;
         }
     }
-    public static bool IsBase64(this string input) => ToBase64(input) != null;
-    public static (bool, byte[]?) IsToBase64(this string input)
+    
+    public static (bool isBase64, byte[]? byteResult) Base64(this string input)
     {
-        var bt = ToBase64(input);
+        var bt = input.ToBase64();
         return (bt != null, bt);
     }
 

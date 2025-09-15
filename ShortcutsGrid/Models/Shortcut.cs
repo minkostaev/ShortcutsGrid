@@ -8,7 +8,7 @@ using System.Windows.Media;
 public class Shortcut
 {
     /// <summary>
-    /// Path or URL or Command or Directory
+    /// Path or URL or Command or Directory.
     /// It's a list to try multiple execution if it fails
     /// </summary>
     public List<string> Executions { get; set; } = [];

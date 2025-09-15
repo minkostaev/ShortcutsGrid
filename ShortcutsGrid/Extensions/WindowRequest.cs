@@ -5,6 +5,7 @@ using Forms.Wpf.Mls.Tools.Services;
 using Mintzat.Email.Models.TheMachine;
 using ShortcutsGrid.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
@@ -60,7 +61,7 @@ public static class WindowRequest
             return null;
 
         var machine = new TheMachine();
-        var headers = new System.Collections.Generic.Dictionary<string, string?>
+        var headers = new Dictionary<string, string?>
         {
             { "Desktop-Machine", machine.Hash },
             { "Desktop-Value", AppValues.LastExecuted },
