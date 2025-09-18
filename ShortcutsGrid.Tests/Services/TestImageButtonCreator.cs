@@ -8,17 +8,17 @@ using System.Reflection;
 internal class TestImageButtonCreator
 {
 
-    [Test]
-    public void TestFolderOpeningString()
-    {
-        MethodInfo? methodInfo = typeof(ImageButtonCreator).
-            GetMethod("FolderOpeningString", BindingFlags.Static | BindingFlags.NonPublic);
-        object[] parameters = { "file.exe" };
-        var result = methodInfo?.Invoke(null, parameters);
+    //[Test]
+    //public void TestFolderOpeningString()
+    //{
+    //    MethodInfo? methodInfo = typeof(ImageButtonCreator).
+    //        GetMethod("FolderOpeningString", BindingFlags.Static | BindingFlags.NonPublic);
+    //    object[] parameters = { "file.exe" };
+    //    var result = methodInfo?.Invoke(null, parameters);
 
-        string expected = "explorer.exe /select, \"file.exe\"";
-        Assert.That(expected, Is.EqualTo(result));
-    }
+    //    string expected = "explorer.exe /select, \"file.exe\"";
+    //    Assert.That(expected, Is.EqualTo(result));
+    //}
 
     //reflection private
     ///MethodInfo? methodInfo = typeof(MainWindow)

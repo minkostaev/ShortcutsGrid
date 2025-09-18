@@ -81,15 +81,15 @@ public static class ImageButtonCreator
         };
         imageButton.MnFolderExe.Click += delegate
         {
-            RunProcess.Run(FolderOpeningString(shortcutItem.Executions.FirstOrDefault()));
+            RunProcess.OpenExplorer(shortcutItem.ExistingExes.FirstOrDefault());
         };
         imageButton.MnFolderImg.Click += delegate
         {
-            RunProcess.Run(FolderOpeningString(shortcutItem.Image));
+            RunProcess.OpenExplorer(shortcutItem.Image);
         };
         imageButton.MnFolderThis.Click += delegate
         {
-            RunProcess.Run(FolderOpeningString(AppValues.ExePath));
+            RunProcess.OpenExplorer(AppValues.ExePath);
         };
         imageButton.MnAbout.Click += delegate
         {
@@ -97,14 +97,9 @@ public static class ImageButtonCreator
         };
         imageButton.MnExit.Click += delegate
         {
-            window.Exit();
+            Application.Current.Shutdown();
         };
         return imageButton;
-    }
-
-    private static string FolderOpeningString(string? filePath)
-    {
-        return "explorer.exe " + "/select, \"" + filePath + "\"";
     }
 
 }

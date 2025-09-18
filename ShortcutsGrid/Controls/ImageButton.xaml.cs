@@ -39,7 +39,7 @@ public partial class ImageButton : UserControl
 
     private void ContextMenuInit(Shortcut shortcut)
     {
-        bool showExe = File.Exists(shortcut.Executions.FirstOrDefault());
+        bool showExe = File.Exists(shortcut.ExistingExes.FirstOrDefault());
         bool showImg = File.Exists(shortcut.Image);
         bool showOpen = true;
         bool showAdmin = true;

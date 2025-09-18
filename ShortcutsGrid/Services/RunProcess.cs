@@ -1,5 +1,6 @@
 ﻿namespace ShortcutsGrid.Services;
 
+using Forms.Wpf.Mls.Tools.Services;
 using ShortcutsGrid.Extensions;
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Windows;
@@ -7,26 +8,55 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 public static class RunProcess
 {
-    public static void OpenLink(string uri)
+    public static bool OpenLink(string uri)
     {
-        Process.Start(new ProcessStartInfo
+        try
         {
-            FileName = uri,
-            UseShellExecute = true
-        });
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = uri,
+                UseShellExecute = true
+            });
+            return true;
+        }
+        catch { return false; }
+    }
+
+    public static bool OpenExplorer(string? path)
+    {
+        path = TryAddSpecialFolders(path!);
+        string argument;
+        if (File.Exists(path))
+            argument = $"/select,\"{path}\"";
+        else if (Directory.Exists(path))
+            argument = $"\"{path}\"";
+        else
+            return false;
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                Arguments = argument,
+                UseShellExecute = true
+            });
+            return true;
+        }
+        catch { return false; }
     }
 
     public static bool Run(string commandOrPath, bool skipError = false, bool admin = false)
     {
         if (string.IsNullOrWhiteSpace(commandOrPath))
             return false;
+        commandOrPath = TryAddSpecialFolders(commandOrPath);
         try
         {
-            var (executable, arguments) = ParseTarget(commandOrPath);
+            var (executable, arguments) = SeparateArguments(commandOrPath);
             ProcessStart(executable, admin, arguments);
             return true;
         }
@@ -42,19 +72,26 @@ public static class RunProcess
     }
     public static bool Run(List<string> commandsOrPaths, bool admin = false)
     {
+        string errorMsg = string.Empty;
         foreach (string commandOrPath in commandsOrPaths)
         {
+            string cmdOrPath = TryAddSpecialFolders(commandOrPath);
+            errorMsg += string.IsNullOrEmpty(errorMsg) ? cmdOrPath : "\n\n" + cmdOrPath;
             if (Run(commandOrPath, true, admin))
                 return true;
         }
         var messageDialogs = new MessageDialogs();
-        messageDialogs.SimpleError(string.Join("\n", commandsOrPaths));
+        messageDialogs.SimpleError(errorMsg);
         return false;
     }
 
-    private static (string Executable, string Arguments) ParseTarget(string line)
+    public static (string Executable, string Arguments) SeparateArguments(string input)
     {
-        string[] list = line.Split(' ');
+        if (string.IsNullOrWhiteSpace(input))
+            return (string.Empty, string.Empty);
+        if (Directory.Exists(input))
+            return (input, string.Empty);
+        string[] list = input.Split(' ');
         bool isCommand = true;
         string cmdOrPath = string.Empty;
         foreach (string arg in list)
@@ -70,7 +107,7 @@ public static class RunProcess
         {
             cmdOrPath = list[0];
         }
-        string args = line.Replace(cmdOrPath, "");
+        string args = input.Replace(cmdOrPath, "");
         return (cmdOrPath, args);
     }
 
@@ -88,6 +125,30 @@ public static class RunProcess
         process.Start();
         AppValues.LastExecuted = commandOrPath;
         _ = WindowRequest.SendToApi();
+    }
+
+    public static string TryAddSpecialFolders(string path)
+    {
+        try
+        {
+            string pattern = @"<\|(.*?)\|>";// e.g. <|Desktop|>
+            var matches = Regex.Matches(path, pattern);
+            foreach (Match match in matches)
+            {
+                if (match.Groups.Count > 1)
+                {
+                    string value = match.Value;
+                    string id = match.Groups[1].Value;
+                    string folder = SpecialFolders.NameToPath(id);
+                    path = path.Replace(value, folder);
+                }
+            }
+            return path;
+        }
+        catch
+        {
+            return path;
+        }
     }
 
 }

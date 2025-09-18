@@ -49,10 +49,10 @@ internal static class ImageUtilities
         }
         else
         {
-            var bt64 = imgPath.Base64();
-            if (bt64.isBase64 && bt64.byteResult != null)
+            var (isBase64, byteResult) = imgPath.Base64();
+            if (isBase64 && byteResult != null)
             {
-                var image = Base64ToImage(bt64.byteResult);
+                var image = Base64ToImage(byteResult);
                 if (image == null)
                 {
                     return ExeToImage(exePath);
