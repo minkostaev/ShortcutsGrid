@@ -9,18 +9,44 @@
     <Grid>
         <DataGrid x:Name="dgrNumbers" HorizontalAlignment="Left" Width="20"/>
         <DataGrid x:Name="dgrShortcuts" HorizontalAlignment="Left" Width="160" Margin="20,0,0,0"/>
-        <TextBlock x:Name="tbNotAllowed" Text="Not Allowed" Margin="180,0,0,0"/>
-        <Grid x:Name="pnlControl" Margin="180,0,0,0">
-            <Button x:Name="btnUp" Content="↑" Margin="10,10,180,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnDown" Content="↓" Margin="10,35,180,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnNew" Content="New" Margin="125,10,10,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnRemove" Content="Remove" Margin="125,40,10,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnCommit" Content="Update" Margin="125,70,10,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtName" Margin="10,95,10,0" TextWrapping="Wrap" Height="18" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtPath" Margin="10,118,10,0" TextWrapping="Wrap" Height="56" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtImg" Margin="10,179,10,0" TextWrapping="Wrap" Height="180" VerticalAlignment="Top"/>
+        <TabControl x:Name="pnlItem" Margin="180,0,0,100">
+            <TabItem Header="Name">
+                <Grid>
+                    <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtName" Margin="10,41,10,0" TextWrapping="Wrap" Height="18" VerticalAlignment="Top"/>
+                    <Label Content="Description" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtDescription" Margin="10,95,10,0" TextWrapping="Wrap" Height="200" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Commands">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel CanVerticallyScroll="True">
+                        <TextBox x:Name="txtCmd1" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd2" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd3" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd4" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd5" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd6" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd7" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd8" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <TextBox x:Name="txtCmd9" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Icon">
+                <Grid>
+                    <Label Content="Image source" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtImg" Margin="10,40,10,0" TextWrapping="Wrap" Height="260" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"/>
+                    <Grid x:Name="pnlImg" Width="130" Height="130" Margin="10,310,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Grid x:Name="pnlButtons" Margin="180,0,0,30" Height="70" VerticalAlignment="Bottom">
+            <Button x:Name="btnUp" Content="↑" Margin="10,10,0,0" Width="26" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="btnDown" Content="↓" Margin="10,40,0,0" Width="26" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="btnCommit" Content="Update" Margin="0,0,20,40" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <Button x:Name="btnRemove" Content="Remove" Margin="0,0,20,10" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
         </Grid>
-
-
+        <Button x:Name="btnNew" Content="Add new" Margin="230,0,50,10" Width="100" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

@@ -33,7 +33,13 @@ public static class FileShortcuts
             AppValues.FileTypeLoaded = null;
             AppValues.Shortcuts = [];
         }
-        AppValues.Shortcuts.Add(new Shortcut() { Label = "Drag or Close", Image = AppValues.CloseDragImage, Tag = AppValues.CloseDragId });
+        AppValues.Shortcuts.Add(new Shortcut()
+        {
+            Label = "Drag or Close",
+            Description = "Exit button. This can't be edited.",
+            Image = AppValues.CloseDragImage,
+            Tag = AppValues.CloseDragId
+        });
     }
     public static void ShortcutsToFile()
     {
