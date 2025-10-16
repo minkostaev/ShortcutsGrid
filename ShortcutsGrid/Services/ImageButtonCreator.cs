@@ -14,7 +14,7 @@ public static class ImageButtonCreator
 
     public static ImageButton GetButton(Shortcut shortcutItem, MainWindow window)
     {
-        bool closeDragButton = shortcutItem.Tag is string && shortcutItem.Tag.ToString() == AppValues.CloseDragId;
+        bool closeDragButton = shortcutItem.Id == AppValues.CloseDragId;
         var imageButton = new ImageButton(shortcutItem)
         {
             Height = 110,

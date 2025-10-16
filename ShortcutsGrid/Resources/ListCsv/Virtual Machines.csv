@@ -7,8 +7,8 @@ iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7O
 Windows
 <|Windows|>
 
-System
-<|System|>
+Windows System
+<|WindowsSystem|>
 
 Program Files
 <|ProgramFiles|>
@@ -16,16 +16,16 @@ Program Files
 Program Files (x86)
 <|ProgramFilesX86|>
 
-ProgramData
+Program Data
 <|ProgramData|>
 
-UserProfile
+User Profile
 <|UserProfile|>
 
-LocalAppData
+Local AppData
 <|LocalAppData|>
 
-RoamingAppData
+Roaming AppData
 <|RoamingAppData|>
 
 Temp

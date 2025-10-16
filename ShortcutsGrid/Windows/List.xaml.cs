@@ -73,8 +73,7 @@ public partial class List : Window
                 var shortcut = (Shortcut)dgrShortcuts.SelectedItem;
                 if (shortcut != null)
                 {
-                    var tag = shortcut.Tag as string;
-                    if (tag == AppValues.CloseDragId)
+                    if (shortcut.Id == AppValues.CloseDragId)
                     {
                         pnlItem.IsEnabled = false;
                         pnlButtons.IsEnabled = false;

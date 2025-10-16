@@ -2,6 +2,7 @@
 
 using Services.Image;
 using ShortcutsGrid.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,31 +10,45 @@ using System.Windows.Media;
 
 public class Shortcut
 {
+    public Shortcut()
+    {
+        Executions = [];
+        Label = string.Empty;
+        Description = string.Empty;
+        Image = string.Empty;
+        Id = Guid.NewGuid().ToString();
+    }
+    
     /// <summary>
     /// Path or URL or Command or Directory.
     /// It's a list to try multiple execution if it fails
     /// </summary>
-    public List<string> Executions { get; set; } = [];
+    public List<string> Executions { get; set; }
     
     /// <summary>
     /// Name bellow the icon (optional)
     /// </summary>
-    public string Label { get; set; } = string.Empty;
+    public string Label { get; set; }
     
     /// <summary>
     /// Tooltip text when hover the icon (optional)
     /// </summary>
-    public string Description { get; set; } = string.Empty;
+    public string Description { get; set; }
     
     /// <summary>
     /// Icon path or base64String (optional)
     /// </summary>
-    public string? Image { get; set; } = string.Empty;
-    
+    public string? Image { get; set; }
+
+    /// <summary>
+    /// Identifier
+    /// </summary>
+    public string Id { get; private set; }
+
     /// <summary>
     /// Helper property
     /// </summary>
-    public object? Tag { get; set; }
+    ///public object? Tag { get; set; }
 
     private ImageSource? _imageSource;
     public ImageSource? ImageSource
@@ -62,6 +77,14 @@ public class Shortcut
             }
             return result;
         }
+    }
+
+    public void MakeItCloseItem()
+    {
+        Label = "Drag or Close";
+        Description = "Exit button. This can't be edited.";
+        Image = AppValues.CloseDragImage;
+        Id = AppValues.CloseDragId;
     }
 
 }

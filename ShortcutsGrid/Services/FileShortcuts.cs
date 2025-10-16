@@ -33,13 +33,9 @@ public static class FileShortcuts
             AppValues.FileTypeLoaded = null;
             AppValues.Shortcuts = [];
         }
-        AppValues.Shortcuts.Add(new Shortcut()
-        {
-            Label = "Drag or Close",
-            Description = "Exit button. This can't be edited.",
-            Image = AppValues.CloseDragImage,
-            Tag = AppValues.CloseDragId
-        });
+        var closeShortcut = new Shortcut();
+        closeShortcut.MakeItCloseItem();
+        AppValues.Shortcuts.Add(closeShortcut);
     }
     public static void ShortcutsToFile()
     {
@@ -106,7 +102,7 @@ public static class FileShortcuts
             using var stream = new StreamWriter(filePath, false, CsvEncoding);
             foreach (var shortcut in shortcuts)
             {
-                if (shortcut.Tag as string == AppValues.CloseDragId)
+                if (shortcut.Id == AppValues.CloseDragId)
                     continue;
                 string description = string.IsNullOrEmpty(shortcut.Description)
                     ? string.Empty : delimiter + shortcut.Description;

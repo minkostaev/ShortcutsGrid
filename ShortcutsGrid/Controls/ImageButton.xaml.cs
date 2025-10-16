@@ -43,7 +43,7 @@ public partial class ImageButton : UserControl
         bool showImg = File.Exists(shortcut.Image);
         bool showOpen = true;
         bool showAdmin = true;
-        if (shortcut.Tag is string && shortcut.Tag.ToString() == AppValues.CloseDragId)
+        if (shortcut.Id == AppValues.CloseDragId)
         {
             showOpen = false;
             showAdmin = false;
