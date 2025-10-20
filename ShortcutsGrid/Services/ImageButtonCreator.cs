@@ -77,7 +77,8 @@ public static class ImageButtonCreator
         };
         imageButton.MnManageList.Click += delegate
         {
-            new List().ShowDialog();
+            new List(shortcutItem.Id).ShowDialog();
+            ShowShortcuts.Load(window);
         };
         imageButton.MnFolderExe.Click += delegate
         {

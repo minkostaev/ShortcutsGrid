@@ -7,13 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 /// <summary>
 /// Interaction logic for List.xaml
 /// </summary>
 public partial class List : Window
 {
-    public List()
+    public List(string id = "")
     {
         InitializeComponent();
 
@@ -136,6 +137,8 @@ public partial class List : Window
             }
         };
 
+        dgrShortcuts.SelectedItem = AppValues.Shortcuts.Find(i => i.Id == id);
+
         btnCommit.Click += (s, e) =>
         {
             if (dgrShortcuts.SelectedItem is not null)
@@ -169,6 +172,24 @@ public partial class List : Window
                 }
             }
             FileShortcuts.ShortcutsToFile();
+        };
+
+        btnRemove.Background = Brushes.LightCoral;
+        btnRemove.Click += (s, e) =>
+        {
+            if (dgrShortcuts.SelectedItem is not null)
+            {
+                var shortcut = (Shortcut)dgrShortcuts.SelectedItem;
+                if (shortcut != null)
+                {
+                    if (shortcut.Id != AppValues.CloseDragId)
+                    {
+                        AppValues.Shortcuts.Remove(shortcut);
+                        dgrShortcuts.Items.Refresh();
+                        FileShortcuts.ShortcutsToFile();
+                    }
+                }
+            }
         };
 
     }
