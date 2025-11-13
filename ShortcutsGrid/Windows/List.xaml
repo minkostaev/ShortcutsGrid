@@ -15,29 +15,33 @@
                     <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txtName" Margin="10,41,10,0" TextWrapping="Wrap" Height="18" VerticalAlignment="Top"/>
                     <Label Content="Description" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtDescription" Margin="10,95,10,0" TextWrapping="Wrap" Height="200" VerticalAlignment="Top"/>
+                    <Grid x:Name="pnlImg1" Opacity="0.5" Width="130" Height="130" Margin="0,170,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtDescription" Background="Transparent" Margin="10,95,10,0" TextWrapping="Wrap" Height="200" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Commands">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <StackPanel CanVerticallyScroll="True">
-                        <TextBox x:Name="txtCmd1" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd2" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd3" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd4" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd5" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd6" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd7" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd8" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                        <TextBox x:Name="txtCmd9" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                    </StackPanel>
+                    <Grid>
+                        <Grid x:Name="pnlImg2" Opacity="0.5" Width="130" Height="130" Margin="0,170,0,0" VerticalAlignment="Top"/>
+                        <StackPanel CanVerticallyScroll="True">
+                            <TextBox x:Name="txtCmd1" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd2" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd3" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd4" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd5" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd6" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd7" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd8" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                            <TextBox x:Name="txtCmd9" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        </StackPanel>
+                    </Grid>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Icon">
                 <Grid>
                     <Label Content="Image source" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtImg" Margin="10,40,10,0" TextWrapping="Wrap" Height="260" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"/>
-                    <Grid x:Name="pnlImg" Width="130" Height="130" Margin="10,310,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Grid x:Name="pnlImg3" Opacity="0.5" Width="130" Height="130" Margin="0,170,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtImg" Background="Transparent" Margin="10,40,10,0" TextWrapping="Wrap" Height="260" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"/>
                 </Grid>
             </TabItem>
         </TabControl>

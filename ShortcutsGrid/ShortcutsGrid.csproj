@@ -7,9 +7,9 @@
     <UseWPF>true</UseWPF>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <ApplicationIcon>Resources\Icons\web-browser-128.ico</ApplicationIcon>
-    <AssemblyVersion>1.4.22.0</AssemblyVersion>
-    <FileVersion>1.4.22.0</FileVersion>
-    <VersionPrefix>1.4.22</VersionPrefix>
+    <AssemblyVersion>1.4.23.0</AssemblyVersion>
+    <FileVersion>1.4.23.0</FileVersion>
+    <VersionPrefix>1.4.23</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyyy-MM-dd))</VersionSuffix>
     <NoWarn>SYSLIB1054</NoWarn>
   </PropertyGroup>

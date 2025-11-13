@@ -1,6 +1,7 @@
 ﻿namespace ShortcutsGrid.Windows;
 
 using ShortcutsGrid.Controls;
+using ShortcutsGrid.Extensions;
 using ShortcutsGrid.Models;
 using ShortcutsGrid.Services;
 using System;
@@ -22,9 +23,6 @@ public partial class List : Window
         //this.ResizeMode = ResizeMode.CanResize;
 
         _ = new DataGridsScrollersTogether(dgrNumbers, dgrShortcuts);
-
-        btnUp.IsEnabled = false;
-        btnDown.IsEnabled = false;
 
         dgrNumbers.AutoGenerateColumns = false;
         dgrNumbers.IsEnabled = false;
@@ -68,7 +66,9 @@ public partial class List : Window
             txtCmd7.Text = string.Empty;
             txtCmd8.Text = string.Empty;
             txtCmd9.Text = string.Empty;
-            pnlImg.Children.Clear();
+            pnlImg1.Children.Clear();
+            pnlImg2.Children.Clear();
+            pnlImg3.Children.Clear();
             if (dgrShortcuts.SelectedItem is not null)
             {
                 var shortcut = (Shortcut)dgrShortcuts.SelectedItem;
@@ -124,20 +124,52 @@ public partial class List : Window
                     txtImg.Text = shortcut.Image;
                     try
                     {
-                        var imageButton = new ImageButton(new Shortcut()
+                        var imageButton1 = new ImageButton(new Shortcut()
                         { Executions = ["exe.exe"], Image = shortcut.Image }, false)
                         {
                             Height = 128,
                             Width = 128
                         };
-                        pnlImg.Children.Add(imageButton);
+                        var imageButton2 = new ImageButton(new Shortcut()
+                        { Executions = ["exe.exe"], Image = shortcut.Image }, false)
+                        {
+                            Height = 128,
+                            Width = 128
+                        };
+                        var imageButton3 = new ImageButton(new Shortcut()
+                        { Executions = ["exe.exe"], Image = shortcut.Image }, false)
+                        {
+                            Height = 128,
+                            Width = 128
+                        };
+                        pnlImg1.Children.Add(imageButton1);
+                        pnlImg2.Children.Add(imageButton2);
+                        pnlImg3.Children.Add(imageButton3);
                     }
                     catch (Exception ex) { _ = ex.Message; }
                 }
             }
+            else
+            {
+                pnlItem.IsEnabled = false;
+                pnlButtons.IsEnabled = false;
+            }
+        };
+        dgrShortcuts.SelectedCellsChanged += (s, e) =>
+        {
+            if (dgrShortcuts.SelectedIndex == 0)
+                btnUp.IsEnabled = false;
+            else
+                btnUp.IsEnabled = true;
+            if (dgrShortcuts.SelectedIndex == AppValues.Shortcuts.Count - 2)
+                btnDown.IsEnabled = false;
+            else
+                btnDown.IsEnabled = true;
         };
 
         dgrShortcuts.SelectedItem = AppValues.Shortcuts.Find(i => i.Id == id);
+
+        // Buttons
 
         btnCommit.Click += (s, e) =>
         {
@@ -192,6 +224,37 @@ public partial class List : Window
             }
         };
 
+        btnNew.Click += (s, e) =>
+        {
+            if (AppValues.Shortcuts.Count > 23)
+            {
+                var messageDialogs = new MessageDialogs();
+                messageDialogs.SimpleError("Max mumber of items reached!", "Action not allowed");
+                return;
+            }
+            int index = (dgrShortcuts.SelectedIndex == -1) ? 0 : dgrShortcuts.SelectedIndex;
+            var newShortcut = new Shortcut();
+            AppValues.Shortcuts.Insert(index, newShortcut);
+            dgrShortcuts.SelectedItem = newShortcut;
+            dgrShortcuts.Items.Refresh();
+            FileShortcuts.ShortcutsToFile();
+        };
+
+        btnUp.IsEnabled = false;
+        btnDown.IsEnabled = false;
+
+        btnUp.Click += (s, e) =>
+        {
+            AppValues.Shortcuts.MoveItem(dgrShortcuts.SelectedIndex, dgrShortcuts.SelectedIndex - 1);
+            dgrShortcuts.Items.Refresh();
+            FileShortcuts.ShortcutsToFile();
+        };
+        btnDown.Click += (s, e) =>
+        {
+            AppValues.Shortcuts.MoveItem(dgrShortcuts.SelectedIndex, dgrShortcuts.SelectedIndex + 1);
+            dgrShortcuts.Items.Refresh();
+            FileShortcuts.ShortcutsToFile();
+        };
     }
 
     private readonly List<string> numberRows =
