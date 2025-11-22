@@ -23,16 +23,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <Grid>
                         <Grid x:Name="pnlImg2" Opacity="0.5" Width="130" Height="130" Margin="0,170,0,0" VerticalAlignment="Top"/>
-                        <StackPanel CanVerticallyScroll="True">
-                            <TextBox x:Name="txtCmd1" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd2" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd3" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd4" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd5" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd6" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd7" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd8" TextWrapping="Wrap" Margin="10,2,10,0"/>
-                            <TextBox x:Name="txtCmd9" TextWrapping="Wrap" Margin="10,2,10,0"/>
+                        <StackPanel x:Name="stkCmds" CanVerticallyScroll="True" Margin="0,2,0,0">
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>

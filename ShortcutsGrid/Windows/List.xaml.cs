@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 /// <summary>
@@ -57,15 +58,6 @@ public partial class List : Window
             txtName.Text = string.Empty;
             txtDescription.Text = string.Empty;
             txtImg.Text = string.Empty;
-            txtCmd1.Text = string.Empty;
-            txtCmd2.Text = string.Empty;
-            txtCmd3.Text = string.Empty;
-            txtCmd4.Text = string.Empty;
-            txtCmd5.Text = string.Empty;
-            txtCmd6.Text = string.Empty;
-            txtCmd7.Text = string.Empty;
-            txtCmd8.Text = string.Empty;
-            txtCmd9.Text = string.Empty;
             pnlImg1.Children.Clear();
             pnlImg2.Children.Clear();
             pnlImg3.Children.Clear();
@@ -86,65 +78,63 @@ public partial class List : Window
                     }
                     txtName.Text = shortcut.Label;
                     txtDescription.Text = shortcut.Description;
+                    stkCmds.Children.Clear();
                     for (int i = 0; i < shortcut.Executions.Count; i++)
                     {
-                        switch (i)
+                        Grid pnlTxt = new()
                         {
-                            case 0:
-                                txtCmd1.Text = shortcut.Executions[0];
-                                break;
-                            case 1:
-                                txtCmd2.Text = shortcut.Executions[1];
-                                break;
-                            case 2:
-                                txtCmd3.Text = shortcut.Executions[2];
-                                break;
-                            case 3:
-                                txtCmd4.Text = shortcut.Executions[3];
-                                break;
-                            case 4:
-                                txtCmd5.Text = shortcut.Executions[4];
-                                break;
-                            case 5:
-                                txtCmd6.Text = shortcut.Executions[5];
-                                break;
-                            case 6:
-                                txtCmd7.Text = shortcut.Executions[6];
-                                break;
-                            case 7:
-                                txtCmd8.Text = shortcut.Executions[7];
-                                break;
-                            case 8:
-                                txtCmd9.Text = shortcut.Executions[8];
-                                break;
-                            default:
-                                break;
-                        }
+                            HorizontalAlignment = HorizontalAlignment.Stretch,
+                            Margin = new Thickness(10, 0, 10, 2)
+                        };
+                        stkCmds.Children.Add(pnlTxt);
+                        TextBox txt = new()
+                        {
+                            Text = shortcut.Executions[i],
+                            TextWrapping = TextWrapping.Wrap,
+                            Margin = new Thickness(0, 0, 28, 0)
+                        };
+                        txt.ContextMenu = CmdTxtContextMenu(txt);
+                        pnlTxt.Children.Add(txt);
+                        Button btnDel = new()
+                        {
+                            Content = "X",
+                            Width = 24,
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            Tag = i,
+                            IsEnabled = i != 0,
+                            Margin = new Thickness(10, 0, 0, 2)
+                        };
+                        btnDel.Click += (s, e) =>
+                        {
+                            int id = -1;
+                            try
+                            {
+                                id = (int)((Button)s).Tag;
+                                shortcut.Executions.RemoveAt(id);
+                            }
+                            catch { }
+                            ReSelectItem(shortcut);
+                        };
+                        pnlTxt.Children.Add(btnDel);
                     }
+                    Button btnAdd = new()
+                    {
+                        Content = "+",
+                        Width = 24
+                    };
+                    btnAdd.Click += (s, e) =>
+                    {
+                        shortcut.Executions.Add(string.Empty);
+                        ReSelectItem(shortcut);
+                    };
+                    stkCmds.Children.Add(btnAdd);
+
                     txtImg.Text = shortcut.Image;
                     try
                     {
-                        var imageButton1 = new ImageButton(new Shortcut()
-                        { Executions = ["exe.exe"], Image = shortcut.Image }, false)
-                        {
-                            Height = 128,
-                            Width = 128
-                        };
-                        var imageButton2 = new ImageButton(new Shortcut()
-                        { Executions = ["exe.exe"], Image = shortcut.Image }, false)
-                        {
-                            Height = 128,
-                            Width = 128
-                        };
-                        var imageButton3 = new ImageButton(new Shortcut()
-                        { Executions = ["exe.exe"], Image = shortcut.Image }, false)
-                        {
-                            Height = 128,
-                            Width = 128
-                        };
-                        pnlImg1.Children.Add(imageButton1);
-                        pnlImg2.Children.Add(imageButton2);
-                        pnlImg3.Children.Add(imageButton3);
+                        pnlImg1.Children.Add(ImageButtonOnly(shortcut.Image));
+                        pnlImg2.Children.Add(ImageButtonOnly(shortcut.Image));
+                        pnlImg3.Children.Add(ImageButtonOnly(shortcut.Image));
                     }
                     catch (Exception ex) { _ = ex.Message; }
                 }
@@ -181,24 +171,19 @@ public partial class List : Window
                     shortcut.Label = txtName.Text;
                     shortcut.Description = txtDescription.Text;
                     shortcut.Executions.Clear();
-                    if (!string.IsNullOrEmpty(txtCmd1.Text))
-                        shortcut.Executions.Add(txtCmd1.Text);
-                    if (!string.IsNullOrEmpty(txtCmd2.Text))
-                        shortcut.Executions.Add(txtCmd2.Text);
-                    if (!string.IsNullOrEmpty(txtCmd3.Text))
-                        shortcut.Executions.Add(txtCmd3.Text);
-                    if (!string.IsNullOrEmpty(txtCmd4.Text))
-                        shortcut.Executions.Add(txtCmd4.Text);
-                    if (!string.IsNullOrEmpty(txtCmd5.Text))
-                        shortcut.Executions.Add(txtCmd5.Text);
-                    if (!string.IsNullOrEmpty(txtCmd6.Text))
-                        shortcut.Executions.Add(txtCmd6.Text);
-                    if (!string.IsNullOrEmpty(txtCmd7.Text))
-                        shortcut.Executions.Add(txtCmd7.Text);
-                    if (!string.IsNullOrEmpty(txtCmd8.Text))
-                        shortcut.Executions.Add(txtCmd8.Text);
-                    if (!string.IsNullOrEmpty(txtCmd9.Text))
-                        shortcut.Executions.Add(txtCmd9.Text);
+                    foreach (var child in stkCmds.Children)
+                    {
+                        if (child is Grid pnlTxt)
+                        {
+                            foreach (var pnlChild in pnlTxt.Children)
+                            {
+                                if (pnlChild is TextBox txt)
+                                {
+                                    shortcut.Executions.Add(txt.Text);
+                                }
+                            }
+                        }
+                    }
                     shortcut.Image = txtImg.Text;
                     dgrShortcuts.Items.Refresh();
                 }
@@ -255,6 +240,7 @@ public partial class List : Window
             dgrShortcuts.Items.Refresh();
             FileShortcuts.ShortcutsToFile();
         };
+
     }
 
     private readonly List<string> numberRows =
@@ -262,5 +248,103 @@ public partial class List : Window
         "21", "22", "23", "24", "25", "26",
         "31", "32", "33", "34", "35", "36",
         "41", "42", "43", "44", "45", "46" ];
+
+    private void ReSelectItem(Shortcut shortcut)
+    {
+        dgrShortcuts.SelectedItem = null;
+        dgrShortcuts.SelectedItem = shortcut;
+    }
+
+    private ImageButton ImageButtonOnly(string? image)
+    {
+        var btn = new ImageButton(new Shortcut()
+        { Executions = ["exe.exe"], Image = image }, false)
+        {
+            Height = 128,
+            Width = 128
+        };
+        return btn;
+    }
+
+    private ContextMenu CmdTxtContextMenu(TextBox txt)
+    {
+        ContextMenu menu = new();
+
+        MenuItem cutItem = new()
+        {
+            Header = "Cut",
+            Command = ApplicationCommands.Cut
+        };
+        menu.Items.Add(cutItem);
+        MenuItem copyItem = new()
+        {
+            Header = "Copy",
+            Command = ApplicationCommands.Copy
+        };
+        menu.Items.Add(copyItem);
+        MenuItem pasteItem = new()
+        {
+            Header = "Paste",
+            Command = ApplicationCommands.Paste
+        };
+        menu.Items.Add(pasteItem);
+
+        menu.Items.Add(new Separator());
+
+        MenuItem insertItem = new() { Header = "Path code" };
+        menu.Items.Add(insertItem);
+
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Windows", "<|Windows|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Windows System", "<|WindowsSystem|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Program Files", "<|ProgramFiles|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Program Files(x86)", "<|ProgramFilesX86|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Program Data", "<|ProgramData|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "User Profile", "<|UserProfile|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Local AppData", "<|LocalAppData|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Roaming AppData", "<|RoamingAppData|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Temp", "<|Temp|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Desktop", "<|Desktop|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Documents", "<|Documents|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Pictures", "<|Pictures|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Music", "<|Music|>"));
+        insertItem.Items.Add(CmdTxtContextItem(txt, "Videos", "<|Videos|>"));
+
+        MenuItem gotoItem = new() { Header = "Go to" };
+        menu.Items.Add(gotoItem);
+
+        gotoItem.Items.Add(CmdTxtContextItem("Windows", "<|Windows|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Windows System", "<|WindowsSystem|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Program Files", "<|ProgramFiles|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Program Files(x86)", "<|ProgramFilesX86|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Program Data", "<|ProgramData|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("User Profile", "<|UserProfile|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Local AppData", "<|LocalAppData|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Roaming AppData", "<|RoamingAppData|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Temp", "<|Temp|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Desktop", "<|Desktop|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Documents", "<|Documents|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Pictures", "<|Pictures|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Music", "<|Music|>"));
+        gotoItem.Items.Add(CmdTxtContextItem("Videos", "<|Videos|>"));
+
+        return menu;
+    }
+    private MenuItem CmdTxtContextItem(TextBox txt, string header, string place)
+    {
+        MenuItem mnItm = new() { Header = header, };
+        mnItm.Click += (s, e) =>
+        {
+            int caretIndex = txt.CaretIndex;
+            txt.Text = txt.Text.Insert(caretIndex, place);
+            txt.CaretIndex = caretIndex + place.Length;
+        };
+        return mnItm;
+    }
+    private MenuItem CmdTxtContextItem(string header, string place)
+    {
+        MenuItem mnItm = new() { Header = header, };
+        mnItm.Click += (s, e) => { RunProcess.OpenExplorer(place); };
+        return mnItm;
+    }
 
 }
