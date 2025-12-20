@@ -6,7 +6,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/minkostaev/ShortcutsGrid?color=blue)](https://github.com/minkostaev/ShortcutsGrid/commits/)
 [![GitHub releases](.github/badge_version.svg)](https://github.com/minkostaev/ShortcutsGrid/releases)
 
-**WPF (.NET 9.0) desktop app with transparent background that displays 'custom list' grid with links or commands to other programs on the PC to run. With customizable app names and icons/images.**
+**WPF (.NET 10.0) desktop app with transparent background that displays 'custom list' grid with links or commands to other programs on the PC to run. With customizable app names and icons/images.**
 
 What you can use it for:
 * Create your list with programs' **shortucs** for easy and fast way to start them
